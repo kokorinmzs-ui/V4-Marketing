@@ -1,0 +1,17 @@
+﻿........................................................................ [ 21%]
+........................................................................ [ 42%]
+........................................................................ [ 63%]
+........................................................................ [ 84%]
+......................................................                   [100%]
+============================== warnings summary ===============================
+shared\schemas\base.py:6
+  C:\Users\Professional\Desktop\Marketing OS v4\shared\schemas\base.py:6: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class MarketingOSBaseModel(BaseModel):
+
+tests/unit/test_brief_schema.py: 22 warnings
+tests/unit/test_schema_validator.py: 12 warnings
+  C:\Python313\Lib\site-packages\pydantic\main.py:263: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+342 passed, 35 warnings in 0.94s

@@ -1,0 +1,36 @@
+﻿.......FFF.F............................................................ [ 15%]
+........................................................................ [ 30%]
+........................................................................ [ 46%]
+........................................................................ [ 61%]
+........................................................................ [ 76%]
+........................................................................ [ 92%]
+.....................................                                    [100%]
+================================== FAILURES ===================================
+E   assert False
+     +  where False = any(<generator object TestStopWordInjection.test_no_info_detected.<locals>.<genexpr> at 0x000001E26E9CE260>)
+C:\Users\Professional\Desktop\Marketing OS v4\tests\integration\test_full_pipeline.py:180: assert False
+E   AssertionError: assert not True
+     +  where True = ValidationResult(validator_name='stop_words', passed=True, score=90.0, issues=[ValidationIssue(code='stop_word_marketi...uggestion='Replace with a specific, verifiable claim with numbers or facts', category='marketing_fluff')], metadata={}).passed
+C:\Users\Professional\Desktop\Marketing OS v4\tests\integration\test_full_pipeline.py:184: AssertionError: assert not True
+E   AssertionError: assert not True
+     +  where True = ValidationResult(validator_name='stop_words', passed=True, score=90.0, issues=[ValidationIssue(code='stop_word_marketi...uggestion='Replace with a specific, verifiable claim with numbers or facts', category='marketing_fluff')], metadata={}).passed
+C:\Users\Professional\Desktop\Marketing OS v4\tests\integration\test_full_pipeline.py:188: AssertionError: assert not True
+E   AttributeError: 'BlockRegistry' object has no attribute 'block_id'
+C:\Users\Professional\Desktop\Marketing OS v4\ai_engine\pipeline\block_registry.py:43: AttributeError: 'BlockRegistry' object has no attribute 'block_id'
+============================== warnings summary ===============================
+shared\schemas\base.py:6
+  C:\Users\Professional\Desktop\Marketing OS v4\shared\schemas\base.py:6: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+    class MarketingOSBaseModel(BaseModel):
+
+tests/unit/test_brief_schema.py: 22 warnings
+tests/unit/test_schema_validator.py: 12 warnings
+  C:\Python313\Lib\site-packages\pydantic\main.py:263: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/integration/test_full_pipeline.py::TestStopWordInjection::test_no_info_detected
+FAILED tests/integration/test_full_pipeline.py::TestStopWordInjection::test_best_detected
+FAILED tests/integration/test_full_pipeline.py::TestStopWordInjection::test_unique_approach_detected
+FAILED tests/integration/test_full_pipeline.py::TestRepairLoop::test_repair_works
+4 failed, 465 passed, 35 warnings in 1.92s

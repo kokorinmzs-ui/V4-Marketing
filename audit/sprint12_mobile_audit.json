@@ -1,0 +1,8 @@
+{
+  "media_rule": true,
+  "max_width": true,
+  "min_width_390": true,
+  "no_fixed_body_width": false,
+  "no_scroll_cooldown": true,
+  "responsive_padding": true
+}

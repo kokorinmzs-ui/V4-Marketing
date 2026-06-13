@@ -1,0 +1,19 @@
+{
+  "all_8_tab_divs": true,
+  "data-tab_buttons": true,
+  "mission-cards": true,
+  "btn-done": true,
+  "btn-redo": true,
+  "btn-fail": true,
+  "btn-copy": true,
+  "grid_divs": {
+    "today": false,
+    "plan": true,
+    "content": true,
+    "ads": true,
+    "sales": true,
+    "clients": true,
+    "metrics": true,
+    "why": true
+  }
+}

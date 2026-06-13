@@ -1,0 +1,182 @@
+{
+  "blocks": {
+    "total_blocks": 27,
+    "expected": 27,
+    "all_unique": true,
+    "all_have_prompts": true,
+    "all_have_validators": true,
+    "all_have_schema_validator": false,
+    "block_ids": [
+      "01_market_analysis",
+      "02_business_diagnosis",
+      "03_competitors",
+      "04_platform",
+      "05_owner_portrait",
+      "06_product_system",
+      "07_flagship",
+      "08_product_ladder",
+      "09_lead_magnets",
+      "10_audience",
+      "11_avatars",
+      "12_psychotypes",
+      "13_pains",
+      "14_triggers",
+      "15_offers",
+      "16_funnels",
+      "17_advertising",
+      "18_content_plan",
+      "19_reels",
+      "20_blog_articles",
+      "21_posts",
+      "22_visual_briefs",
+      "23_sales_scripts",
+      "24_kpi",
+      "25_first_7_days",
+      "26_launch_plan",
+      "27_quality_control"
+    ],
+    "missing_expected": []
+  },
+  "prompts": {
+    "total_block_prompts": 27,
+    "expected": 27,
+    "master_prompt_exists": true,
+    "repair_prompt_exists": true,
+    "execution_prompt_exists": true,
+    "all_have_version": true,
+    "all_have_json_requirement": true,
+    "missing": []
+  },
+  "schemas": {
+    "final_data_block_fields": 27,
+    "final_data_block_names": [
+      "market_analysis",
+      "business_diagnosis",
+      "competitors",
+      "platform",
+      "owner_portrait",
+      "product_system",
+      "flagship_product",
+      "product_ladder",
+      "lead_magnets",
+      "audience",
+      "avatars",
+      "psychotypes",
+      "pains",
+      "triggers",
+      "offers",
+      "funnels",
+      "advertising",
+      "content_plan",
+      "reels",
+      "blog_articles",
+      "posts",
+      "visual_briefs",
+      "sales_scripts",
+      "kpi",
+      "first_7_days",
+      "launch_plan",
+      "quality_control"
+    ],
+    "execution_view_model_exists": true,
+    "mission_fields": [
+      "schema_version",
+      "mission_id",
+      "day",
+      "phase",
+      "mission_type",
+      "title",
+      "objective",
+      "why",
+      "difficulty",
+      "estimated_time",
+      "steps",
+      "ready_text",
+      "cta",
+      "platform",
+      "content_format",
+      "archetype",
+      "hook",
+      "frame_1",
+      "frame_2",
+      "frame_3",
+      "frame_4",
+      "voiceover",
+      "budget",
+      "audience",
+      "metric",
+      "success_threshold",
+      "warning_threshold",
+      "fail_threshold",
+      "if_success",
+      "if_warning",
+      "if_fail",
+      "xp_reward",
+      "status"
+    ],
+    "mission_has_required": true,
+    "no_dict_str_any": true
+  },
+  "cross_validation": [
+    {
+      "description": "All valid → PASS",
+      "expected_success": true,
+      "actual_success": true,
+      "passed": true,
+      "errors": []
+    },
+    {
+      "description": "Avatar without pain → FAIL",
+      "expected_success": false,
+      "actual_success": false,
+      "passed": true,
+      "errors": [
+        "Pain avatar_id 'av99' not in avatars",
+        "Trigger pain_id 'p1' not in pains",
+        "Trigger pain_id 'p2' not in pains"
+      ]
+    },
+    {
+      "description": "Pain without offer → FAIL",
+      "expected_success": false,
+      "actual_success": false,
+      "passed": true,
+      "errors": [
+        "Offer pain_id 'p99' not in pains"
+      ]
+    },
+    {
+      "description": "Offer without CTA → FAIL",
+      "expected_success": false,
+      "actual_success": false,
+      "passed": true,
+      "errors": [
+        "Offer 'o1' missing CTA"
+      ]
+    },
+    {
+      "description": "Ads without audience → FAIL",
+      "expected_success": false,
+      "actual_success": false,
+      "passed": true,
+      "errors": [
+        "Ad campaign missing audience"
+      ]
+    },
+    {
+      "description": "KPI without action → FAIL",
+      "expected_success": false,
+      "actual_success": false,
+      "passed": true,
+      "errors": [
+        "KPI missing action"
+      ]
+    }
+  ],
+  "summary": {
+    "blocks_ok": true,
+    "prompts_ok": true,
+    "schemas_ok": true,
+    "cross_validation_ok": true
+  }
+}

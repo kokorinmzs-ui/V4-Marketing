@@ -1,0 +1,1 @@
+"""Marketing OS v4 — Shared schemas, contracts, and constants."""

@@ -1,0 +1,97 @@
+{
+  "files": [
+    {
+      "file": "test_full_pipeline.py",
+      "sprint": "?"
+    },
+    {
+      "file": "test_actionability_validator.py",
+      "sprint": "3"
+    },
+    {
+      "file": "test_ai_providers.py",
+      "sprint": "5"
+    },
+    {
+      "file": "test_block_executor.py",
+      "sprint": "6"
+    },
+    {
+      "file": "test_blocks_01_10.py",
+      "sprint": "7"
+    },
+    {
+      "file": "test_blocks_11_20.py",
+      "sprint": "8"
+    },
+    {
+      "file": "test_blocks_21_27.py",
+      "sprint": "9"
+    },
+    {
+      "file": "test_brief_schema.py",
+      "sprint": "2"
+    },
+    {
+      "file": "test_content_quality_validator.py",
+      "sprint": "3"
+    },
+    {
+      "file": "test_dependency_graph.py",
+      "sprint": "6"
+    },
+    {
+      "file": "test_execution_planner.py",
+      "sprint": "11"
+    },
+    {
+      "file": "test_execution_view_model_schema.py",
+      "sprint": "2"
+    },
+    {
+      "file": "test_final_data_assembly.py",
+      "sprint": "10"
+    },
+    {
+      "file": "test_final_data_schema.py",
+      "sprint": "2"
+    },
+    {
+      "file": "test_html_dashboard_renderer.py",
+      "sprint": "12"
+    },
+    {
+      "file": "test_kpi_validator.py",
+      "sprint": "3"
+    },
+    {
+      "file": "test_package_exporters.py",
+      "sprint": "13"
+    },
+    {
+      "file": "test_prompt_contracts.py",
+      "sprint": "4"
+    },
+    {
+      "file": "test_prompt_registry.py",
+      "sprint": "4"
+    },
+    {
+      "file": "test_repair_loop.py",
+      "sprint": "6"
+    },
+    {
+      "file": "test_schema_validator.py",
+      "sprint": "3"
+    },
+    {
+      "file": "test_stop_words.py",
+      "sprint": "2"
+    },
+    {
+      "file": "test_stop_words_validator.py",
+      "sprint": "3"
+    }
+  ],
+  "total_tests": 469
+}

@@ -1,0 +1,19 @@
+{
+  "today_has_missions": true,
+  "all_missions_have_title": true,
+  "all_missions_have_why": true,
+  "all_missions_have_steps": true,
+  "all_missions_have_cta": true,
+  "all_missions_have_metric": true,
+  "all_missions_have_if_success": true,
+  "all_missions_have_if_fail": false,
+  "no_todo": true,
+  "no_fixme": true,
+  "no_lorem": true,
+  "no_net_inform": true,
+  "no_razvivat": true,
+  "no_uluchsit": true,
+  "content_tasks_not_empty": true,
+  "ads_tasks_not_empty": true,
+  "sales_tasks_not_empty": true
+}

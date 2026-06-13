@@ -1,0 +1,13 @@
+{
+  "DATA_ref": true,
+  "MISSIONS_ref": true,
+  "switchTab_def": true,
+  "localStorage_key": true,
+  "copyText_def": true,
+  "textarea_fallback": true,
+  "no_script_src": true,
+  "no_CDN": true,
+  "balanced_braces": true,
+  "balanced_parens": true,
+  "balanced_brackets": true
+}

@@ -1,0 +1,10 @@
+{
+  "window.DATA_found": true,
+  "window.MISSIONS_found": true,
+  "DATA_parses": true,
+  "MISSIONS_parses": true,
+  "missions_count": 48,
+  "days_count": 30,
+  "today_exists": true,
+  "project_name_exists": true
+}

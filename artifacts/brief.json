@@ -1,0 +1,4418 @@
+{
+  "01_market_analysis": {
+    "market_overview": "Рынок фотостудий Москвы",
+    "market_size": "Средний",
+    "seasonality": [
+      "Осень"
+    ],
+    "buying_triggers": [
+      "Контент"
+    ],
+    "buying_barriers": [
+      "Цена"
+    ],
+    "growth_opportunities": [
+      "Рост"
+    ],
+    "channels": [
+      "IG"
+    ],
+    "risks": [
+      "Насыщение"
+    ],
+    "confidence": "medium"
+  },
+  "02_business_diagnosis": {
+    "constraints": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "quick_wins": [
+      "W1",
+      "W2",
+      "W3",
+      "W4",
+      "W5"
+    ],
+    "growth_barriers": [
+      "G"
+    ],
+    "focus_areas": [
+      "F"
+    ],
+    "confidence": "medium"
+  },
+  "03_competitors": {
+    "competitors": [
+      {
+        "name": "K0",
+        "offer": "O0",
+        "pricing": "P",
+        "channels": [],
+        "strengths": [],
+        "weaknesses": [],
+        "lead_magnets": [],
+        "status": "analyzed",
+        "assumption": ""
+      },
+      {
+        "name": "K1",
+        "offer": "O1",
+        "pricing": "P",
+        "channels": [],
+        "strengths": [],
+        "weaknesses": [],
+        "lead_magnets": [],
+        "status": "analyzed",
+        "assumption": ""
+      },
+      {
+        "name": "K2",
+        "offer": "O2",
+        "pricing": "P",
+        "channels": [],
+        "strengths": [],
+        "weaknesses": [],
+        "lead_magnets": [],
+        "status": "analyzed",
+        "assumption": ""
+      },
+      {
+        "name": "K3",
+        "offer": "O3",
+        "pricing": "P",
+        "channels": [],
+        "strengths": [],
+        "weaknesses": [],
+        "lead_magnets": [],
+        "status": "analyzed",
+        "assumption": ""
+      },
+      {
+        "name": "K4",
+        "offer": "O4",
+        "pricing": "P",
+        "channels": [],
+        "strengths": [],
+        "weaknesses": [],
+        "lead_magnets": [],
+        "status": "analyzed",
+        "assumption": ""
+      },
+      {
+        "name": "K5",
+        "offer": "O5",
+        "pricing": "P",
+        "channels": [],
+        "strengths": [],
+        "weaknesses": [],
+        "lead_magnets": [],
+        "status": "analyzed",
+        "assumption": ""
+      },
+      {
+        "name": "K6",
+        "offer": "O6",
+        "pricing": "P",
+        "channels": [],
+        "strengths": [],
+        "weaknesses": [],
+        "lead_magnets": [],
+        "status": "analyzed",
+        "assumption": ""
+      },
+      {
+        "name": "K7",
+        "offer": "O7",
+        "pricing": "P",
+        "channels": [],
+        "strengths": [],
+        "weaknesses": [],
+        "lead_magnets": [],
+        "status": "analyzed",
+        "assumption": ""
+      },
+      {
+        "name": "K8",
+        "offer": "O8",
+        "pricing": "P",
+        "channels": [],
+        "strengths": [],
+        "weaknesses": [],
+        "lead_magnets": [],
+        "status": "analyzed",
+        "assumption": ""
+      },
+      {
+        "name": "K9",
+        "offer": "O9",
+        "pricing": "P",
+        "channels": [],
+        "strengths": [],
+        "weaknesses": [],
+        "lead_magnets": [],
+        "status": "analyzed",
+        "assumption": ""
+      }
+    ],
+    "advantages": [
+      "A"
+    ],
+    "gaps": [
+      "G"
+    ],
+    "confidence": "medium"
+  },
+  "04_platform": {
+    "positioning": "Доступная студия",
+    "usp": "Контент за день",
+    "big_idea": "Идея",
+    "tone_of_voice": "Дружелюбный",
+    "proof_points": [
+      "X",
+      "Y",
+      "Z"
+    ],
+    "confidence": "medium"
+  },
+  "05_owner_portrait": {
+    "owner_story": "История",
+    "expertise": "Экспертиза",
+    "trust_points": [
+      "A",
+      "B",
+      "C"
+    ],
+    "confidence": "medium"
+  },
+  "06_product_system": {
+    "lead_magnets": [
+      "L"
+    ],
+    "tripwires": [
+      "T"
+    ],
+    "core_products": [
+      "C"
+    ],
+    "flagship_products": [
+      "F"
+    ],
+    "upsells": [
+      "U"
+    ],
+    "cross_sells": [
+      "X"
+    ],
+    "retention": [
+      "R"
+    ],
+    "referrals": [
+      "Rf"
+    ],
+    "confidence": "medium"
+  },
+  "07_flagship": {
+    "product": "Продукт",
+    "audience": [
+      "A"
+    ],
+    "core_pains": [
+      "P"
+    ],
+    "core_benefits": [
+      "B"
+    ],
+    "confidence": "medium"
+  },
+  "08_product_ladder": {
+    "steps": [
+      {
+        "product_name": "S1",
+        "price": "0",
+        "next_step": "S2"
+      },
+      {
+        "product_name": "S2",
+        "price": "990",
+        "next_step": "S3"
+      }
+    ],
+    "confidence": "medium"
+  },
+  "09_lead_magnets": {
+    "magnets": [
+      {
+        "title": "LM0",
+        "pain": "P0",
+        "cta": "C0",
+        "magnet_type": "checklist"
+      },
+      {
+        "title": "LM1",
+        "pain": "P1",
+        "cta": "C1",
+        "magnet_type": "checklist"
+      },
+      {
+        "title": "LM2",
+        "pain": "P2",
+        "cta": "C2",
+        "magnet_type": "checklist"
+      },
+      {
+        "title": "LM3",
+        "pain": "P3",
+        "cta": "C3",
+        "magnet_type": "checklist"
+      },
+      {
+        "title": "LM4",
+        "pain": "P4",
+        "cta": "C4",
+        "magnet_type": "checklist"
+      },
+      {
+        "title": "LM5",
+        "pain": "P5",
+        "cta": "C5",
+        "magnet_type": "checklist"
+      },
+      {
+        "title": "LM6",
+        "pain": "P6",
+        "cta": "C6",
+        "magnet_type": "checklist"
+      },
+      {
+        "title": "LM7",
+        "pain": "P7",
+        "cta": "C7",
+        "magnet_type": "checklist"
+      },
+      {
+        "title": "LM8",
+        "pain": "P8",
+        "cta": "C8",
+        "magnet_type": "checklist"
+      },
+      {
+        "title": "LM9",
+        "pain": "P9",
+        "cta": "C9",
+        "magnet_type": "checklist"
+      }
+    ],
+    "confidence": "medium"
+  },
+  "10_audience": {
+    "segments": [
+      {
+        "segment_name": "S0",
+        "description": "D0",
+        "problem": "P0",
+        "motivation": "M0"
+      },
+      {
+        "segment_name": "S1",
+        "description": "D1",
+        "problem": "P1",
+        "motivation": "M1"
+      },
+      {
+        "segment_name": "S2",
+        "description": "D2",
+        "problem": "P2",
+        "motivation": "M2"
+      },
+      {
+        "segment_name": "S3",
+        "description": "D3",
+        "problem": "P3",
+        "motivation": "M3"
+      },
+      {
+        "segment_name": "S4",
+        "description": "D4",
+        "problem": "P4",
+        "motivation": "M4"
+      }
+    ],
+    "max_segments": 15,
+    "confidence": "medium"
+  },
+  "11_avatars": {
+    "avatars": [
+      {
+        "avatar_id": "av1",
+        "name": "Persona 1",
+        "age": 21,
+        "occupation": "Job 1",
+        "income": "60k",
+        "interests": [
+          "M"
+        ],
+        "goals": [
+          "G"
+        ],
+        "fears": [
+          "F"
+        ],
+        "buying_motivation": [
+          "M"
+        ],
+        "trust_triggers": [
+          "T"
+        ],
+        "channels": [
+          "IG"
+        ]
+      },
+      {
+        "avatar_id": "av2",
+        "name": "Persona 2",
+        "age": 22,
+        "occupation": "Job 2",
+        "income": "70k",
+        "interests": [
+          "M"
+        ],
+        "goals": [
+          "G"
+        ],
+        "fears": [
+          "F"
+        ],
+        "buying_motivation": [
+          "M"
+        ],
+        "trust_triggers": [
+          "T"
+        ],
+        "channels": [
+          "IG"
+        ]
+      },
+      {
+        "avatar_id": "av3",
+        "name": "Persona 3",
+        "age": 23,
+        "occupation": "Job 3",
+        "income": "80k",
+        "interests": [
+          "M"
+        ],
+        "goals": [
+          "G"
+        ],
+        "fears": [
+          "F"
+        ],
+        "buying_motivation": [
+          "M"
+        ],
+        "trust_triggers": [
+          "T"
+        ],
+        "channels": [
+          "IG"
+        ]
+      },
+      {
+        "avatar_id": "av4",
+        "name": "Persona 4",
+        "age": 24,
+        "occupation": "Job 4",
+        "income": "90k",
+        "interests": [
+          "M"
+        ],
+        "goals": [
+          "G"
+        ],
+        "fears": [
+          "F"
+        ],
+        "buying_motivation": [
+          "M"
+        ],
+        "trust_triggers": [
+          "T"
+        ],
+        "channels": [
+          "IG"
+        ]
+      },
+      {
+        "avatar_id": "av5",
+        "name": "Persona 5",
+        "age": 25,
+        "occupation": "Job 5",
+        "income": "100k",
+        "interests": [
+          "M"
+        ],
+        "goals": [
+          "G"
+        ],
+        "fears": [
+          "F"
+        ],
+        "buying_motivation": [
+          "M"
+        ],
+        "trust_triggers": [
+          "T"
+        ],
+        "channels": [
+          "IG"
+        ]
+      }
+    ],
+    "similarity_score": 0.4,
+    "confidence": "medium"
+  },
+  "12_psychotypes": {
+    "mappings": [
+      {
+        "avatar_id": "av1",
+        "primary_type": "rational",
+        "secondary_type": "emotional"
+      },
+      {
+        "avatar_id": "av2",
+        "primary_type": "rational",
+        "secondary_type": "emotional"
+      },
+      {
+        "avatar_id": "av3",
+        "primary_type": "rational",
+        "secondary_type": "emotional"
+      },
+      {
+        "avatar_id": "av4",
+        "primary_type": "rational",
+        "secondary_type": "emotional"
+      },
+      {
+        "avatar_id": "av5",
+        "primary_type": "rational",
+        "secondary_type": "emotional"
+      }
+    ],
+    "confidence": "medium"
+  },
+  "13_pains": {
+    "pains": [
+      {
+        "pain_id": "p11",
+        "avatar_id": "av1",
+        "pain": "Pain 1",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 1",
+        "offer": "Off 1",
+        "cta": "CTA 1",
+        "metric": "Met 1"
+      },
+      {
+        "pain_id": "p12",
+        "avatar_id": "av1",
+        "pain": "Pain 2",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 2",
+        "offer": "Off 2",
+        "cta": "CTA 2",
+        "metric": "Met 2"
+      },
+      {
+        "pain_id": "p13",
+        "avatar_id": "av1",
+        "pain": "Pain 3",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 3",
+        "offer": "Off 3",
+        "cta": "CTA 3",
+        "metric": "Met 3"
+      },
+      {
+        "pain_id": "p14",
+        "avatar_id": "av1",
+        "pain": "Pain 4",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 4",
+        "offer": "Off 4",
+        "cta": "CTA 4",
+        "metric": "Met 4"
+      },
+      {
+        "pain_id": "p15",
+        "avatar_id": "av1",
+        "pain": "Pain 5",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 5",
+        "offer": "Off 5",
+        "cta": "CTA 5",
+        "metric": "Met 5"
+      },
+      {
+        "pain_id": "p16",
+        "avatar_id": "av1",
+        "pain": "Pain 6",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 6",
+        "offer": "Off 6",
+        "cta": "CTA 6",
+        "metric": "Met 6"
+      },
+      {
+        "pain_id": "p17",
+        "avatar_id": "av1",
+        "pain": "Pain 7",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 7",
+        "offer": "Off 7",
+        "cta": "CTA 7",
+        "metric": "Met 7"
+      },
+      {
+        "pain_id": "p18",
+        "avatar_id": "av1",
+        "pain": "Pain 8",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 8",
+        "offer": "Off 8",
+        "cta": "CTA 8",
+        "metric": "Met 8"
+      },
+      {
+        "pain_id": "p19",
+        "avatar_id": "av1",
+        "pain": "Pain 9",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 9",
+        "offer": "Off 9",
+        "cta": "CTA 9",
+        "metric": "Met 9"
+      },
+      {
+        "pain_id": "p110",
+        "avatar_id": "av1",
+        "pain": "Pain 10",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 10",
+        "offer": "Off 10",
+        "cta": "CTA 10",
+        "metric": "Met 10"
+      },
+      {
+        "pain_id": "p21",
+        "avatar_id": "av2",
+        "pain": "Pain 1",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 1",
+        "offer": "Off 1",
+        "cta": "CTA 1",
+        "metric": "Met 1"
+      },
+      {
+        "pain_id": "p22",
+        "avatar_id": "av2",
+        "pain": "Pain 2",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 2",
+        "offer": "Off 2",
+        "cta": "CTA 2",
+        "metric": "Met 2"
+      },
+      {
+        "pain_id": "p23",
+        "avatar_id": "av2",
+        "pain": "Pain 3",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 3",
+        "offer": "Off 3",
+        "cta": "CTA 3",
+        "metric": "Met 3"
+      },
+      {
+        "pain_id": "p24",
+        "avatar_id": "av2",
+        "pain": "Pain 4",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 4",
+        "offer": "Off 4",
+        "cta": "CTA 4",
+        "metric": "Met 4"
+      },
+      {
+        "pain_id": "p25",
+        "avatar_id": "av2",
+        "pain": "Pain 5",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 5",
+        "offer": "Off 5",
+        "cta": "CTA 5",
+        "metric": "Met 5"
+      },
+      {
+        "pain_id": "p26",
+        "avatar_id": "av2",
+        "pain": "Pain 6",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 6",
+        "offer": "Off 6",
+        "cta": "CTA 6",
+        "metric": "Met 6"
+      },
+      {
+        "pain_id": "p27",
+        "avatar_id": "av2",
+        "pain": "Pain 7",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 7",
+        "offer": "Off 7",
+        "cta": "CTA 7",
+        "metric": "Met 7"
+      },
+      {
+        "pain_id": "p28",
+        "avatar_id": "av2",
+        "pain": "Pain 8",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 8",
+        "offer": "Off 8",
+        "cta": "CTA 8",
+        "metric": "Met 8"
+      },
+      {
+        "pain_id": "p29",
+        "avatar_id": "av2",
+        "pain": "Pain 9",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 9",
+        "offer": "Off 9",
+        "cta": "CTA 9",
+        "metric": "Met 9"
+      },
+      {
+        "pain_id": "p210",
+        "avatar_id": "av2",
+        "pain": "Pain 10",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 10",
+        "offer": "Off 10",
+        "cta": "CTA 10",
+        "metric": "Met 10"
+      },
+      {
+        "pain_id": "p31",
+        "avatar_id": "av3",
+        "pain": "Pain 1",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 1",
+        "offer": "Off 1",
+        "cta": "CTA 1",
+        "metric": "Met 1"
+      },
+      {
+        "pain_id": "p32",
+        "avatar_id": "av3",
+        "pain": "Pain 2",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 2",
+        "offer": "Off 2",
+        "cta": "CTA 2",
+        "metric": "Met 2"
+      },
+      {
+        "pain_id": "p33",
+        "avatar_id": "av3",
+        "pain": "Pain 3",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 3",
+        "offer": "Off 3",
+        "cta": "CTA 3",
+        "metric": "Met 3"
+      },
+      {
+        "pain_id": "p34",
+        "avatar_id": "av3",
+        "pain": "Pain 4",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 4",
+        "offer": "Off 4",
+        "cta": "CTA 4",
+        "metric": "Met 4"
+      },
+      {
+        "pain_id": "p35",
+        "avatar_id": "av3",
+        "pain": "Pain 5",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 5",
+        "offer": "Off 5",
+        "cta": "CTA 5",
+        "metric": "Met 5"
+      },
+      {
+        "pain_id": "p36",
+        "avatar_id": "av3",
+        "pain": "Pain 6",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 6",
+        "offer": "Off 6",
+        "cta": "CTA 6",
+        "metric": "Met 6"
+      },
+      {
+        "pain_id": "p37",
+        "avatar_id": "av3",
+        "pain": "Pain 7",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 7",
+        "offer": "Off 7",
+        "cta": "CTA 7",
+        "metric": "Met 7"
+      },
+      {
+        "pain_id": "p38",
+        "avatar_id": "av3",
+        "pain": "Pain 8",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 8",
+        "offer": "Off 8",
+        "cta": "CTA 8",
+        "metric": "Met 8"
+      },
+      {
+        "pain_id": "p39",
+        "avatar_id": "av3",
+        "pain": "Pain 9",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 9",
+        "offer": "Off 9",
+        "cta": "CTA 9",
+        "metric": "Met 9"
+      },
+      {
+        "pain_id": "p310",
+        "avatar_id": "av3",
+        "pain": "Pain 10",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 10",
+        "offer": "Off 10",
+        "cta": "CTA 10",
+        "metric": "Met 10"
+      },
+      {
+        "pain_id": "p41",
+        "avatar_id": "av4",
+        "pain": "Pain 1",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 1",
+        "offer": "Off 1",
+        "cta": "CTA 1",
+        "metric": "Met 1"
+      },
+      {
+        "pain_id": "p42",
+        "avatar_id": "av4",
+        "pain": "Pain 2",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 2",
+        "offer": "Off 2",
+        "cta": "CTA 2",
+        "metric": "Met 2"
+      },
+      {
+        "pain_id": "p43",
+        "avatar_id": "av4",
+        "pain": "Pain 3",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 3",
+        "offer": "Off 3",
+        "cta": "CTA 3",
+        "metric": "Met 3"
+      },
+      {
+        "pain_id": "p44",
+        "avatar_id": "av4",
+        "pain": "Pain 4",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 4",
+        "offer": "Off 4",
+        "cta": "CTA 4",
+        "metric": "Met 4"
+      },
+      {
+        "pain_id": "p45",
+        "avatar_id": "av4",
+        "pain": "Pain 5",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 5",
+        "offer": "Off 5",
+        "cta": "CTA 5",
+        "metric": "Met 5"
+      },
+      {
+        "pain_id": "p46",
+        "avatar_id": "av4",
+        "pain": "Pain 6",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 6",
+        "offer": "Off 6",
+        "cta": "CTA 6",
+        "metric": "Met 6"
+      },
+      {
+        "pain_id": "p47",
+        "avatar_id": "av4",
+        "pain": "Pain 7",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 7",
+        "offer": "Off 7",
+        "cta": "CTA 7",
+        "metric": "Met 7"
+      },
+      {
+        "pain_id": "p48",
+        "avatar_id": "av4",
+        "pain": "Pain 8",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 8",
+        "offer": "Off 8",
+        "cta": "CTA 8",
+        "metric": "Met 8"
+      },
+      {
+        "pain_id": "p49",
+        "avatar_id": "av4",
+        "pain": "Pain 9",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 9",
+        "offer": "Off 9",
+        "cta": "CTA 9",
+        "metric": "Met 9"
+      },
+      {
+        "pain_id": "p410",
+        "avatar_id": "av4",
+        "pain": "Pain 10",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 10",
+        "offer": "Off 10",
+        "cta": "CTA 10",
+        "metric": "Met 10"
+      },
+      {
+        "pain_id": "p51",
+        "avatar_id": "av5",
+        "pain": "Pain 1",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 1",
+        "offer": "Off 1",
+        "cta": "CTA 1",
+        "metric": "Met 1"
+      },
+      {
+        "pain_id": "p52",
+        "avatar_id": "av5",
+        "pain": "Pain 2",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 2",
+        "offer": "Off 2",
+        "cta": "CTA 2",
+        "metric": "Met 2"
+      },
+      {
+        "pain_id": "p53",
+        "avatar_id": "av5",
+        "pain": "Pain 3",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 3",
+        "offer": "Off 3",
+        "cta": "CTA 3",
+        "metric": "Met 3"
+      },
+      {
+        "pain_id": "p54",
+        "avatar_id": "av5",
+        "pain": "Pain 4",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 4",
+        "offer": "Off 4",
+        "cta": "CTA 4",
+        "metric": "Met 4"
+      },
+      {
+        "pain_id": "p55",
+        "avatar_id": "av5",
+        "pain": "Pain 5",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 5",
+        "offer": "Off 5",
+        "cta": "CTA 5",
+        "metric": "Met 5"
+      },
+      {
+        "pain_id": "p56",
+        "avatar_id": "av5",
+        "pain": "Pain 6",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 6",
+        "offer": "Off 6",
+        "cta": "CTA 6",
+        "metric": "Met 6"
+      },
+      {
+        "pain_id": "p57",
+        "avatar_id": "av5",
+        "pain": "Pain 7",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 7",
+        "offer": "Off 7",
+        "cta": "CTA 7",
+        "metric": "Met 7"
+      },
+      {
+        "pain_id": "p58",
+        "avatar_id": "av5",
+        "pain": "Pain 8",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 8",
+        "offer": "Off 8",
+        "cta": "CTA 8",
+        "metric": "Met 8"
+      },
+      {
+        "pain_id": "p59",
+        "avatar_id": "av5",
+        "pain": "Pain 9",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 9",
+        "offer": "Off 9",
+        "cta": "CTA 9",
+        "metric": "Met 9"
+      },
+      {
+        "pain_id": "p510",
+        "avatar_id": "av5",
+        "pain": "Pain 10",
+        "severity": "medium",
+        "emotion": "fear",
+        "consequence": "loss",
+        "solution": "Sol 10",
+        "offer": "Off 10",
+        "cta": "CTA 10",
+        "metric": "Met 10"
+      }
+    ],
+    "confidence": "medium"
+  },
+  "14_triggers": {
+    "triggers": [
+      {
+        "trigger_id": "t11",
+        "pain_id": "p11",
+        "avatar_id": "av1",
+        "trigger_text": "Trigger 1",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t12",
+        "pain_id": "p12",
+        "avatar_id": "av1",
+        "trigger_text": "Trigger 2",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t13",
+        "pain_id": "p13",
+        "avatar_id": "av1",
+        "trigger_text": "Trigger 3",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t14",
+        "pain_id": "p14",
+        "avatar_id": "av1",
+        "trigger_text": "Trigger 4",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t15",
+        "pain_id": "p15",
+        "avatar_id": "av1",
+        "trigger_text": "Trigger 5",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t16",
+        "pain_id": "p16",
+        "avatar_id": "av1",
+        "trigger_text": "Trigger 6",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t17",
+        "pain_id": "p17",
+        "avatar_id": "av1",
+        "trigger_text": "Trigger 7",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t18",
+        "pain_id": "p18",
+        "avatar_id": "av1",
+        "trigger_text": "Trigger 8",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t19",
+        "pain_id": "p19",
+        "avatar_id": "av1",
+        "trigger_text": "Trigger 9",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t110",
+        "pain_id": "p110",
+        "avatar_id": "av1",
+        "trigger_text": "Trigger 10",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t21",
+        "pain_id": "p21",
+        "avatar_id": "av2",
+        "trigger_text": "Trigger 1",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t22",
+        "pain_id": "p22",
+        "avatar_id": "av2",
+        "trigger_text": "Trigger 2",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t23",
+        "pain_id": "p23",
+        "avatar_id": "av2",
+        "trigger_text": "Trigger 3",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t24",
+        "pain_id": "p24",
+        "avatar_id": "av2",
+        "trigger_text": "Trigger 4",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t25",
+        "pain_id": "p25",
+        "avatar_id": "av2",
+        "trigger_text": "Trigger 5",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t26",
+        "pain_id": "p26",
+        "avatar_id": "av2",
+        "trigger_text": "Trigger 6",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t27",
+        "pain_id": "p27",
+        "avatar_id": "av2",
+        "trigger_text": "Trigger 7",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t28",
+        "pain_id": "p28",
+        "avatar_id": "av2",
+        "trigger_text": "Trigger 8",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t29",
+        "pain_id": "p29",
+        "avatar_id": "av2",
+        "trigger_text": "Trigger 9",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t210",
+        "pain_id": "p210",
+        "avatar_id": "av2",
+        "trigger_text": "Trigger 10",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t31",
+        "pain_id": "p31",
+        "avatar_id": "av3",
+        "trigger_text": "Trigger 1",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t32",
+        "pain_id": "p32",
+        "avatar_id": "av3",
+        "trigger_text": "Trigger 2",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t33",
+        "pain_id": "p33",
+        "avatar_id": "av3",
+        "trigger_text": "Trigger 3",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t34",
+        "pain_id": "p34",
+        "avatar_id": "av3",
+        "trigger_text": "Trigger 4",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t35",
+        "pain_id": "p35",
+        "avatar_id": "av3",
+        "trigger_text": "Trigger 5",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t36",
+        "pain_id": "p36",
+        "avatar_id": "av3",
+        "trigger_text": "Trigger 6",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t37",
+        "pain_id": "p37",
+        "avatar_id": "av3",
+        "trigger_text": "Trigger 7",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t38",
+        "pain_id": "p38",
+        "avatar_id": "av3",
+        "trigger_text": "Trigger 8",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t39",
+        "pain_id": "p39",
+        "avatar_id": "av3",
+        "trigger_text": "Trigger 9",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t310",
+        "pain_id": "p310",
+        "avatar_id": "av3",
+        "trigger_text": "Trigger 10",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t41",
+        "pain_id": "p41",
+        "avatar_id": "av4",
+        "trigger_text": "Trigger 1",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t42",
+        "pain_id": "p42",
+        "avatar_id": "av4",
+        "trigger_text": "Trigger 2",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t43",
+        "pain_id": "p43",
+        "avatar_id": "av4",
+        "trigger_text": "Trigger 3",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t44",
+        "pain_id": "p44",
+        "avatar_id": "av4",
+        "trigger_text": "Trigger 4",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t45",
+        "pain_id": "p45",
+        "avatar_id": "av4",
+        "trigger_text": "Trigger 5",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t46",
+        "pain_id": "p46",
+        "avatar_id": "av4",
+        "trigger_text": "Trigger 6",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t47",
+        "pain_id": "p47",
+        "avatar_id": "av4",
+        "trigger_text": "Trigger 7",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t48",
+        "pain_id": "p48",
+        "avatar_id": "av4",
+        "trigger_text": "Trigger 8",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t49",
+        "pain_id": "p49",
+        "avatar_id": "av4",
+        "trigger_text": "Trigger 9",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t410",
+        "pain_id": "p410",
+        "avatar_id": "av4",
+        "trigger_text": "Trigger 10",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t51",
+        "pain_id": "p51",
+        "avatar_id": "av5",
+        "trigger_text": "Trigger 1",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t52",
+        "pain_id": "p52",
+        "avatar_id": "av5",
+        "trigger_text": "Trigger 2",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t53",
+        "pain_id": "p53",
+        "avatar_id": "av5",
+        "trigger_text": "Trigger 3",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t54",
+        "pain_id": "p54",
+        "avatar_id": "av5",
+        "trigger_text": "Trigger 4",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t55",
+        "pain_id": "p55",
+        "avatar_id": "av5",
+        "trigger_text": "Trigger 5",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t56",
+        "pain_id": "p56",
+        "avatar_id": "av5",
+        "trigger_text": "Trigger 6",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t57",
+        "pain_id": "p57",
+        "avatar_id": "av5",
+        "trigger_text": "Trigger 7",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t58",
+        "pain_id": "p58",
+        "avatar_id": "av5",
+        "trigger_text": "Trigger 8",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t59",
+        "pain_id": "p59",
+        "avatar_id": "av5",
+        "trigger_text": "Trigger 9",
+        "trigger_type": "fear"
+      },
+      {
+        "trigger_id": "t510",
+        "pain_id": "p510",
+        "avatar_id": "av5",
+        "trigger_text": "Trigger 10",
+        "trigger_type": "fear"
+      }
+    ],
+    "confidence": "medium"
+  },
+  "15_offers": {
+    "offers": [
+      {
+        "offer_id": "o11",
+        "avatar_id": "av1",
+        "pain_id": "p11",
+        "headline": "Offer 1",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 1"
+      },
+      {
+        "offer_id": "o12",
+        "avatar_id": "av1",
+        "pain_id": "p12",
+        "headline": "Offer 2",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 2"
+      },
+      {
+        "offer_id": "o13",
+        "avatar_id": "av1",
+        "pain_id": "p13",
+        "headline": "Offer 3",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 3"
+      },
+      {
+        "offer_id": "o14",
+        "avatar_id": "av1",
+        "pain_id": "p14",
+        "headline": "Offer 4",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 4"
+      },
+      {
+        "offer_id": "o15",
+        "avatar_id": "av1",
+        "pain_id": "p15",
+        "headline": "Offer 5",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 5"
+      },
+      {
+        "offer_id": "o16",
+        "avatar_id": "av1",
+        "pain_id": "p16",
+        "headline": "Offer 6",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 6"
+      },
+      {
+        "offer_id": "o17",
+        "avatar_id": "av1",
+        "pain_id": "p17",
+        "headline": "Offer 7",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 7"
+      },
+      {
+        "offer_id": "o18",
+        "avatar_id": "av1",
+        "pain_id": "p18",
+        "headline": "Offer 8",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 8"
+      },
+      {
+        "offer_id": "o19",
+        "avatar_id": "av1",
+        "pain_id": "p19",
+        "headline": "Offer 9",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 9"
+      },
+      {
+        "offer_id": "o110",
+        "avatar_id": "av1",
+        "pain_id": "p110",
+        "headline": "Offer 10",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 10"
+      },
+      {
+        "offer_id": "o21",
+        "avatar_id": "av2",
+        "pain_id": "p21",
+        "headline": "Offer 1",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 1"
+      },
+      {
+        "offer_id": "o22",
+        "avatar_id": "av2",
+        "pain_id": "p22",
+        "headline": "Offer 2",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 2"
+      },
+      {
+        "offer_id": "o23",
+        "avatar_id": "av2",
+        "pain_id": "p23",
+        "headline": "Offer 3",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 3"
+      },
+      {
+        "offer_id": "o24",
+        "avatar_id": "av2",
+        "pain_id": "p24",
+        "headline": "Offer 4",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 4"
+      },
+      {
+        "offer_id": "o25",
+        "avatar_id": "av2",
+        "pain_id": "p25",
+        "headline": "Offer 5",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 5"
+      },
+      {
+        "offer_id": "o26",
+        "avatar_id": "av2",
+        "pain_id": "p26",
+        "headline": "Offer 6",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 6"
+      },
+      {
+        "offer_id": "o27",
+        "avatar_id": "av2",
+        "pain_id": "p27",
+        "headline": "Offer 7",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 7"
+      },
+      {
+        "offer_id": "o28",
+        "avatar_id": "av2",
+        "pain_id": "p28",
+        "headline": "Offer 8",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 8"
+      },
+      {
+        "offer_id": "o29",
+        "avatar_id": "av2",
+        "pain_id": "p29",
+        "headline": "Offer 9",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 9"
+      },
+      {
+        "offer_id": "o210",
+        "avatar_id": "av2",
+        "pain_id": "p210",
+        "headline": "Offer 10",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 10"
+      },
+      {
+        "offer_id": "o31",
+        "avatar_id": "av3",
+        "pain_id": "p31",
+        "headline": "Offer 1",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 1"
+      },
+      {
+        "offer_id": "o32",
+        "avatar_id": "av3",
+        "pain_id": "p32",
+        "headline": "Offer 2",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 2"
+      },
+      {
+        "offer_id": "o33",
+        "avatar_id": "av3",
+        "pain_id": "p33",
+        "headline": "Offer 3",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 3"
+      },
+      {
+        "offer_id": "o34",
+        "avatar_id": "av3",
+        "pain_id": "p34",
+        "headline": "Offer 4",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 4"
+      },
+      {
+        "offer_id": "o35",
+        "avatar_id": "av3",
+        "pain_id": "p35",
+        "headline": "Offer 5",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 5"
+      },
+      {
+        "offer_id": "o36",
+        "avatar_id": "av3",
+        "pain_id": "p36",
+        "headline": "Offer 6",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 6"
+      },
+      {
+        "offer_id": "o37",
+        "avatar_id": "av3",
+        "pain_id": "p37",
+        "headline": "Offer 7",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 7"
+      },
+      {
+        "offer_id": "o38",
+        "avatar_id": "av3",
+        "pain_id": "p38",
+        "headline": "Offer 8",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 8"
+      },
+      {
+        "offer_id": "o39",
+        "avatar_id": "av3",
+        "pain_id": "p39",
+        "headline": "Offer 9",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 9"
+      },
+      {
+        "offer_id": "o310",
+        "avatar_id": "av3",
+        "pain_id": "p310",
+        "headline": "Offer 10",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 10"
+      },
+      {
+        "offer_id": "o41",
+        "avatar_id": "av4",
+        "pain_id": "p41",
+        "headline": "Offer 1",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 1"
+      },
+      {
+        "offer_id": "o42",
+        "avatar_id": "av4",
+        "pain_id": "p42",
+        "headline": "Offer 2",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 2"
+      },
+      {
+        "offer_id": "o43",
+        "avatar_id": "av4",
+        "pain_id": "p43",
+        "headline": "Offer 3",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 3"
+      },
+      {
+        "offer_id": "o44",
+        "avatar_id": "av4",
+        "pain_id": "p44",
+        "headline": "Offer 4",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 4"
+      },
+      {
+        "offer_id": "o45",
+        "avatar_id": "av4",
+        "pain_id": "p45",
+        "headline": "Offer 5",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 5"
+      },
+      {
+        "offer_id": "o46",
+        "avatar_id": "av4",
+        "pain_id": "p46",
+        "headline": "Offer 6",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 6"
+      },
+      {
+        "offer_id": "o47",
+        "avatar_id": "av4",
+        "pain_id": "p47",
+        "headline": "Offer 7",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 7"
+      },
+      {
+        "offer_id": "o48",
+        "avatar_id": "av4",
+        "pain_id": "p48",
+        "headline": "Offer 8",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 8"
+      },
+      {
+        "offer_id": "o49",
+        "avatar_id": "av4",
+        "pain_id": "p49",
+        "headline": "Offer 9",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 9"
+      },
+      {
+        "offer_id": "o410",
+        "avatar_id": "av4",
+        "pain_id": "p410",
+        "headline": "Offer 10",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 10"
+      },
+      {
+        "offer_id": "o51",
+        "avatar_id": "av5",
+        "pain_id": "p51",
+        "headline": "Offer 1",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 1"
+      },
+      {
+        "offer_id": "o52",
+        "avatar_id": "av5",
+        "pain_id": "p52",
+        "headline": "Offer 2",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 2"
+      },
+      {
+        "offer_id": "o53",
+        "avatar_id": "av5",
+        "pain_id": "p53",
+        "headline": "Offer 3",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 3"
+      },
+      {
+        "offer_id": "o54",
+        "avatar_id": "av5",
+        "pain_id": "p54",
+        "headline": "Offer 4",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 4"
+      },
+      {
+        "offer_id": "o55",
+        "avatar_id": "av5",
+        "pain_id": "p55",
+        "headline": "Offer 5",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 5"
+      },
+      {
+        "offer_id": "o56",
+        "avatar_id": "av5",
+        "pain_id": "p56",
+        "headline": "Offer 6",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 6"
+      },
+      {
+        "offer_id": "o57",
+        "avatar_id": "av5",
+        "pain_id": "p57",
+        "headline": "Offer 7",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 7"
+      },
+      {
+        "offer_id": "o58",
+        "avatar_id": "av5",
+        "pain_id": "p58",
+        "headline": "Offer 8",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 8"
+      },
+      {
+        "offer_id": "o59",
+        "avatar_id": "av5",
+        "pain_id": "p59",
+        "headline": "Offer 9",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 9"
+      },
+      {
+        "offer_id": "o510",
+        "avatar_id": "av5",
+        "pain_id": "p510",
+        "headline": "Offer 10",
+        "value": "V",
+        "result": "R",
+        "timeframe": "3d",
+        "cta": "CTA 10"
+      }
+    ],
+    "confidence": "medium"
+  },
+  "16_funnels": {
+    "steps": [
+      {
+        "stage": "awareness",
+        "client_state": "cold",
+        "content": "C",
+        "cta": "CTA",
+        "kpi": "KPI",
+        "next_step": "N"
+      },
+      {
+        "stage": "interest",
+        "client_state": "warm",
+        "content": "C",
+        "cta": "CTA",
+        "kpi": "KPI",
+        "next_step": "N"
+      }
+    ],
+    "confidence": "medium"
+  },
+  "17_advertising": {
+    "campaigns": [
+      {
+        "platform": "vk",
+        "audience": "Women",
+        "creative": "C",
+        "offer": "O",
+        "budget": "500",
+        "test_duration": "3",
+        "kpi": "CTR > 2%",
+        "success_threshold": "CTR > 2%",
+        "stop_threshold": "CTR < 1%",
+        "scale_threshold": "CTR > 3%"
+      }
+    ],
+    "confidence": "medium"
+  },
+  "18_content_plan": {
+    "days": [
+      {
+        "day": 1,
+        "avatar_id": "av2",
+        "pain_id": "p22",
+        "offer_id": "o22",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 1",
+        "kpi": "1 likes"
+      },
+      {
+        "day": 2,
+        "avatar_id": "av3",
+        "pain_id": "p33",
+        "offer_id": "o33",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 2",
+        "kpi": "2 likes"
+      },
+      {
+        "day": 3,
+        "avatar_id": "av4",
+        "pain_id": "p44",
+        "offer_id": "o44",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 3",
+        "kpi": "3 likes"
+      },
+      {
+        "day": 4,
+        "avatar_id": "av5",
+        "pain_id": "p55",
+        "offer_id": "o55",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 4",
+        "kpi": "4 likes"
+      },
+      {
+        "day": 5,
+        "avatar_id": "av1",
+        "pain_id": "p16",
+        "offer_id": "o16",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 5",
+        "kpi": "5 likes"
+      },
+      {
+        "day": 6,
+        "avatar_id": "av2",
+        "pain_id": "p27",
+        "offer_id": "o27",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 6",
+        "kpi": "6 likes"
+      },
+      {
+        "day": 7,
+        "avatar_id": "av3",
+        "pain_id": "p38",
+        "offer_id": "o38",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 7",
+        "kpi": "7 likes"
+      },
+      {
+        "day": 8,
+        "avatar_id": "av4",
+        "pain_id": "p49",
+        "offer_id": "o49",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 8",
+        "kpi": "8 likes"
+      },
+      {
+        "day": 9,
+        "avatar_id": "av5",
+        "pain_id": "p510",
+        "offer_id": "o510",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 9",
+        "kpi": "9 likes"
+      },
+      {
+        "day": 10,
+        "avatar_id": "av1",
+        "pain_id": "p11",
+        "offer_id": "o11",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 10",
+        "kpi": "10 likes"
+      },
+      {
+        "day": 11,
+        "avatar_id": "av2",
+        "pain_id": "p22",
+        "offer_id": "o22",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 11",
+        "kpi": "11 likes"
+      },
+      {
+        "day": 12,
+        "avatar_id": "av3",
+        "pain_id": "p33",
+        "offer_id": "o33",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 12",
+        "kpi": "12 likes"
+      },
+      {
+        "day": 13,
+        "avatar_id": "av4",
+        "pain_id": "p44",
+        "offer_id": "o44",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 13",
+        "kpi": "13 likes"
+      },
+      {
+        "day": 14,
+        "avatar_id": "av5",
+        "pain_id": "p55",
+        "offer_id": "o55",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 14",
+        "kpi": "14 likes"
+      },
+      {
+        "day": 15,
+        "avatar_id": "av1",
+        "pain_id": "p16",
+        "offer_id": "o16",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 15",
+        "kpi": "15 likes"
+      },
+      {
+        "day": 16,
+        "avatar_id": "av2",
+        "pain_id": "p27",
+        "offer_id": "o27",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 16",
+        "kpi": "16 likes"
+      },
+      {
+        "day": 17,
+        "avatar_id": "av3",
+        "pain_id": "p38",
+        "offer_id": "o38",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 17",
+        "kpi": "17 likes"
+      },
+      {
+        "day": 18,
+        "avatar_id": "av4",
+        "pain_id": "p49",
+        "offer_id": "o49",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 18",
+        "kpi": "18 likes"
+      },
+      {
+        "day": 19,
+        "avatar_id": "av5",
+        "pain_id": "p510",
+        "offer_id": "o510",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 19",
+        "kpi": "19 likes"
+      },
+      {
+        "day": 20,
+        "avatar_id": "av1",
+        "pain_id": "p11",
+        "offer_id": "o11",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 20",
+        "kpi": "20 likes"
+      },
+      {
+        "day": 21,
+        "avatar_id": "av2",
+        "pain_id": "p22",
+        "offer_id": "o22",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 21",
+        "kpi": "21 likes"
+      },
+      {
+        "day": 22,
+        "avatar_id": "av3",
+        "pain_id": "p33",
+        "offer_id": "o33",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 22",
+        "kpi": "22 likes"
+      },
+      {
+        "day": 23,
+        "avatar_id": "av4",
+        "pain_id": "p44",
+        "offer_id": "o44",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 23",
+        "kpi": "23 likes"
+      },
+      {
+        "day": 24,
+        "avatar_id": "av5",
+        "pain_id": "p55",
+        "offer_id": "o55",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 24",
+        "kpi": "24 likes"
+      },
+      {
+        "day": 25,
+        "avatar_id": "av1",
+        "pain_id": "p16",
+        "offer_id": "o16",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 25",
+        "kpi": "25 likes"
+      },
+      {
+        "day": 26,
+        "avatar_id": "av2",
+        "pain_id": "p27",
+        "offer_id": "o27",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 26",
+        "kpi": "26 likes"
+      },
+      {
+        "day": 27,
+        "avatar_id": "av3",
+        "pain_id": "p38",
+        "offer_id": "o38",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 27",
+        "kpi": "27 likes"
+      },
+      {
+        "day": 28,
+        "avatar_id": "av4",
+        "pain_id": "p49",
+        "offer_id": "o49",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 28",
+        "kpi": "28 likes"
+      },
+      {
+        "day": 29,
+        "avatar_id": "av5",
+        "pain_id": "p510",
+        "offer_id": "o510",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 29",
+        "kpi": "29 likes"
+      },
+      {
+        "day": 30,
+        "avatar_id": "av1",
+        "pain_id": "p11",
+        "offer_id": "o11",
+        "platform": "instagram",
+        "content_format": "post",
+        "archetype": "case",
+        "cta": "CTA 30",
+        "kpi": "30 likes"
+      }
+    ],
+    "confidence": "medium"
+  },
+  "19_reels": {
+    "reels": [
+      {
+        "archetype": "case",
+        "hook": "Hook 1",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r1",
+        "frame_2": "F2 r1",
+        "frame_3": "F3 r1",
+        "frame_4": "F4 r1",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 1"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 2",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r2",
+        "frame_2": "F2 r2",
+        "frame_3": "F3 r2",
+        "frame_4": "F4 r2",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 2"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 3",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r3",
+        "frame_2": "F2 r3",
+        "frame_3": "F3 r3",
+        "frame_4": "F4 r3",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 3"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 4",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r4",
+        "frame_2": "F2 r4",
+        "frame_3": "F3 r4",
+        "frame_4": "F4 r4",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 4"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 5",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r5",
+        "frame_2": "F2 r5",
+        "frame_3": "F3 r5",
+        "frame_4": "F4 r5",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 5"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 6",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r6",
+        "frame_2": "F2 r6",
+        "frame_3": "F3 r6",
+        "frame_4": "F4 r6",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 6"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 7",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r7",
+        "frame_2": "F2 r7",
+        "frame_3": "F3 r7",
+        "frame_4": "F4 r7",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 7"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 8",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r8",
+        "frame_2": "F2 r8",
+        "frame_3": "F3 r8",
+        "frame_4": "F4 r8",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 8"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 9",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r9",
+        "frame_2": "F2 r9",
+        "frame_3": "F3 r9",
+        "frame_4": "F4 r9",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 9"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 10",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r10",
+        "frame_2": "F2 r10",
+        "frame_3": "F3 r10",
+        "frame_4": "F4 r10",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 10"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 11",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r11",
+        "frame_2": "F2 r11",
+        "frame_3": "F3 r11",
+        "frame_4": "F4 r11",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 11"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 12",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r12",
+        "frame_2": "F2 r12",
+        "frame_3": "F3 r12",
+        "frame_4": "F4 r12",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 12"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 13",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r13",
+        "frame_2": "F2 r13",
+        "frame_3": "F3 r13",
+        "frame_4": "F4 r13",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 13"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 14",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r14",
+        "frame_2": "F2 r14",
+        "frame_3": "F3 r14",
+        "frame_4": "F4 r14",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 14"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 15",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r15",
+        "frame_2": "F2 r15",
+        "frame_3": "F3 r15",
+        "frame_4": "F4 r15",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 15"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 16",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r16",
+        "frame_2": "F2 r16",
+        "frame_3": "F3 r16",
+        "frame_4": "F4 r16",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 16"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 17",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r17",
+        "frame_2": "F2 r17",
+        "frame_3": "F3 r17",
+        "frame_4": "F4 r17",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 17"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 18",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r18",
+        "frame_2": "F2 r18",
+        "frame_3": "F3 r18",
+        "frame_4": "F4 r18",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 18"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 19",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r19",
+        "frame_2": "F2 r19",
+        "frame_3": "F3 r19",
+        "frame_4": "F4 r19",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 19"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 20",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r20",
+        "frame_2": "F2 r20",
+        "frame_3": "F3 r20",
+        "frame_4": "F4 r20",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 20"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 21",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r21",
+        "frame_2": "F2 r21",
+        "frame_3": "F3 r21",
+        "frame_4": "F4 r21",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 21"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 22",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r22",
+        "frame_2": "F2 r22",
+        "frame_3": "F3 r22",
+        "frame_4": "F4 r22",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 22"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 23",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r23",
+        "frame_2": "F2 r23",
+        "frame_3": "F3 r23",
+        "frame_4": "F4 r23",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 23"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 24",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r24",
+        "frame_2": "F2 r24",
+        "frame_3": "F3 r24",
+        "frame_4": "F4 r24",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 24"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 25",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r25",
+        "frame_2": "F2 r25",
+        "frame_3": "F3 r25",
+        "frame_4": "F4 r25",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 25"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 26",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r26",
+        "frame_2": "F2 r26",
+        "frame_3": "F3 r26",
+        "frame_4": "F4 r26",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 26"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 27",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r27",
+        "frame_2": "F2 r27",
+        "frame_3": "F3 r27",
+        "frame_4": "F4 r27",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 27"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 28",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r28",
+        "frame_2": "F2 r28",
+        "frame_3": "F3 r28",
+        "frame_4": "F4 r28",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 28"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 29",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r29",
+        "frame_2": "F2 r29",
+        "frame_3": "F3 r29",
+        "frame_4": "F4 r29",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 29"
+      },
+      {
+        "archetype": "case",
+        "hook": "Hook 30",
+        "problem": "P",
+        "insight": "I",
+        "proof": "Pr",
+        "frame_1": "F1 r30",
+        "frame_2": "F2 r30",
+        "frame_3": "F3 r30",
+        "frame_4": "F4 r30",
+        "voiceover": "VO",
+        "on_screen_text": "T",
+        "cta": "CTA 30"
+      }
+    ],
+    "confidence": "medium"
+  },
+  "20_blog_articles": {
+    "articles": [
+      {
+        "title": "Article 1",
+        "search_query": "q1",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P1"
+        ],
+        "cta": "C1",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 2",
+        "search_query": "q2",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P2"
+        ],
+        "cta": "C2",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 3",
+        "search_query": "q3",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P3"
+        ],
+        "cta": "C3",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 4",
+        "search_query": "q4",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P4"
+        ],
+        "cta": "C4",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 5",
+        "search_query": "q5",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P5"
+        ],
+        "cta": "C5",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 6",
+        "search_query": "q6",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P6"
+        ],
+        "cta": "C6",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 7",
+        "search_query": "q7",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P7"
+        ],
+        "cta": "C7",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 8",
+        "search_query": "q8",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P8"
+        ],
+        "cta": "C8",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 9",
+        "search_query": "q9",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P9"
+        ],
+        "cta": "C9",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 10",
+        "search_query": "q10",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P10"
+        ],
+        "cta": "C10",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 11",
+        "search_query": "q11",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P11"
+        ],
+        "cta": "C11",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 12",
+        "search_query": "q12",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P12"
+        ],
+        "cta": "C12",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 13",
+        "search_query": "q13",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P13"
+        ],
+        "cta": "C13",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 14",
+        "search_query": "q14",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P14"
+        ],
+        "cta": "C14",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 15",
+        "search_query": "q15",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P15"
+        ],
+        "cta": "C15",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 16",
+        "search_query": "q16",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P16"
+        ],
+        "cta": "C16",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 17",
+        "search_query": "q17",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P17"
+        ],
+        "cta": "C17",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 18",
+        "search_query": "q18",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P18"
+        ],
+        "cta": "C18",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 19",
+        "search_query": "q19",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P19"
+        ],
+        "cta": "C19",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 20",
+        "search_query": "q20",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P20"
+        ],
+        "cta": "C20",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 21",
+        "search_query": "q21",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P21"
+        ],
+        "cta": "C21",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 22",
+        "search_query": "q22",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P22"
+        ],
+        "cta": "C22",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 23",
+        "search_query": "q23",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P23"
+        ],
+        "cta": "C23",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 24",
+        "search_query": "q24",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P24"
+        ],
+        "cta": "C24",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 25",
+        "search_query": "q25",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P25"
+        ],
+        "cta": "C25",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 26",
+        "search_query": "q26",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P26"
+        ],
+        "cta": "C26",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 27",
+        "search_query": "q27",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P27"
+        ],
+        "cta": "C27",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 28",
+        "search_query": "q28",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P28"
+        ],
+        "cta": "C28",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 29",
+        "search_query": "q29",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P29"
+        ],
+        "cta": "C29",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      },
+      {
+        "title": "Article 30",
+        "search_query": "q30",
+        "structure": [
+          "I",
+          "B",
+          "O"
+        ],
+        "key_points": [
+          "P30"
+        ],
+        "cta": "C30",
+        "linked_product": "P",
+        "linked_lead_magnet": "M"
+      }
+    ],
+    "confidence": "medium"
+  },
+  "21_posts": {
+    "posts": [
+      {
+        "platform": "instagram",
+        "avatar_id": "av2",
+        "pain_id": "p22",
+        "headline": "Post 1",
+        "post_text": "Full post text 1 with enough meaningful content",
+        "cta": "CTA 1",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 1",
+        "metric": "1 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av3",
+        "pain_id": "p33",
+        "headline": "Post 2",
+        "post_text": "Full post text 2 with enough meaningful content",
+        "cta": "CTA 2",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 2",
+        "metric": "2 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av4",
+        "pain_id": "p44",
+        "headline": "Post 3",
+        "post_text": "Full post text 3 with enough meaningful content",
+        "cta": "CTA 3",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 3",
+        "metric": "3 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av5",
+        "pain_id": "p55",
+        "headline": "Post 4",
+        "post_text": "Full post text 4 with enough meaningful content",
+        "cta": "CTA 4",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 4",
+        "metric": "4 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av1",
+        "pain_id": "p16",
+        "headline": "Post 5",
+        "post_text": "Full post text 5 with enough meaningful content",
+        "cta": "CTA 5",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 5",
+        "metric": "5 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av2",
+        "pain_id": "p27",
+        "headline": "Post 6",
+        "post_text": "Full post text 6 with enough meaningful content",
+        "cta": "CTA 6",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 6",
+        "metric": "6 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av3",
+        "pain_id": "p38",
+        "headline": "Post 7",
+        "post_text": "Full post text 7 with enough meaningful content",
+        "cta": "CTA 7",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 7",
+        "metric": "7 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av4",
+        "pain_id": "p49",
+        "headline": "Post 8",
+        "post_text": "Full post text 8 with enough meaningful content",
+        "cta": "CTA 8",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 8",
+        "metric": "8 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av5",
+        "pain_id": "p510",
+        "headline": "Post 9",
+        "post_text": "Full post text 9 with enough meaningful content",
+        "cta": "CTA 9",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 9",
+        "metric": "9 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av1",
+        "pain_id": "p11",
+        "headline": "Post 10",
+        "post_text": "Full post text 10 with enough meaningful content",
+        "cta": "CTA 10",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 10",
+        "metric": "10 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av2",
+        "pain_id": "p22",
+        "headline": "Post 11",
+        "post_text": "Full post text 11 with enough meaningful content",
+        "cta": "CTA 11",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 11",
+        "metric": "11 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av3",
+        "pain_id": "p33",
+        "headline": "Post 12",
+        "post_text": "Full post text 12 with enough meaningful content",
+        "cta": "CTA 12",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 12",
+        "metric": "12 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av4",
+        "pain_id": "p44",
+        "headline": "Post 13",
+        "post_text": "Full post text 13 with enough meaningful content",
+        "cta": "CTA 13",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 13",
+        "metric": "13 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av5",
+        "pain_id": "p55",
+        "headline": "Post 14",
+        "post_text": "Full post text 14 with enough meaningful content",
+        "cta": "CTA 14",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 14",
+        "metric": "14 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av1",
+        "pain_id": "p16",
+        "headline": "Post 15",
+        "post_text": "Full post text 15 with enough meaningful content",
+        "cta": "CTA 15",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 15",
+        "metric": "15 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av2",
+        "pain_id": "p27",
+        "headline": "Post 16",
+        "post_text": "Full post text 16 with enough meaningful content",
+        "cta": "CTA 16",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 16",
+        "metric": "16 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av3",
+        "pain_id": "p38",
+        "headline": "Post 17",
+        "post_text": "Full post text 17 with enough meaningful content",
+        "cta": "CTA 17",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 17",
+        "metric": "17 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av4",
+        "pain_id": "p49",
+        "headline": "Post 18",
+        "post_text": "Full post text 18 with enough meaningful content",
+        "cta": "CTA 18",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 18",
+        "metric": "18 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av5",
+        "pain_id": "p510",
+        "headline": "Post 19",
+        "post_text": "Full post text 19 with enough meaningful content",
+        "cta": "CTA 19",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 19",
+        "metric": "19 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av1",
+        "pain_id": "p11",
+        "headline": "Post 20",
+        "post_text": "Full post text 20 with enough meaningful content",
+        "cta": "CTA 20",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 20",
+        "metric": "20 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av2",
+        "pain_id": "p22",
+        "headline": "Post 21",
+        "post_text": "Full post text 21 with enough meaningful content",
+        "cta": "CTA 21",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 21",
+        "metric": "21 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av3",
+        "pain_id": "p33",
+        "headline": "Post 22",
+        "post_text": "Full post text 22 with enough meaningful content",
+        "cta": "CTA 22",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 22",
+        "metric": "22 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av4",
+        "pain_id": "p44",
+        "headline": "Post 23",
+        "post_text": "Full post text 23 with enough meaningful content",
+        "cta": "CTA 23",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 23",
+        "metric": "23 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av5",
+        "pain_id": "p55",
+        "headline": "Post 24",
+        "post_text": "Full post text 24 with enough meaningful content",
+        "cta": "CTA 24",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 24",
+        "metric": "24 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av1",
+        "pain_id": "p16",
+        "headline": "Post 25",
+        "post_text": "Full post text 25 with enough meaningful content",
+        "cta": "CTA 25",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 25",
+        "metric": "25 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av2",
+        "pain_id": "p27",
+        "headline": "Post 26",
+        "post_text": "Full post text 26 with enough meaningful content",
+        "cta": "CTA 26",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 26",
+        "metric": "26 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av3",
+        "pain_id": "p38",
+        "headline": "Post 27",
+        "post_text": "Full post text 27 with enough meaningful content",
+        "cta": "CTA 27",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 27",
+        "metric": "27 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av4",
+        "pain_id": "p49",
+        "headline": "Post 28",
+        "post_text": "Full post text 28 with enough meaningful content",
+        "cta": "CTA 28",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 28",
+        "metric": "28 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av5",
+        "pain_id": "p510",
+        "headline": "Post 29",
+        "post_text": "Full post text 29 with enough meaningful content",
+        "cta": "CTA 29",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 29",
+        "metric": "29 likes"
+      },
+      {
+        "platform": "instagram",
+        "avatar_id": "av1",
+        "pain_id": "p11",
+        "headline": "Post 30",
+        "post_text": "Full post text 30 with enough meaningful content",
+        "cta": "CTA 30",
+        "hashtags": [
+          "tag"
+        ],
+        "target_action": "action 30",
+        "metric": "30 likes"
+      }
+    ],
+    "confidence": "medium"
+  },
+  "22_visual_briefs": {
+    "briefs": [
+      {
+        "material_id": "m1",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D1.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D1.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 1"
+      },
+      {
+        "material_id": "m2",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D2.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D2.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 2"
+      },
+      {
+        "material_id": "m3",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D3.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D3.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 3"
+      },
+      {
+        "material_id": "m4",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D4.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D4.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 4"
+      },
+      {
+        "material_id": "m5",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D5.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D5.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 5"
+      },
+      {
+        "material_id": "m6",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D6.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D6.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 6"
+      },
+      {
+        "material_id": "m7",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D7.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D7.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 7"
+      },
+      {
+        "material_id": "m8",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D8.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D8.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 8"
+      },
+      {
+        "material_id": "m9",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D9.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D9.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 9"
+      },
+      {
+        "material_id": "m10",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D10.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D10.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 10"
+      },
+      {
+        "material_id": "m11",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D11.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D11.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 11"
+      },
+      {
+        "material_id": "m12",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D12.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D12.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 12"
+      },
+      {
+        "material_id": "m13",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D13.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D13.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 13"
+      },
+      {
+        "material_id": "m14",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D14.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D14.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 14"
+      },
+      {
+        "material_id": "m15",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D15.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D15.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 15"
+      },
+      {
+        "material_id": "m16",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D16.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D16.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 16"
+      },
+      {
+        "material_id": "m17",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D17.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D17.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 17"
+      },
+      {
+        "material_id": "m18",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D18.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D18.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 18"
+      },
+      {
+        "material_id": "m19",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D19.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D19.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 19"
+      },
+      {
+        "material_id": "m20",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D20.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D20.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 20"
+      },
+      {
+        "material_id": "m21",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D21.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D21.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 21"
+      },
+      {
+        "material_id": "m22",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D22.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D22.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 22"
+      },
+      {
+        "material_id": "m23",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D23.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D23.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 23"
+      },
+      {
+        "material_id": "m24",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D24.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D24.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 24"
+      },
+      {
+        "material_id": "m25",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D25.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D25.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 25"
+      },
+      {
+        "material_id": "m26",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D26.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D26.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 26"
+      },
+      {
+        "material_id": "m27",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D27.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D27.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 27"
+      },
+      {
+        "material_id": "m28",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D28.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D28.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 28"
+      },
+      {
+        "material_id": "m29",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D29.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D29.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 29"
+      },
+      {
+        "material_id": "m30",
+        "visual_type": "photo",
+        "frames": [
+          {
+            "frame_number": 1,
+            "description": "D30.1",
+            "angle": "wide",
+            "lighting": "natural",
+            "text_overlay": "O"
+          },
+          {
+            "frame_number": 2,
+            "description": "D30.2",
+            "angle": "close-up",
+            "lighting": "studio",
+            "text_overlay": ""
+          }
+        ],
+        "goal": "Goal 30"
+      }
+    ],
+    "confidence": "medium"
+  },
+  "23_sales_scripts": {
+    "scripts": [
+      {
+        "scenario": "first",
+        "goal": "Start",
+        "message": "Hello!",
+        "next_step": "Ask"
+      },
+      {
+        "scenario": "price",
+        "goal": "Handle",
+        "message": "Message",
+        "next_step": "Next"
+      }
+    ],
+    "confidence": "medium"
+  },
+  "24_kpi": {
+    "kpis": [
+      {
+        "action": "Reels",
+        "metric": "5000 views",
+        "success_threshold": "5000",
+        "warning_threshold": "1500",
+        "fail_threshold": "500",
+        "if_success": "scale",
+        "if_warning": "keep",
+        "if_fail": "change"
+      }
+    ],
+    "confidence": "medium"
+  },
+  "25_first_7_days": {
+    "days": [
+      {
+        "day": 1,
+        "preparation": [
+          "Prep 1"
+        ],
+        "content": [
+          "Content 1"
+        ],
+        "ads": [],
+        "kpi_check": [
+          "Check 1"
+        ]
+      },
+      {
+        "day": 2,
+        "preparation": [
+          "Prep 2"
+        ],
+        "content": [
+          "Content 2"
+        ],
+        "ads": [],
+        "kpi_check": [
+          "Check 2"
+        ]
+      },
+      {
+        "day": 3,
+        "preparation": [
+          "Prep 3"
+        ],
+        "content": [
+          "Content 3"
+        ],
+        "ads": [],
+        "kpi_check": [
+          "Check 3"
+        ]
+      },
+      {
+        "day": 4,
+        "preparation": [
+          "Prep 4"
+        ],
+        "content": [
+          "Content 4"
+        ],
+        "ads": [],
+        "kpi_check": [
+          "Check 4"
+        ]
+      },
+      {
+        "day": 5,
+        "preparation": [
+          "Prep 5"
+        ],
+        "content": [
+          "Content 5"
+        ],
+        "ads": [],
+        "kpi_check": [
+          "Check 5"
+        ]
+      },
+      {
+        "day": 6,
+        "preparation": [
+          "Prep 6"
+        ],
+        "content": [
+          "Content 6"
+        ],
+        "ads": [],
+        "kpi_check": [
+          "Check 6"
+        ]
+      },
+      {
+        "day": 7,
+        "preparation": [
+          "Prep 7"
+        ],
+        "content": [
+          "Content 7"
+        ],
+        "ads": [],
+        "kpi_check": [
+          "Check 7"
+        ]
+      }
+    ],
+    "confidence": "medium"
+  },
+  "26_launch_plan": {
+    "steps": [
+      {
+        "step_number": 1,
+        "action": "A",
+        "next_step": "B"
+      },
+      {
+        "step_number": 2,
+        "action": "B",
+        "next_step": "C"
+      },
+      {
+        "step_number": 3,
+        "action": "C",
+        "next_step": ""
+      }
+    ],
+    "outcome": "Outcome",
+    "confidence": "medium"
+  },
+  "27_quality_control": {
+    "overall_pass": true,
+    "cross_validations": [],
+    "stop_words_found": [],
+    "hallucinations": [],
+    "empties": [],
+    "repeats": [],
+    "disconnected_ctas": [],
+    "disconnected_offers": [],
+    "disconnected_content": [],
+    "can_deliver_to_client": true,
+    "quality_score": 95.0
+  }
+}

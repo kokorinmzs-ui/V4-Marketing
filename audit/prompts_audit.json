@@ -1,0 +1,10 @@
+{
+  "total_block_prompts": 27,
+  "expected": 27,
+  "master_prompt_exists": true,
+  "repair_prompt_exists": true,
+  "execution_prompt_exists": true,
+  "all_have_version": true,
+  "all_have_json_requirement": true,
+  "missing": []
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "description": "All valid → PASS",
+    "expected_success": true,
+    "actual_success": true,
+    "passed": true,
+    "errors": []
+  },
+  {
+    "description": "Avatar without pain → FAIL",
+    "expected_success": false,
+    "actual_success": false,
+    "passed": true,
+    "errors": [
+      "Pain avatar_id 'av99' not in avatars",
+      "Trigger pain_id 'p1' not in pains",
+      "Trigger pain_id 'p2' not in pains"
+    ]
+  },
+  {
+    "description": "Pain without offer → FAIL",
+    "expected_success": false,
+    "actual_success": false,
+    "passed": true,
+    "errors": [
+      "Offer pain_id 'p99' not in pains"
+    ]
+  },
+  {
+    "description": "Offer without CTA → FAIL",
+    "expected_success": false,
+    "actual_success": false,
+    "passed": true,
+    "errors": [
+      "Offer 'o1' missing CTA"
+    ]
+  },
+  {
+    "description": "Ads without audience → FAIL",
+    "expected_success": false,
+    "actual_success": false,
+    "passed": true,
+    "errors": [
+      "Ad campaign missing audience"
+    ]
+  },
+  {
+    "description": "KPI without action → FAIL",
+    "expected_success": false,
+    "actual_success": false,
+    "passed": true,
+    "errors": [
+      "KPI missing action"
+    ]
+  }
+]
