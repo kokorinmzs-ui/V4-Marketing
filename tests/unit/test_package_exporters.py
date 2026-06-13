@@ -1,5 +1,5 @@
 """Tests for Package Exporter — Sprint 13 (55 tests)."""
-import json, os, tempfile, zipfile, io, pytest
+import copy, json, os, tempfile, zipfile, io, pytest
 from ai_engine.planner.execution_planner import ExecutionPlanner
 from ai_engine.exporters.package_builder import PackageBuilder
 from ai_engine.exporters.zip_exporter import ZipExporter
@@ -119,6 +119,18 @@ class TestMutationZIP:
         files["03-CONTENT-LIBRARY.html"] = ""
         with pytest.raises(ValueError, match="Empty"):
             ZipExporter().export(files)
+
+
+class TestPackageXSSHardening:
+    def test_html_files_escape_malicious_strings(self):
+        base = copy.deepcopy(ExecutionPlanner().plan(MIN_FD).execution_view_model)
+        base.content_tasks[0].ready_text = '<script>alert(1)</script>'
+        base.sales_tasks[0].message = '<button onclick="alert(1)">buy</button>'
+        files = PackageBuilder().build(base)
+        assert "<script>alert(1)</script>" not in files["03-CONTENT-LIBRARY.html"]
+        assert 'onclick="alert(1)"' not in files["04-SALES-SCRIPTS.html"]
+        assert "&lt;script&gt;alert(1)&lt;/script&gt;" in files["03-CONTENT-LIBRARY.html"]
+        assert "&lt;button onclick=&quot;alert(1)&quot;&gt;buy&lt;/button&gt;" in files["04-SALES-SCRIPTS.html"]
     def test_corrupt_after_export_validation(self, files):
         data = ZipExporter().export(files)
         bad = data[:len(data)//2]

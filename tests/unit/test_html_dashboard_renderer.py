@@ -1,5 +1,6 @@
 """Tests for HTML Dashboard Renderer — Sprint 12 (51 tests)."""
 
+import copy
 import json
 import pytest
 from ai_engine.exporters.html_dashboard_renderer import (
@@ -178,6 +179,24 @@ class TestQuality:
     def test_no_placeholder_data(self):
         html = RENDERER.render(EVM)
         assert "нет информации" not in html.lower()
+
+
+class TestXSSHardening:
+    def test_escapes_malicious_content(self):
+        evm = copy.deepcopy(EVM)
+        evm.missions[0].title = '<img src=x onerror=alert(1)>'
+        evm.missions[0].ready_text = '<script>alert(1)</script>'
+        evm.missions[0].cta = 'Click </script> now'
+        evm.sales_tasks[0].message = '<button onclick="alert(1)">buy</button>'
+        html = RENDERER.render(evm)
+        assert "<img src=x onerror=alert(1)>" not in html
+        assert "<script>alert(1)</script>" not in html
+        assert "onerror=" not in html
+        assert 'onclick="alert(1)"' not in html
+        assert "\\u003cimg" in html
+        assert "\\u003c/script\\u003e" in html or "\\u003c/script" in html
+        assert "&lt;script&gt;alert(1)&lt;/script&gt;" not in html  # data is JSON-embedded, not HTML-rendered
+        assert "escapeHtml" in html
 
     def test_mobile_css_exists(self):
         html = RENDERER.render(EVM)

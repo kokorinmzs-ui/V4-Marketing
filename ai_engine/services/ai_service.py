@@ -7,6 +7,7 @@ Direct provider calls are forbidden.
 from __future__ import annotations
 
 import json
+import os
 from dataclasses import dataclass, field
 from typing import Any, Optional
 
@@ -24,6 +25,8 @@ from ai_engine.providers.openai import OpenAIProvider
 class AIServiceConfig:
     """Configuration for AIService."""
 
+    primary_provider: str = field(default_factory=lambda: os.getenv("PRIMARY_LLM_PROVIDER", "deepseek"))
+    fallback_provider: str = field(default_factory=lambda: os.getenv("FALLBACK_LLM_PROVIDER", "openai"))
     deepseek_api_key: str = ""
     deepseek_model: str = "deepseek-chat"
     openai_api_key: str = ""
@@ -89,6 +92,10 @@ class AIService:
 
         self._deepseek = DeepSeekProvider(deepseek_cfg)
         self._openai = OpenAIProvider(openai_cfg)
+        self._providers: dict[str, BaseProvider] = {
+            "deepseek": self._deepseek,
+            "openai": self._openai,
+        }
         self._total_usage: list[LLMUsage] = []
 
     def generate(
@@ -107,46 +114,41 @@ class AIService:
         Returns:
             AIServiceResponse with structured data, never throws
         """
-        # Try DeepSeek first
-        response = self._deepseek.generate(system_prompt, user_prompt, json_schema)
+        provider_order = self._provider_order()
+        last_error = ""
+        attempts = 0
 
-        if response.status == "success":
+        for provider_name in provider_order:
+            provider = self._providers.get(provider_name)
+            if provider is None:
+                continue
+            attempts += 1
+            response = provider.generate(system_prompt, user_prompt, json_schema)
+            last_error = response.error or last_error
+            if response.status != "success":
+                continue
+
             data = self._validate_json(response.data, response.raw_json or "")
-            if data["status"] == "success":
-                self._total_usage.append(response.usage)
-                return AIServiceResponse(
-                    status="success",
-                    data=data["data"],
-                    model_used=response.model_used,
-                    usage=response.usage,
-                    provider_used="deepseek",
-                    elapsed_seconds=response.elapsed_seconds,
-                    attempts=1,
-                    parsed_json=True,
-                )
+            if data["status"] != "success":
+                last_error = data.get("error", last_error)
+                continue
 
-        # DeepSeek failed — try OpenAI
-        openai_response = self._openai.generate(system_prompt, user_prompt, json_schema)
-        if openai_response.status == "success":
-            data = self._validate_json(openai_response.data, openai_response.raw_json or "")
-            if data["status"] == "success":
-                self._total_usage.append(openai_response.usage)
-                return AIServiceResponse(
-                    status="success",
-                    data=data["data"],
-                    model_used=openai_response.model_used,
-                    usage=openai_response.usage,
-                    provider_used="openai",
-                    elapsed_seconds=openai_response.elapsed_seconds,
-                    attempts=2,
-                    parsed_json=True,
-                )
+            self._total_usage.append(response.usage)
+            return AIServiceResponse(
+                status="success",
+                data=data["data"],
+                model_used=response.model_used,
+                usage=response.usage,
+                provider_used=provider_name,
+                elapsed_seconds=response.elapsed_seconds,
+                attempts=attempts,
+                parsed_json=True,
+            )
 
-        # Both failed
         return AIServiceResponse(
             status="error",
-            error=f"DeepSeek: {response.error}; OpenAI: {openai_response.error}",
-            attempts=2,
+            error=last_error or "No provider returned valid JSON",
+            attempts=attempts or len(provider_order),
         )
 
     def _validate_json(self, data: dict[str, Any], raw: str) -> dict[str, Any]:
@@ -189,3 +191,18 @@ class AIService:
     def reset_usage(self) -> None:
         """Reset usage tracking."""
         self._total_usage.clear()
+
+    def _provider_order(self) -> list[str]:
+        preferred = self._normalize_provider_name(self.config.primary_provider)
+        fallback = self._normalize_provider_name(self.config.fallback_provider)
+        order = [preferred, fallback]
+        if order[1] == order[0]:
+            order.pop()
+        return order
+
+    @staticmethod
+    def _normalize_provider_name(name: str) -> str:
+        normalized = (name or "").strip().lower()
+        if normalized in {"deepseek", "openai"}:
+            return normalized
+        return "deepseek"

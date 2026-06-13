@@ -63,7 +63,7 @@ class TestSuccessfulAssembly:
         asm = FinalDataAssembler()
         _add_all(asm, _mk_all_valid())
         result = asm.assemble()
-        assert len(result.cross_validation_results) == 12
+        assert len(result.cross_validation_results) >= 16
 
 
 # ============================================================
@@ -176,6 +176,15 @@ class TestContentAvatar:
         assert result.success is True  # WARNING doesn't block
         assert any("content→avatar" in vr.validator_name for vr in result.cross_validation_results)
 
+    def test_content_unknown_offer_warns(self):
+        asm = FinalDataAssembler()
+        data = _mk_all_valid()
+        data["18_content_plan"] = {"days": [{"day":1,"avatar_id":"av1","pain_id":"p1","offer_id":"o99","platform":"instagram","content_format":"post","archetype":"case","cta":"CTA","kpi":"KPI"}], "confidence":"medium"}
+        _add_all(asm, data)
+        result = asm.assemble()
+        assert result.success is True
+        assert any("content→offer" in vr.validator_name for vr in result.cross_validation_results)
+
 
 # ============================================================
 # Cross-validator: ads → audience
@@ -194,6 +203,26 @@ class TestAdsAudience:
         _add_all(asm, data)
         result = asm.assemble()
         assert result.success is False
+
+
+# ============================================================
+# Cross-validator: posts → linkage
+# ============================================================
+class TestPostsLinkage:
+    def test_post_with_unknown_offer_fails(self):
+        asm = FinalDataAssembler()
+        data = _mk_all_valid()
+        data["21_posts"] = {"posts": [{"platform":"instagram","offer_id":"o99","avatar_id":"av1","pain_id":"p1","headline":"Head","post_text":"Text text text text text","cta":"CTA","hashtags":[],"target_action":"act","metric":"10 likes"}], "confidence":"medium"}
+        _add_all(asm, data)
+        result = asm.assemble()
+        assert result.success is False
+
+    def test_strict_mode_requires_optional_blocks(self):
+        asm = FinalDataAssembler()
+        _add_all(asm, _mk_all_valid())
+        result = asm.assemble(strict=True)
+        assert result.success is False
+        assert "05_owner_portrait" in result.blocks_failed
 
 
 # ============================================================

@@ -1,5 +1,6 @@
 """Tests for Execution Planner — Sprint 11 (60+ tests)."""
 
+import copy
 import pytest
 from ai_engine.planner.execution_planner import ExecutionPlanner, PlannerResult
 from ai_engine.validators.actionability import validate_actionability
@@ -324,3 +325,55 @@ class TestPlannerStats:
         assert r.stats["content"] >= 1
         assert r.stats["ads"] >= 1
         assert r.stats["sales"] >= 1
+
+
+# ============================================================
+# Real-data linkage
+# ============================================================
+class TestPlannerReality:
+    def test_custom_post_text_flows_into_content(self):
+        data = copy.deepcopy(MIN_FD)
+        data["posts"]["posts"][0]["post_text"] = "UNIQUE_POST_TEXT_123"
+        r = PLANNER.plan(data)
+        assert r.success
+        assert any(
+            "UNIQUE_POST_TEXT_123" in (m.ready_text or "") or "UNIQUE_POST_TEXT_123" in (m.title or "")
+            for m in r.execution_view_model.missions
+        )
+        assert any(
+            "UNIQUE_POST_TEXT_123" in (t.ready_text or "") or "UNIQUE_POST_TEXT_123" in (t.title or "")
+            for t in r.execution_view_model.content_tasks
+        )
+
+    def test_custom_sales_script_flows_into_sales(self):
+        data = copy.deepcopy(MIN_FD)
+        data["sales_scripts"]["scripts"][0]["message"] = "UNIQUE_SALES_SCRIPT_456"
+        r = PLANNER.plan(data)
+        assert r.success
+        assert any("UNIQUE_SALES_SCRIPT_456" in (m.ready_text or "") for m in r.execution_view_model.missions)
+        assert any("UNIQUE_SALES_SCRIPT_456" in (t.message or "") for t in r.execution_view_model.sales_tasks)
+
+    def test_custom_ads_data_flows_into_ads(self):
+        data = copy.deepcopy(MIN_FD)
+        data["advertising"]["campaigns"][0]["audience"] = "Women 25-34 - UNIQUE"
+        data["advertising"]["campaigns"][0]["budget"] = "1000"
+        r = PLANNER.plan(data)
+        assert r.success
+        assert any("UNIQUE" in (m.audience or "") for m in r.execution_view_model.missions if m.mission_type == MissionType.ADS)
+        assert any("UNIQUE" in (t.audience or "") for t in r.execution_view_model.ads_tasks)
+
+    def test_custom_reel_hook_flows_into_reel(self):
+        data = copy.deepcopy(MIN_FD)
+        data["content_plan"]["days"][0]["content_format"] = "reel"
+        data["reels"]["reels"][0]["hook"] = "UNIQUE_REEL_HOOK_789"
+        data["reels"]["reels"][0]["frame_1"] = "FRAME_ONE_789"
+        r = PLANNER.plan(data)
+        assert r.success
+        assert any("UNIQUE_REEL_HOOK_789" in (m.title or "") or "FRAME_ONE_789" in (m.ready_text or "") for m in r.execution_view_model.missions)
+
+    def test_empty_content_plan_fails(self):
+        data = copy.deepcopy(MIN_FD)
+        data["content_plan"] = {"days": []}
+        r = PLANNER.plan(data)
+        assert not r.success
+        assert any("content_plan" in err for err in r.errors)

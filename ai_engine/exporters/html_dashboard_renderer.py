@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 
+import html as html_lib
 import json
 
 from shared.schemas.execution_view_model import ExecutionViewModel
-from ai_engine.validators.base import ValidationIssue, ValidationResult, ValidationSeverity
+from ai_engine.validators.base import ValidationIssue, ValidationSeverity
 
 
 class RendererError(Exception):
@@ -13,12 +14,16 @@ class RendererError(Exception):
 
 
 class HTMLDashboardRenderer:
-
     TAB_IDS = ["today", "plan", "content", "ads", "sales", "clients", "metrics", "why"]
     TAB_NAMES = {
-        "today": "Сегодня", "plan": "30 дней", "content": "Контент",
-        "ads": "Реклама", "sales": "Продажи", "clients": "Клиенты",
-        "metrics": "Метрики", "why": "Почему",
+        "today": "Сегодня",
+        "plan": "30 дней",
+        "content": "Контент",
+        "ads": "Реклама",
+        "sales": "Продажи",
+        "clients": "Клиенты",
+        "metrics": "Метрики",
+        "why": "Почему",
     }
 
     CSS = """*{box-sizing:border-box;margin:0;padding:0}
@@ -62,15 +67,15 @@ function gs(mid){return S.completed[mid]?'done':S.failed[mid]?'failed':'pending'
 function ss(mid,st){if(st==='done'){S.completed[mid]=true;delete S.failed[mid];S.xp+=10;}else if(st==='failed'){S.failed[mid]=true;delete S.completed[mid];}else{delete S.completed[mid];delete S.failed[mid];}save();rt();}
 function cp(t){if(navigator.clipboard){navigator.clipboard.writeText(t).catch(function(){fc(t);});}else{fc(t);}}
 function fc(t){var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);}
-function esc(s){if(!s)return'';return String(s).replace(/&/g,'&').replace(/</g,'<').replace(/>/g,'>').replace(/"/g,'"');}
+function escapeHtml(s){if(s===null||s===undefined)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 function esc_js(s){if(!s)return'';return String(s).replace(/\\\\/g,'\\\\\\\\').replace(/'/g,"\\\\'").replace(/"/g,'\\\\"').replace(/\\n/g,'\\\\n');}
-function rt(){var c=document.getElementById('mission-cards');var td=window.DATA.today;var ms=window.MISSIONS.filter(function(m){return m.day===td.day;});if(!ms.length){c.innerHTML='<div class="no-data">Нет миссий</div>';return;}c.innerHTML=ms.map(function(m){var st=gs(m.mission_id);var dc=st==='done'?' done':'';return'<div class="card"><h3>'+esc(m.title)+'</h3><div class="meta">XP: '+m.xp_reward+'</div><div class="steps">'+m.steps.map(function(s){return'<li>'+esc(s)+'</li>';}).join('')+'</div>'+(m.ready_text?'<div class="ready-text">'+esc(m.ready_text)+'</div>':'')+'<div class="kpi-row">CTA: '+esc(m.cta)+' | KPI: '+esc(m.metric)+'</div><div class="actions"><button class="btn btn-done'+dc+'" onclick="ss(\\''+m.mission_id+'\\',\\'done\\')">SD</button><button class="btn btn-redo" onclick="ss(\\''+m.mission_id+'\\',\\'redo\\')">RD</button><button class="btn btn-fail" onclick="ss(\\''+m.mission_id+'\\',\\'failed\\')">FL</button>'+(m.ready_text?'<button class="btn btn-copy" onclick="cp(\\''+esc_js(m.ready_text)+'\\')">CP</button>':'')+'</div></div>';}).join('');}
-function rp(){var c=document.getElementById('plan-grid');c.innerHTML=window.DATA.days.map(function(d){return'<div class="card"><h3>Day '+d.day+' - '+esc(d.phase)+'</h3><p>'+esc(d.goal)+'</p></div>';}).join('');}
-function rc(){var c=document.getElementById('content-grid');var t=window.DATA.content_tasks;if(!t.length){c.innerHTML='<div class="no-data">No content</div>';return;}c.innerHTML=t.map(function(t){return'<div class="card"><h3>'+esc(t.title)+'</h3><div class="ready-text">'+esc(t.ready_text)+'</div><button class="btn btn-copy" onclick="cp(\\''+esc_js(t.ready_text)+'\\')">Copy</button></div>';}).join('');}
-function ra(){var c=document.getElementById('ads-grid');var t=window.DATA.ads_tasks;if(!t.length){c.innerHTML='<div class="no-data">No ads</div>';return;}c.innerHTML=t.map(function(t){return'<div class="card"><h3>Ad Day '+t.day+'</h3><div class="meta">Budget: '+esc(t.budget)+' | KPI: '+esc(t.kpi)+'</div></div>';}).join('');}
-function rs(){var c=document.getElementById('sales-grid');var t=window.DATA.sales_tasks;if(!t.length){c.innerHTML='<div class="no-data">No scripts</div>';return;}c.innerHTML=t.map(function(t){return'<div class="card"><h3>'+esc(t.scenario)+'</h3><p>'+esc(t.message)+'</p><button class="btn btn-copy" onclick="cp(\\''+esc_js(t.message)+'\\')">Copy</button></div>';}).join('');}
+function rt(){var c=document.getElementById('mission-cards');var td=window.DATA.today;var ms=window.MISSIONS.filter(function(m){return m.day===td.day;});if(!ms.length){c.innerHTML='<div class="no-data">Нет миссий</div>';return;}c.innerHTML=ms.map(function(m){var st=gs(m.mission_id);var dc=st==='done'?' done':'';return'<div class="card"><h3>'+escapeHtml(m.title)+'</h3><div class="meta">XP: '+escapeHtml(m.xp_reward)+'</div><div class="steps">'+m.steps.map(function(s){return'<li>'+escapeHtml(s)+'</li>';}).join('')+'</div>'+(m.ready_text?'<div class="ready-text">'+escapeHtml(m.ready_text)+'</div>':'')+'<div class="kpi-row">CTA: '+escapeHtml(m.cta)+' | KPI: '+escapeHtml(m.metric)+'</div><div class="actions"><button class="btn btn-done'+dc+'" onclick="ss(\\''+m.mission_id+'\\',\\'done\\')">SD</button><button class="btn btn-redo" onclick="ss(\\''+m.mission_id+'\\',\\'redo\\')">RD</button><button class="btn btn-fail" onclick="ss(\\''+m.mission_id+'\\',\\'failed\\')">FL</button>'+(m.ready_text?'<button class="btn btn-copy" onclick="cp(\\''+esc_js(m.ready_text)+'\\')">CP</button>':'')+'</div></div>';}).join('');}
+function rp(){var c=document.getElementById('plan-grid');c.innerHTML=window.DATA.days.map(function(d){return'<div class="card"><h3>Day '+escapeHtml(d.day)+' - '+escapeHtml(d.phase)+'</h3><p>'+escapeHtml(d.goal)+'</p></div>';}).join('');}
+function rc(){var c=document.getElementById('content-grid');var t=window.DATA.content_tasks;if(!t.length){c.innerHTML='<div class="no-data">No content</div>';return;}c.innerHTML=t.map(function(t){return'<div class="card"><h3>'+escapeHtml(t.title)+'</h3><div class="ready-text">'+escapeHtml(t.ready_text)+'</div><button class="btn btn-copy" onclick="cp(\\''+esc_js(t.ready_text)+'\\')">Copy</button></div>';}).join('');}
+function ra(){var c=document.getElementById('ads-grid');var t=window.DATA.ads_tasks;if(!t.length){c.innerHTML='<div class="no-data">No ads</div>';return;}c.innerHTML=t.map(function(t){return'<div class="card"><h3>Ad Day '+escapeHtml(t.day)+'</h3><div class="meta">Budget: '+escapeHtml(t.budget)+' | KPI: '+escapeHtml(t.kpi)+'</div></div>';}).join('');}
+function rs(){var c=document.getElementById('sales-grid');var t=window.DATA.sales_tasks;if(!t.length){c.innerHTML='<div class="no-data">No scripts</div>';return;}c.innerHTML=t.map(function(t){return'<div class="card"><h3>'+escapeHtml(t.scenario)+'</h3><p>'+escapeHtml(t.message)+'</p><button class="btn btn-copy" onclick="cp(\\''+esc_js(t.message)+'\\')">Copy</button></div>';}).join('');}
 function rcl(){document.getElementById('clients-grid').innerHTML='<div class="no-data">Client info</div>';}
-function rm(){var c=document.getElementById('metrics-grid');var k=window.DATA.kpi_tasks;if(!k||!k.length){c.innerHTML='<div class="no-data">No metrics</div>';return;}c.innerHTML=k.map(function(k){return'<div class="card"><h3>'+esc(k.action)+'</h3><div class="meta">'+esc(k.metric)+'</div></div>';}).join('');}
+function rm(){var c=document.getElementById('metrics-grid');var k=window.DATA.kpi_tasks;if(!k||!k.length){c.innerHTML='<div class="no-data">No metrics</div>';return;}c.innerHTML=k.map(function(k){return'<div class="card"><h3>'+escapeHtml(k.action)+'</h3><div class="meta">'+escapeHtml(k.metric)+'</div></div>';}).join('');}
 function rw(){document.getElementById('why-grid').innerHTML='<div class="card"><p>Built on deep marketing analysis.</p></div>';}
 function sw(tabId){
 document.querySelectorAll('.tab-content').forEach(function(el){el.classList.remove('active');});
@@ -92,9 +97,8 @@ document.querySelectorAll('.tabs button').forEach(function(btn){btn.addEventList
             for tid in self.TAB_IDS
         )
 
-        data_json = json.dumps(evm.model_dump(), ensure_ascii=False)
-        missions_json = json.dumps([m.model_dump() for m in evm.missions], ensure_ascii=False)
-
+        data_json = self._js_json_literal(evm.model_dump())
+        missions_json = self._js_json_literal([m.model_dump() for m in evm.missions])
         js = self.JS.replace("DATA_PLACEHOLDER", data_json).replace("MISSIONS_PLACEHOLDER", missions_json)
 
         return f"""<!DOCTYPE html>
@@ -109,7 +113,7 @@ document.querySelectorAll('.tabs button').forEach(function(btn){btn.addEventList
 <header>
 <h1>{self._esc(evm.project.name)}</h1>
 <div class="info">Day {evm.project.current_day} / {evm.total_days} — {self._esc(evm.project.current_phase)}</div>
-<div class="stats"><span>🔥 {evm.gamification.streak} days</span><span>⭐ {evm.gamification.xp} XP</span><span>📊 {self._esc(evm.gamification.level)}</span></div>
+<div class="stats"><span>🔥 {evm.gamification.streak} days</span><span>⭐ {evm.gamification.xp} XP</span><span>📉 {self._esc(evm.gamification.level)}</span></div>
 <div class="progress-bar"><div style="width:{evm.gamification.progress_percent}%"></div></div>
 </header>
 <nav class="tabs">{tabs_html}</nav>
@@ -141,7 +145,21 @@ document.querySelectorAll('.tabs button').forEach(function(btn){btn.addEventList
     def _esc(text: str) -> str:
         if not text:
             return ""
-        return str(text).replace("&", "&").replace("<", "<").replace(">", ">")
+        return html_lib.escape(str(text), quote=True)
+
+    @staticmethod
+    def _js_json_literal(value: object) -> str:
+        """Return a safe JSON literal for direct JS embedding."""
+        text = json.dumps(value, ensure_ascii=False)
+        text = (
+            text.replace("&", "\\u0026")
+            .replace("<", "\\u003c")
+            .replace(">", "\\u003e")
+            .replace("=", "\\u003d")
+            .replace("\u2028", "\\u2028")
+            .replace("\u2029", "\\u2029")
+        )
+        return text
 
     def render_to_file(self, evm: ExecutionViewModel, path: str) -> int:
         html = self.render(evm)

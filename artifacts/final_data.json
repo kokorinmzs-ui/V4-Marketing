@@ -1,6 +1,6 @@
 {
   "schema_version": "4.0",
-  "project_id": "assembed-001",
+  "project_id": "assembled-001",
   "project_name": "Assembled Project",
   "market_analysis": {
     "schema_version": "4.0",
@@ -236,15 +236,17 @@
   },
   "flagship_product": {
     "schema_version": "4.0",
-    "lead_magnets": [],
-    "content_magnets": [],
-    "tripwires": [],
-    "core_products": [],
-    "flagship_products": [],
-    "upsells": [],
-    "cross_sells": [],
-    "retention": [],
-    "referrals": []
+    "product": "Продукт",
+    "audience": [
+      "A"
+    ],
+    "core_pains": [
+      "P"
+    ],
+    "core_benefits": [
+      "B"
+    ],
+    "confidence": "medium"
   },
   "product_ladder": {
     "schema_version": "4.0",
@@ -3530,6 +3532,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av2",
         "pain_id": "p22",
         "headline": "Post 1",
@@ -3544,6 +3547,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av3",
         "pain_id": "p33",
         "headline": "Post 2",
@@ -3558,6 +3562,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av4",
         "pain_id": "p44",
         "headline": "Post 3",
@@ -3572,6 +3577,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av5",
         "pain_id": "p55",
         "headline": "Post 4",
@@ -3586,6 +3592,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av1",
         "pain_id": "p16",
         "headline": "Post 5",
@@ -3600,6 +3607,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av2",
         "pain_id": "p27",
         "headline": "Post 6",
@@ -3614,6 +3622,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av3",
         "pain_id": "p38",
         "headline": "Post 7",
@@ -3628,6 +3637,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av4",
         "pain_id": "p49",
         "headline": "Post 8",
@@ -3642,6 +3652,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av5",
         "pain_id": "p510",
         "headline": "Post 9",
@@ -3656,6 +3667,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av1",
         "pain_id": "p11",
         "headline": "Post 10",
@@ -3670,6 +3682,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av2",
         "pain_id": "p22",
         "headline": "Post 11",
@@ -3684,6 +3697,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av3",
         "pain_id": "p33",
         "headline": "Post 12",
@@ -3698,6 +3712,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av4",
         "pain_id": "p44",
         "headline": "Post 13",
@@ -3712,6 +3727,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av5",
         "pain_id": "p55",
         "headline": "Post 14",
@@ -3726,6 +3742,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av1",
         "pain_id": "p16",
         "headline": "Post 15",
@@ -3740,6 +3757,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av2",
         "pain_id": "p27",
         "headline": "Post 16",
@@ -3754,6 +3772,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av3",
         "pain_id": "p38",
         "headline": "Post 17",
@@ -3768,6 +3787,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av4",
         "pain_id": "p49",
         "headline": "Post 18",
@@ -3782,6 +3802,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av5",
         "pain_id": "p510",
         "headline": "Post 19",
@@ -3796,6 +3817,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av1",
         "pain_id": "p11",
         "headline": "Post 20",
@@ -3810,6 +3832,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av2",
         "pain_id": "p22",
         "headline": "Post 21",
@@ -3824,6 +3847,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av3",
         "pain_id": "p33",
         "headline": "Post 22",
@@ -3838,6 +3862,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av4",
         "pain_id": "p44",
         "headline": "Post 23",
@@ -3852,6 +3877,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av5",
         "pain_id": "p55",
         "headline": "Post 24",
@@ -3866,6 +3892,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av1",
         "pain_id": "p16",
         "headline": "Post 25",
@@ -3880,6 +3907,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av2",
         "pain_id": "p27",
         "headline": "Post 26",
@@ -3894,6 +3922,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av3",
         "pain_id": "p38",
         "headline": "Post 27",
@@ -3908,6 +3937,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av4",
         "pain_id": "p49",
         "headline": "Post 28",
@@ -3922,6 +3952,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av5",
         "pain_id": "p510",
         "headline": "Post 29",
@@ -3936,6 +3967,7 @@
       {
         "schema_version": "4.0",
         "platform": "instagram",
+        "offer_id": "",
         "avatar_id": "av1",
         "pain_id": "p11",
         "headline": "Post 30",

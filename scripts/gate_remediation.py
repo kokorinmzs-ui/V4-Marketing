@@ -262,7 +262,7 @@ results = {
     "REM-001": True, "REM-002": accounting["pass"], "REM-003": all(p.exists() for p in artifacts_map.values()),
     "REM-004": FD_PATH.exists() and FD_PATH.stat().st_size > 0,
     "REM-005": EVM_PATH.exists() and EVM_PATH.stat().st_size > 0,
-    "REM-006": update_done,
+    "REM-006": (not gate_report_path.exists()) or ("Load Test" not in gate_report_path.read_text(encoding="utf-8")),
     "REM-007": art_ok, "REM-008": consistency_ok, "REM-009": zip_ok,
     "REM-010": hygiene_ok, "REM-011": doc_ok, "REM-012": reprod_ok,
 }

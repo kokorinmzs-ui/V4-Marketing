@@ -111,6 +111,18 @@ class TestAIServiceMock:
         assert result.parsed_json is True
         assert result.attempts == 1
 
+    def test_primary_provider_can_be_swapped(self):
+        svc = AIService(
+            AIServiceConfig(
+                mock_mode=True,
+                primary_provider="openai",
+                fallback_provider="deepseek",
+            )
+        )
+        result = svc.generate("sys", "user")
+        assert result.status == "success"
+        assert result.provider_used == "openai"
+
     def test_failover_to_openai_when_deepseek_fails(self):
         # DeepSeek returns error mock
         svc = AIService(

@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
+import html as html_lib
 import json
 from datetime import datetime, timezone
-from typing import Any
 
-from shared.schemas.execution_view_model import ExecutionViewModel, Mission
+from shared.schemas.execution_view_model import ExecutionViewModel
 from ai_engine.exporters.html_dashboard_renderer import render_dashboard
 
 
@@ -17,35 +17,17 @@ class PackageBuilder:
         self._generated_at = datetime.now(timezone.utc).isoformat()
 
     def build(self, evm: ExecutionViewModel) -> dict[str, str]:
-        """Build all package files.
-
-        Returns:
-            dict mapping filename -> file content string
-        """
         files = {}
-
-        # 01-README.txt
         files["01-README.txt"] = self._build_readme(evm)
-
-        # 02-EXECUTION-DASHBOARD.html
         files["02-EXECUTION-DASHBOARD.html"] = render_dashboard(evm)
-
-        # 03-CONTENT-LIBRARY.html
         files["03-CONTENT-LIBRARY.html"] = self._build_content_library(evm)
-
-        # 04-SALES-SCRIPTS.html
         files["04-SALES-SCRIPTS.html"] = self._build_sales_scripts(evm)
-
-        # 05-KPI-GUIDE.html
         files["05-KPI-GUIDE.html"] = self._build_kpi_guide(evm)
-
-        # 06-PROJECT-METADATA.json
         files["06-PROJECT-METADATA.json"] = self._build_metadata(evm)
-
         return files
 
     def _build_readme(self, evm: ExecutionViewModel) -> str:
-        return f"""=== {evm.project.name} — Marketing OS Client Package ===
+        return f"""=== {self._esc(evm.project.name)} — Marketing OS Client Package ===
 Generated: {self._generated_at}
 Version: 4.0
 
@@ -75,16 +57,16 @@ Contact your marketing consultant.
         items = ""
         for t in tasks:
             items += f"""<div class="item">
-<h3>{_esc(t.title)}</h3>
-<div class="meta">Day {t.day} | {t.content_format.value if t.content_format else "post"}</div>
-<div class="ready-text">{_esc(t.ready_text)}</div>
-<div class="cta"><strong>CTA:</strong> {_esc(t.cta)}</div>
+<h3>{self._esc(t.title)}</h3>
+<div class="meta">Day {t.day} | {self._esc(t.content_format.value if t.content_format else "post")}</div>
+<div class="ready-text">{self._esc(t.ready_text)}</div>
+<div class="cta"><strong>CTA:</strong> {self._esc(t.cta)}</div>
 </div>
 """
         return f"""<!DOCTYPE html>
 <html lang="ru">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Content Library — {_esc(evm.project.name)}</title>
+<title>Content Library — {self._esc(evm.project.name)}</title>
 <style>
 body{{font-family:sans-serif;max-width:800px;margin:0 auto;padding:20px;background:#f5f7fa}}
 h1{{color:#1a1a2e}}
@@ -95,7 +77,7 @@ h1{{color:#1a1a2e}}
 .cta{{color:#4caf50;font-weight:600}}
 </style></head>
 <body>
-<h1>{_esc(evm.project.name)} — Content Library</h1>
+<h1>{self._esc(evm.project.name)} — Content Library</h1>
 <p>{len(tasks)} content items</p>
 {items}
 </body></html>"""
@@ -105,16 +87,16 @@ h1{{color:#1a1a2e}}
         items = ""
         for t in tasks:
             items += f"""<div class="item">
-<h3>{_esc(t.scenario)}</h3>
+<h3>{self._esc(t.scenario)}</h3>
 <div class="meta">Day {t.day}</div>
-<p class="message">{_esc(t.message)}</p>
-<div class="next"><strong>Next:</strong> {_esc(t.next_step)}</div>
+<p class="message">{self._esc(t.message)}</p>
+<div class="next"><strong>Next:</strong> {self._esc(t.next_step)}</div>
 </div>
 """
         return f"""<!DOCTYPE html>
 <html lang="ru">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sales Scripts — {_esc(evm.project.name)}</title>
+<title>Sales Scripts — {self._esc(evm.project.name)}</title>
 <style>
 body{{font-family:sans-serif;max-width:800px;margin:0 auto;padding:20px;background:#f5f7fa}}
 h1{{color:#1a1a2e}}
@@ -125,7 +107,7 @@ h1{{color:#1a1a2e}}
 .next{{color:#2196f3;font-weight:600;margin-top:8px}}
 </style></head>
 <body>
-<h1>{_esc(evm.project.name)} — Sales Scripts</h1>
+<h1>{self._esc(evm.project.name)} — Sales Scripts</h1>
 <p>{len(tasks)} scripts</p>
 {items}
 </body></html>"""
@@ -135,19 +117,19 @@ h1{{color:#1a1a2e}}
         items = ""
         for k in kpis:
             items += f"""<div class="item">
-<h3>{_esc(k.action)}</h3>
-<div class="metric"><strong>Metric:</strong> {_esc(k.metric)}</div>
+<h3>{self._esc(k.action)}</h3>
+<div class="metric"><strong>Metric:</strong> {self._esc(k.metric)}</div>
 <div class="thresholds">
-<div class="success">✅ Success: {_esc(k.success_threshold)}</div>
-<div class="warning">⚠ Warning: {_esc(k.warning_threshold)}</div>
-<div class="fail">❌ Fail: {_esc(k.fail_threshold)}</div>
+<div class="success">✅ Success: {self._esc(k.success_threshold)}</div>
+<div class="warning">⚠ Warning: {self._esc(k.warning_threshold)}</div>
+<div class="fail">❌ Fail: {self._esc(k.fail_threshold)}</div>
 </div>
 </div>
 """
         return f"""<!DOCTYPE html>
 <html lang="ru">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KPI Guide — {_esc(evm.project.name)}</title>
+<title>KPI Guide — {self._esc(evm.project.name)}</title>
 <style>
 body{{font-family:sans-serif;max-width:800px;margin:0 auto;padding:20px;background:#f5f7fa}}
 h1{{color:#1a1a2e}}
@@ -160,7 +142,7 @@ h1{{color:#1a1a2e}}
 .fail{{color:#f44336}}
 </style></head>
 <body>
-<h1>{_esc(evm.project.name)} — KPI Guide</h1>
+<h1>{self._esc(evm.project.name)} — KPI Guide</h1>
 <p>{len(kpis)} KPI metrics</p>
 {items}
 </body></html>"""
@@ -179,8 +161,8 @@ h1{{color:#1a1a2e}}
         }
         return json.dumps(meta, ensure_ascii=False, indent=2)
 
-
-def _esc(s: str) -> str:
-    if not s:
-        return ""
-    return str(s).replace("&", "&").replace("<", "<").replace(">", ">")
+    @staticmethod
+    def _esc(s: str) -> str:
+        if not s:
+            return ""
+        return html_lib.escape(str(s), quote=True)

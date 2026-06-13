@@ -539,6 +539,7 @@ class Post(MarketingOSBaseModel):
     """A ready-to-publish social media post."""
 
     platform: Platform = Field(default=Platform.INSTAGRAM)
+    offer_id: str = Field(default="", description="Linked offer ID")
     avatar_id: str = Field(default="", description="Target avatar")
     pain_id: str = Field(default="", description="Target pain")
     headline: str = Field(..., min_length=1, description="Post headline")

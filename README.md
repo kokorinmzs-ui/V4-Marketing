@@ -1,11 +1,11 @@
-# Marketing OS v4
+﻿# Marketing OS v4
 
 **«Бери и делай»** — AI-система, превращающая бриф бизнеса в интерактивный offline HTML-файл с готовым маркетинговым планом действий.
 
 ## Что делает система
 
 ```
-Бриф клиента → 27 блоков AI-анализа → final_data.json → Execution Planner → 02-EXECUTION-DASHBOARD.html
+Бриф клиента → 27 блоков AI-анализа → final_data.json → Execution Planner → `artifacts/dashboard.html`
 ```
 
 Клиент открывает HTML двойным кликом и видит:
@@ -135,12 +135,13 @@ npm run dev
 
 ## Статус разработки
 
-| Спринт                                  | Статус        |
-| --------------------------------------- | ------------- |
-| Sprint 0 — Understanding & Architecture | ✅ Завершён   |
-| Sprint 1 — Repository Skeleton & Docs   | 🔄 В процессе |
-| Sprint 2 — Shared Schemas & Contracts   | ⬜ Ожидание   |
-| Sprint 3–18                             | ⬜ Ожидание   |
+| Sprint | Status |
+| --- | --- |
+| Sprint 0 — Understanding & Architecture | ✅ Completed |
+| Sprint 1 — Repository Skeleton & Docs | ✅ Completed |
+| Sprint 2 — Shared Schemas & Contracts | ✅ Completed |
+| Sprint 3 — Sprint 13 | ✅ Completed |
+| Sprint 14 — Frontend Minimal UI | ⏳ Pending |
 
 ## Ключевые принципы
 
@@ -150,6 +151,8 @@ npm run dev
 - **Client Simplicity** — результат обязан быть понятен владельцу бизнеса без маркетолога
 - **Offline First** — финальный HTML работает без сервера, без интернета, двойным кликом
 - **No Water** — запрещены «развивайте соцсети», «уникальный подход», «повышайте вовлечённость»
+- **Provider order** — `PRIMARY_LLM_PROVIDER=deepseek`, `FALLBACK_LLM_PROVIDER=openai`
+- **Runtime mode** — тесты и фикстуры могут работать в `mock_mode`, но production-путь идёт через реальные провайдеры
 
 ## Документация
 
@@ -172,3 +175,4 @@ npm run dev
 ## Лицензия
 
 Proprietary. Все права защищены.
+

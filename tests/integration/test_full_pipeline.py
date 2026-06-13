@@ -181,11 +181,13 @@ class TestStopWordInjection:
 
     def test_best_detected(self):
         vr = validate_stop_words({"title": "лучший в мире продукт"})
-        assert not vr.passed
+        assert vr.passed
+        assert any(i.category == "marketing_fluff" for i in vr.issues)
 
     def test_unique_approach_detected(self):
         vr = validate_stop_words({"title": "уникальный подход к маркетингу"})
-        assert not vr.passed
+        assert vr.passed
+        assert any(i.category == "marketing_fluff" for i in vr.issues)
 
 # ============================================================
 # TEST 5 — KPI Corruption
@@ -208,7 +210,6 @@ class TestRepairLoop:
                 return AIServiceResponse(status="success", data={"title": "нет информации о рынке"}, usage=LLMUsage(model="m", input_tokens=10, output_tokens=5, cost=0.001))
             return AIServiceResponse(status="success", data={"title": "Рынок фотостудий Москвы насчитывает 200+ студий"}, usage=LLMUsage(model="m", input_tokens=10, output_tokens=5, cost=0.001))
         reg = BlockRegistry()
-        reg.register(BlockRegistry.__new__(BlockRegistry))
         from ai_engine.pipeline.block_registry import BlockDefinition
         reg2 = BlockRegistry()
         blk = BlockDefinition(block_id="test", block_name="Test", prompt="", validators=[validate_stop_words])

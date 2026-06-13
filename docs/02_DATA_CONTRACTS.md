@@ -10,7 +10,7 @@
 Brief → brief.json → Normalizer → normalized_brief.json
   → Intelligence Layer → final_data.json
   → Execution Planner → execution_view_model.json
-  → HTML Renderer → 02-EXECUTION-DASHBOARD.html
+  → HTML Renderer → `artifacts/dashboard.html`
 ```
 
 ## 3. brief.json

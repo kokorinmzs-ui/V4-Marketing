@@ -27,6 +27,7 @@ from shared.schemas.blocks import (
     Pains,
     Posts,
     ProductLadder,
+    FlagshipProduct,
     ProductSystem,
     Psychotypes,
     QualityControl,
@@ -72,7 +73,7 @@ class FinalData(MarketingOSBaseModel):
         default=None, description="BLOCK 06 — Product System"
     )
     # BLOCK 07
-    flagship_product: Optional[ProductSystem] = Field(
+    flagship_product: Optional[FlagshipProduct] = Field(
         default=None, description="BLOCK 07 — Flagship Product"
     )
     # BLOCK 08

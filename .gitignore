@@ -5,6 +5,7 @@ __pycache__/
 *.pyc
 *.pyo
 .pytest_cache/
+.pytest_tmp/
 
 # Environment
 .env
@@ -37,6 +38,11 @@ docker-compose.override.yml
 
 # Storage
 storage/
+storage/*
+
+# Generated output
+output/*
+!output/README.md
 
 # Logs
 *.log

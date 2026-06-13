@@ -8,7 +8,7 @@ from shared.schemas.blocks import (
     MarketAnalysis, BusinessDiagnosis, Competitor, CompetitorAnalysis,
     MarketingPlatform, OwnerPortrait, Avatar, AvatarSet, Pain, Pains,
     Offer, Offers, KPISet, KPI, QualityControl, CrossValidationResult,
-    Confidence,
+    Confidence, FlagshipProduct,
 )
 
 
@@ -67,6 +67,20 @@ class TestFinalDataValid:
         assert fd.business_diagnosis is not None
         assert fd.platform is not None
         assert fd.total_blocks_passed == 3
+
+    def test_final_data_with_flagship_product(self):
+        fd = FinalData(
+            project_id="proj-001",
+            project_name="Test",
+            flagship_product=FlagshipProduct(
+                product="Съёмка за день",
+                audience=["Контент-мейкеры"],
+                core_pains=["Нет времени"],
+                core_benefits=["Готовый контент"],
+            ),
+        )
+        assert fd.flagship_product is not None
+        assert fd.flagship_product.product == "Съёмка за день"
 
     def test_final_data_with_competitors(self):
         """FinalData with competitor analysis (min 10)."""

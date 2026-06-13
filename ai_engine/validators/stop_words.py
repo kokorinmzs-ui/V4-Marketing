@@ -59,7 +59,7 @@ class StopWordsValidator:
                     issues.append(
                         ValidationIssue(
                             code=f"stop_word_{cat_name}",
-                            message=f"Stop word detected: '{word}' ({cat_info.get('description', cat_name)})",
+                            message=f"Stop word detected: '{word}' ({cat_name}) — {cat_info.get('description', cat_name)}",
                             path=path,
                             severity=severity,
                             suggestion=self._suggestion_for_category(cat_name),

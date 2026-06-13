@@ -70,33 +70,33 @@ EXECUTION PROMPT (для Execution Planner)
 
 `ai_engine/prompts/blocks/`:
 
-- `market_analysis_prompt.py`
-- `business_diagnosis_prompt.py`
-- `competitor_prompt.py`
-- `positioning_prompt.py`
-- `owner_portrait_prompt.py`
-- `product_system_prompt.py`
-- `flagship_prompt.py`
-- `product_ladder_prompt.py`
-- `lead_magnets_prompt.py`
-- `audience_prompt.py`
-- `avatar_prompt.py`
-- `psychotype_prompt.py`
-- `pains_prompt.py`
-- `triggers_prompt.py`
-- `offers_prompt.py`
-- `funnel_prompt.py`
-- `advertising_prompt.py`
-- `content_plan_prompt.py`
-- `reels_prompt.py`
-- `blog_articles_prompt.py`
-- `posts_prompt.py`
-- `visual_briefs_prompt.py`
-- `sales_prompt.py`
-- `kpi_prompt.py`
-- `first_7_days_prompt.py`
-- `launch_plan_prompt.py`
-- `quality_control_prompt.py`
+- `ai_engine/prompts/blocks/block_01_market_analysis_prompt.py`
+- `ai_engine/prompts/blocks/block_02_business_diagnosis_prompt.py`
+- `ai_engine/prompts/blocks/block_03_competitors_prompt.py`
+- `ai_engine/prompts/blocks/block_04_platform_prompt.py`
+- `ai_engine/prompts/blocks/block_05_owner_portrait_prompt.py`
+- `ai_engine/prompts/blocks/block_06_product_system_prompt.py`
+- `ai_engine/prompts/blocks/block_07_flagship_prompt.py`
+- `ai_engine/prompts/blocks/block_08_product_ladder_prompt.py`
+- `ai_engine/prompts/blocks/block_09_lead_magnets_prompt.py`
+- `ai_engine/prompts/blocks/block_10_audience_prompt.py`
+- `ai_engine/prompts/blocks/block_11_avatars_prompt.py`
+- `ai_engine/prompts/blocks/block_12_psychotypes_prompt.py`
+- `ai_engine/prompts/blocks/block_13_pains_prompt.py`
+- `ai_engine/prompts/blocks/block_14_triggers_prompt.py`
+- `ai_engine/prompts/blocks/block_15_offers_prompt.py`
+- `ai_engine/prompts/blocks/block_16_funnels_prompt.py`
+- `ai_engine/prompts/blocks/block_17_advertising_prompt.py`
+- `ai_engine/prompts/blocks/block_18_content_plan_prompt.py`
+- `ai_engine/prompts/blocks/block_19_reels_prompt.py`
+- `ai_engine/prompts/blocks/block_20_blog_articles_prompt.py`
+- `ai_engine/prompts/blocks/block_21_posts_prompt.py`
+- `ai_engine/prompts/blocks/block_22_visual_briefs_prompt.py`
+- `ai_engine/prompts/blocks/block_23_sales_scripts_prompt.py`
+- `ai_engine/prompts/blocks/block_24_kpi_prompt.py`
+- `ai_engine/prompts/blocks/block_25_first_7_days_prompt.py`
+- `ai_engine/prompts/blocks/block_26_launch_plan_prompt.py`
+- `ai_engine/prompts/blocks/block_27_quality_control_prompt.py`
 
 ## 4. Repair Prompt
 

@@ -1,11 +1,13 @@
-# 08 — Roadmap (План реализации)
+﻿# 08 — Roadmap (План реализации)
+
+Current status: Sprint 0–13 completed, Sprint 14 pending.
 
 ## План спринтов
 
 | Спринт        | Название                     | Ключевой результат                                             |
 | ------------- | ---------------------------- | -------------------------------------------------------------- |
 | **Sprint 0**  | Understanding & Architecture | ✅ Анализ ТЗ, архитектура, риски, план                         |
-| **Sprint 1**  | Repository Skeleton & Docs   | 🔄 Структура проекта, README, документация                     |
+| **Sprint 1**  | Repository Skeleton & Docs   | ✅ Completed                                                   |
 | **Sprint 2**  | Shared Schemas & Contracts   | Pydantic-модели, нет `dict[str, Any]`, тесты                   |
 | **Sprint 3**  | Validator Engine             | Валидаторы: schema, stop words, repetition, KPI, actionability |
 | **Sprint 4**  | Prompt Library               | Master System + 27 block + repair + execution промптов         |
@@ -16,9 +18,9 @@
 | **Sprint 9**  | Blocks 21–27                 | 7 блоков: посты, визуалы, скрипты, KPI, контроль качества      |
 | **Sprint 10** | Cross-validation & FinalData | Кросс-валидация, сборка final_data.json                        |
 | **Sprint 11** | Execution Planner            | Миссии, content/ads/sales builders, gamification               |
-| **Sprint 12** | HTML Dashboard Renderer      | `02-EXECUTION-DASHBOARD.html` — offline, tabs, localStorage    |
-| **Sprint 13** | Client Package Export        | ZIP: dashboard, content library, sales scripts                 |
-| **Sprint 14** | Frontend Minimal UI          | Проекты → бриф → запуск → скачать HTML                         |
+| **Sprint 12** | HTML Dashboard Renderer      | `artifacts/dashboard.html` — offline, tabs, localStorage       |
+| **Sprint 13** | Client Package Export        | ✅ Completed                                                   |
+| **Sprint 14** | Frontend Minimal UI          | ⏳ Pending                                                     |
 | **Sprint 15** | Backend API & Queue          | REST API, PostgreSQL, Redis/BullMQ                             |
 | **Sprint 16** | Golden Brief Testing         | 10 эталонных брифов (разные ниши)                              |
 | **Sprint 17** | QA Hardening                 | Quality score ≥ 90                                             |
@@ -223,3 +225,5 @@ ai_engine/exporters/
 ## Sprint 18 — Deployment
 
 Docker Compose, env, PostgreSQL, Redis, инструкция. Проект запускается одной командой.
+
+

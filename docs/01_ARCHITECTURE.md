@@ -45,7 +45,7 @@ Marketing OS v4 состоит из четырёх основных слоёв:
 
 - Преобразует анализ в ежедневные действия
 - Готовые тексты, сценарии Reels, скрипты продаж
-- Результат: `02-EXECUTION-DASHBOARD.html`
+- Результат: `artifacts/dashboard.html`
 
 ## 3. Поток данных
 
@@ -60,7 +60,7 @@ Brief → BriefNormalizer → normalized_brief.json
   → Execution Planner
   → execution_view_model.json
   → HTML Renderer
-  → 02-EXECUTION-DASHBOARD.html
+  → `artifacts/dashboard.html`
   → Client Package (.zip)
 ```
 

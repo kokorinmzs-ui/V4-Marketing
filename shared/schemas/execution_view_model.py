@@ -71,6 +71,7 @@ class Mission(MarketingOSBaseModel):
     """
 
     mission_id: str = Field(default="", description="Unique mission ID")
+    source_id: str = Field(default="", description="Source record ID from final_data")
     day: int = Field(..., ge=1, le=30, description="Day number 1-30")
     phase: str = Field(default="setup", description="Phase: setup / content / traffic / scale")
     mission_type: MissionType = Field(default=MissionType.CONTENT, description="Type of mission")
@@ -88,6 +89,11 @@ class Mission(MarketingOSBaseModel):
     # Ready content
     ready_text: str = Field(default="", description="Ready-to-copy text")
     cta: str = Field(default="", description="Call to action")
+    avatar_id: Optional[str] = Field(default=None, description="Linked avatar ID")
+    pain_id: Optional[str] = Field(default=None, description="Linked pain ID")
+    offer_id: Optional[str] = Field(default=None, description="Linked offer ID")
+    content_id: Optional[str] = Field(default=None, description="Linked content/post/reel ID")
+    kpi_id: Optional[str] = Field(default=None, description="Linked KPI ID")
     
     # Content-specific (if mission_type=content)
     platform: Optional[Platform] = Field(default=None, description="Target platform")
@@ -161,6 +167,7 @@ class ContentTask(MarketingOSBaseModel):
     """A content piece in the Content Library."""
 
     task_id: str = Field(default="", description="Unique ID")
+    source_id: str = Field(default="", description="Source content identifier")
     day: int = Field(..., ge=1, le=30)
     title: str = Field(..., min_length=1)
     content_format: ContentFormat = Field(default=ContentFormat.POST)
@@ -168,6 +175,9 @@ class ContentTask(MarketingOSBaseModel):
     ready_text: str = Field(default="", description="Full text to copy")
     cta: str = Field(default="")
     platform: Optional[Platform] = Field(default=None)
+    avatar_id: Optional[str] = Field(default=None)
+    pain_id: Optional[str] = Field(default=None)
+    offer_id: Optional[str] = Field(default=None)
     hashtags: list[str] = Field(default_factory=list)
     metric: str = Field(default="")
 
@@ -180,11 +190,14 @@ class AdsTask(MarketingOSBaseModel):
     """An advertising task."""
 
     task_id: str = Field(default="")
+    source_id: str = Field(default="", description="Source ad identifier")
     day: int = Field(..., ge=1, le=30)
     platform: Platform = Field(default=Platform.VK)
     audience: str = Field(default="")
     creative: str = Field(default="")
     offer: str = Field(default="")
+    avatar_id: Optional[str] = Field(default=None)
+    offer_id: Optional[str] = Field(default=None)
     budget: str = Field(default="500")
     kpi: str = Field(default="")
     success_threshold: str = Field(default="")
@@ -200,11 +213,15 @@ class SalesTask(MarketingOSBaseModel):
     """A sales script task."""
 
     task_id: str = Field(default="")
+    source_id: str = Field(default="", description="Source script identifier")
     day: int = Field(..., ge=1, le=30)
     scenario: str = Field(..., min_length=1)
     goal: str = Field(default="")
     message: str = Field(..., min_length=1, description="Ready-to-copy message")
     next_step: str = Field(default="")
+    avatar_id: Optional[str] = Field(default=None)
+    pain_id: Optional[str] = Field(default=None)
+    offer_id: Optional[str] = Field(default=None)
 
 
 # ============================================================
@@ -215,6 +232,7 @@ class KPITask(MarketingOSBaseModel):
     """A KPI measurement task."""
 
     task_id: str = Field(default="")
+    source_id: str = Field(default="", description="Source KPI identifier")
     day: int = Field(..., ge=1, le=30)
     action: str = Field(..., min_length=1)
     metric: str = Field(..., min_length=1)
