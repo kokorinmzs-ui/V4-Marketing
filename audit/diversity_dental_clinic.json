@@ -1,0 +1,72 @@
+{
+  "marker": "Частная стоматология в СПб. 5 кабинетов, микроскоп, имплантация. Работаем с 2015. DENTAL_UNIQUE_MARKER_888",
+  "market_overview": "Рост спроса на имплантацию и эстетическую стоматологию, цифровизацию (микроскопы, 3D-моделирование),",
+  "segments_count": 3,
+  "avatars_count": 5,
+  "pains_count": 0,
+  "offers_count": 0,
+  "missions_count": 0,
+  "mission_titles": [],
+  "ctas": [],
+  "total_tokens": 33115,
+  "total_cost": 0.006384,
+  "total_time_sec": 117.4,
+  "html_size": 0,
+  "blocks": [
+    {
+      "block_id": "01_market_analysis",
+      "schema_passed": true,
+      "stopwords_passed": true,
+      "content_quality_passed": true,
+      "cq_score": 100.0,
+      "tokens_in": 642,
+      "tokens_out": 1039,
+      "cost": 0.000381,
+      "time_sec": 0
+    },
+    {
+      "block_id": "10_audience",
+      "schema_passed": true,
+      "stopwords_passed": true,
+      "content_quality_passed": true,
+      "cq_score": 100.0,
+      "tokens_in": 1759,
+      "tokens_out": 1287,
+      "cost": 0.000607,
+      "time_sec": 0
+    },
+    {
+      "block_id": "11_avatars",
+      "schema_passed": false,
+      "stopwords_passed": false,
+      "content_quality_passed": true,
+      "cq_score": 100.0,
+      "tokens_in": 3048,
+      "tokens_out": 3040,
+      "cost": 0.001278,
+      "time_sec": 0
+    },
+    {
+      "block_id": "13_pains",
+      "schema_passed": true,
+      "stopwords_passed": false,
+      "content_quality_passed": true,
+      "cq_score": 100.0,
+      "tokens_in": 6091,
+      "tokens_out": 3014,
+      "cost": 0.001697,
+      "time_sec": 0
+    },
+    {
+      "block_id": "15_offers",
+      "schema_passed": true,
+      "stopwords_passed": true,
+      "content_quality_passed": true,
+      "cq_score": 100.0,
+      "tokens_in": 9099,
+      "tokens_out": 4096,
+      "cost": 0.002421,
+      "time_sec": 0
+    }
+  ]
+}

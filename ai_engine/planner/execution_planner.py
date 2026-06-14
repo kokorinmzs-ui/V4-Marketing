@@ -43,7 +43,7 @@ class ExecutionPlanner:
         self._gb = GamificationBuilder()
 
     def plan(self, final_data: dict[str, Any] | Any) -> PlannerResult:
-        self._mg.__class__._counter = 0
+        self._mg._counter = 0
         data = self._normalize(final_data)
 
         result = PlannerResult()

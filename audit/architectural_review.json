@@ -1,0 +1,262 @@
+{
+  "overall_verdict": "The system has a solid engineering skeleton. The architecture, validators, test coverage (616 tests), and artifact pipeline are production-grade. However, the Execution Planner is deterministic to the point of being a template engine, making the marketing output feel generic regardless of niche. This is the single biggest risk — marketing clients judge results on specificity, not code quality. The project is ready for internal demos and prototyping, but NOT ready for paying clients without fixing the Execution Planner to consume AI-generated data pervasively.",
+  "readiness_level": "demo",
+  "top_architecture_risks": [
+    {
+      "risk": "Execution Planner is hardcoded and niche-agnostic — it doesn't use FinalData to customize missions.",
+      "severity": "critical",
+      "why_it_matters": "A photo studio and a dental clinic get identical mission titles, identical ready_text templates, and identical day goals. This is immediately visible to any client who compares outputs across niches. The value proposition of the system ('personalized marketing strategy') breaks at the final delivery stage.",
+      "evidence": "execution_planner.py lines 93-140: `if day <= 5:` + `elif 6 <= day <= 15:` + `elif 16 <= day <= 23:` + `else:` with hardcoded mission text. The `_phase_for_day()` function is purely calendar-based, not data-driven. Mission `ready_text` like 'Привет! Мы — фотостудия Воздух...' is hardcoded in `_build_setup_missions()` as a string literal, not generated from the brand platform (block 04) or flagship product (block 07).",
+      "fix": "Refactor ExecutionPlanner to consume FinalData fields: use market_analysis.seasonality to shift the 30-day window, use owner_portrait.expertise for mission hooks, use flagship_product benefits for CTA, use competitor gaps for differentiation angles. Each mission should be assembled from block data, not from hardcoded strings."
+    },
+    {
+      "risk": "Context propagation between blocks is incomplete in the pipeline.",
+      "severity": "high",
+      "why_it_matters": "Block 10 (audience) receives market_analysis and business_diagnosis, but NOT competitors (03) or platform (04). This means audience segments may not account for competitive gaps or positioning angles. Block 11 (avatars) receives audience data but not platform tone_of_voice or product_system — leading to avatars that don't connect to offers. In marketing strategy, disconnected blocks produce inconsistent output.",
+      "evidence": "live_chain_5_blocks.py: context dictionary is built incrementally as `context[bid] = data` and passed as full JSON to the next block. However the ExecutionPlanner skips the entire context propagation step — it calls `.plan()` on FinalData directly without injecting intermediate block results into prompts. The system relies on AI block prompts to reference 'previous blocks' in plain text, which is fragile.",
+      "fix": "Define explicit context schemas for each block: which upstream blocks MUST be included in the user_prompt (e.g., Block 11 must receive full market_analysis, audience, and platform as structured JSON, not just the brief). Use a `context_map` dictionary keyed by block ID that lists required upstream blocks."
+    },
+    {
+      "risk": "No circuit breaker or retry policy with exponential backoff for API failures.",
+      "severity": "high",
+      "why_it_matters": "A live run of 27 blocks currently makes 27 sequential API calls. If block 18 fails after 30 seconds, the entire pipeline fails. DeepSeek API has rate limits (~5 req/s on free tier) and occasional 503s. Without backoff + retry, any transient failure causes a full pipeline restart.",
+      "evidence": "ai_engine/pipeline/block_executor.py: `generate_response = self._generate(system_prompt=block_def.prompt, user_prompt=...)` — a single call with no retry. ai_engine/providers/deepseek.py has no retry logic — just returns status='error' on HTTP failure. Repair loop handles validation failures, not API failures.",
+      "fix": "Add `tenacity` or custom retry decorator to BaseProvider.generate() with max_retries=3, backoff_factor=2.0, catching ConnectionError, Timeout, and 5xx status codes. Add a `pipeline_max_total_retries` config to prevent infinite retries across 27 blocks."
+    },
+    {
+      "risk": "FinalData assembly allows partial blocks without explicit quality gates at assembly time.",
+      "severity": "medium",
+      "why_it_matters": "FinalDataAssembler.REQUIRED_BLOCKS hardcodes block IDs (01, 02, 03, 04, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 23, 24, 25, 26, 27). But missing optional blocks (05 owner_portrait, 06 product_system, 07 flagship, 08 product_ladder, 09 lead_magnets, 12 psychotypes, 20 blog_articles, 22 visual_briefs) silently pass without warning. For a marketing pipeline, owner_portrait (05) or product_system (06) are arguably critical — without them, the strategy has no soul.",
+      "evidence": "final_data_assembler.py: REQUIRED_BLOCKS list omits 05, 06, 07, 08, 09, 12, 20, 22. Cross_validators check avatar→pain and pain→offer but don't check owner→platform or product→flasghip references.",
+      "fix": "Add a `RECOMMENDED_BLOCKS` list and emit WARNING-level issues (not blocking, but visible) when recommended blocks are missing. Move 05 (owner_portrait), 06 (product_system), 07 (flagship) to required status for marketing completeness."
+    },
+    {
+      "risk": "All 27 blocks share identical mock data across all 10 golden briefs, hiding real AI variability.",
+      "severity": "high",
+      "why_it_matters": "Golden brief tests (sprint16_golden_audit.py) show identical output for all 10 industries: same missions_count (56), same quality_score (95.0), same content_count (30). This proves the test pipeline is deterministic — but also proves it doesn't test real AI behavior at all. A client seeing the same output for 'Стоматология' and 'Фотостудия' would immediately recognize the system as fake.",
+      "evidence": "audit/golden_briefs_report.json: all 10 entries have identical `missions_count: 56`, `content_count: 30`, `ads_count: 4`, `sales_count: 6`, `quality_score: 95.0`. The mock_gen function in test_golden_briefs_pipeline.py returns hardcoded data regardless of brief content.",
+      "fix": "Replace mock data in golden tests with a hybrid: use real DeepSeek for 3 blocks (01, 11, 13) and mock for the rest. This proves AI-personalized output while keeping costs reasonable. Alternatively, maintain a 'live_test' marker and run full-27-block live tests periodically."
+    },
+    {
+      "risk": "No cost tracking or token budget enforcement at pipeline level.",
+      "severity": "medium",
+      "why_it_matters": "Without token budgets, a misconfigured prompt or unusually long context can consume tokens exponentially (block 13 already used 5689 tokens because context from 4 previous blocks was included as plain JSON). At scale, 10 clients × 27 blocks × ~12k tokens = 3.2M tokens ≈ $1.50 total — but without monitoring, a single runaway prompt could cost $5-10 per client.",
+      "evidence": "live_chain_5_blocks.json: block 13 cost $0.0013 (26% of total chain cost) despite being the 5th block. Tokens grow with context: block 01: 1103 tokens → block 13: 5689 tokens (5x). No per-block or per-pipeline budget constraint exists.",
+      "fix": "Add `max_tokens_per_block` and `max_tokens_per_pipeline` settings in AIService or ProviderConfig. If a block exceeds its budget, fall back to a simplified prompt or abort with a clear cost warning. Log per-block token counts to a cost dashboard."
+    },
+    {
+      "risk": "SchemaValidator reports passed=False but the error message does not distinguish between AI hallucination (wrong keys) vs missing required fields.",
+      "severity": "medium",
+      "why_it_matters": "When AI returns extra/non-standard keys (like `market_trends` instead of `market_overview`), the schema validator rejects the entire object. But a better system would map AI output to expected schema — especially since AI often gives more detailed, higher-quality output that just doesn't match the Pydantic model 1:1. Currently, the system discards potentially valuable AI insights because of schema mismatch.",
+      "evidence": "live_block_01 (first run): AI returned `['market_size', 'competitors', 'market_trends', 'customer_segments', 'pricing_analysis', 'seasonality', 'key_insights', 'risks', 'confidence_score', 'notes']` — 10 useful keys, but SchemaValidator FAILED because 6 of them don't match MarketAnalysis fields. The AI output was arguably MORE insightful than the required schema, but the system rejected it.",
+      "fix": "Add a schema mapping layer: for each block, define `SCHEMA_ALIASES` (e.g., `market_trends` → `market_overview`, `customer_segments` → list of segments). After AI generation, apply the mapping, then validate. Log any unmapped keys as warnings (not errors) — they represent AI insights that might be valuable."
+    },
+    {
+      "risk": "HTML Dashboard renders missions from EVM into static HTML with JS that never reads actual mission data from the pipeline — it reads window.MISSIONS which IS the EVM data, but the visual rendering of cards can be 0 even though 48 missions exist because of JS filtering by today.day.",
+      "severity": "low",
+      "why_it_matters": "Dashboard UX may show empty cards if the client opens it on a day with no missions. The JS `renderToday()` function filters `window.MISSIONS.filter(function(m){return m.day===td.day;})` — if the client hasn't done Day 1 yet, they see nothing. This is a UX issue, not data issue, but reduces perceived value.",
+      "evidence": "html_dashboard_renderer.py JS code: `var td = window.DATA.today; var ms = window.MISSIONS.filter(function(m){return m.day===td.day;});` — this means the dashboard always shows only today's missions, even if the client wants to see the full plan.",
+      "fix": "Default the dashboard to show Day 1 if no missions match today (project.current_day defaults to 1 in the planner). Add a 'View All Missions' button that renders ALL missions sorted by day."
+    },
+    {
+      "risk": "The system has no mechanism for human-in-the-loop correction or feedback.",
+      "severity": "medium",
+      "why_it_matters": "A real marketing consultant using this system would need to edit block outputs before they flow downstream. For example, if AI generates 10 competitors but the consultant knows 'Конкурент 7' is actually not a competitor, they need to remove it before it influences audience, avatar, and pain generation. Currently, all block outputs are final and flow directly into the next block without human review gates.",
+      "evidence": "No 'review' or 'edit' step exists between blocks. BlockExecutor.execute() returns a BlockResult which is immediately added to the assembler. The frontend (page.html) shows brief editing but no block-level editing.",
+      "fix": "Add a `review_required` flag to each BlockDefinition. If true, pipeline pauses and waits for human approval before proceeding. Store block outputs in a draft state until approved. This is critical for client-facing runs where AI errors propagate downstream."
+    },
+    {
+      "risk": "No logging or observability beyond terminal output.",
+      "severity": "medium",
+      "why_it_matters": "When a client asks 'Why did the system choose Instagram over VK for my business?', there is no audit trail. The system makes decisions (e.g., ads budget of 500₽, channel prioritization) without logging the reasoning chain. For a marketing tool, explainability IS part of the product value.",
+      "evidence": "No structured logging exists in block_executor.py or execution_planner.py beyond `from __future__ import annotations`. Live smoke tests manually print to stdout but don't persist structured data. The `why_it_works` field in EVM is a static string.",
+      "fix": "Add structured JSON logging per block: input data keys, key decisions made (channel selection, budget recommendation, avatar count), confidence level, alternative considered. Store as `decision_log.json` alongside artifacts."
+    }
+  ],
+  "top_code_risks": [
+    {
+      "risk": "ContentQualityValidator score=0.0 for block 13 (Pains) while passed=True — passed/passed flag is misleading.",
+      "severity": "high",
+      "why_it_matters": "The validator's `passed` boolean checks for ERROR/CRITICAL severity issues, while `score` counts ALL issues including warnings. For block 13, score=0 means every field had a quality warning (generic statements, short fields) — the content is essentially all low-quality. Yet `passed=true` tells the pipeline the block is fine. This creates a false sense of quality.",
+      "evidence": "live_chain_5_blocks.json line 169: `\"content_quality\": {\"passed\": true, \"score\": 0.0}` for block 13_pains. This means the AI generated 50 pains (5 avatars × 10) that all contain generic/placeholder content like 'Pain 1', 'Pain 2' — structurally correct but semantically worthless.",
+      "fix": "Lower the `passed` threshold: if content_quality score < 50, return `passed=false` regardless of whether individual issues are ERROR or WARNING. Define a minimum quality threshold per block (e.g., block 13 must have content_quality > 60 to pass)."
+    },
+    {
+      "risk": "ExecutionPlanner._cycle() creates the illusion of diversity but actually just loops through data cyclically.",
+      "severity": "high",
+      "why_it_matters": "For 30 days × 5 avatars × 10 pains = 1500 data points, `_cycle(data, index)` will repeat items every N days, creating identical reels/posts every N/len(posts) days. A marketer would notice 'Повторить формат через 3 дня' appearing alongside nearly-identical content. This violates the anti-repeat rule the system claims to enforce.",
+      "evidence": "execution_planner.py: `_cycle()` is defined as `data[index % len(data)]` — it's a simple modulo. With 30 posts in content_plan and a 30-day cycle, each post appears exactly once. But with only 1 ad campaign defined, every ad day reuses the identical ad creative.",
+      "fix": "Replace `_cycle()` with a weighted random sampler that prioritizes items with lowest previous usage count. Enforce a 'no repeat within 7 days' rule at the planner level, not just at the HTML dashboard level. Use block data to generate actual diverse creatives rather than cycling through a single ad template."
+    },
+    {
+      "risk": "MarketAnalysis schema has `confidence: Literal['high', 'medium', 'low']` but AI sometimes returns 'medium' for all fields regardless of actual data confidence.",
+      "severity": "medium",
+      "why_it_matters": "Confidence scoring is supposed to indicate where AI is certain vs guessing. If every block returns 'medium', the system can't prioritize which outputs need human review. In a client-facing tool, this is a trust issue — showing 'medium confidence' for market size estimate when the system could be completely wrong.",
+      "evidence": "All 10 golden briefs and all mock data use `'confidence': 'medium'` as the default. No block prompt instructs DeepSeek to self-assess confidence honestly (e.g., 'return high only if you can cite specific data').",
+      "fix": "Add a `confidence_guidelines` section to system prompts: define what constitutes high/medium/low with examples. Validate that high confidence only appears when the AI output contains specific numbers or named entities. Show per-block confidence in the HTML dashboard."
+    },
+    {
+      "risk": "ZipExporter validates file existence but doesn't validate content integrity (checksums, size mismatches).",
+      "severity": "low",
+      "why_it_matters": "A client downloads a ZIP, extracts it, and finds a corrupted dashboard.html. The system says ZIP is valid, but the HTML is truncated. This is unlikely (Python writes are atomic), but in a production pipeline with concurrent access, switching to an async write could introduce race conditions.",
+      "evidence": "zip_exporter.py: `validate_zip()` checks `info.file_size == 0` but doesn't compute checksums or compare to expected sizes. `export_to_file()` doesn't verify the written file matches the in-memory bytes.",
+      "fix": "Add SHA256 checksum to metadata.json for each artifact. After ZIP creation, extract and verify checksums before marking the ZIP as valid."
+    },
+    {
+      "risk": "prompts/registry.py stores 27 block prompts with `VERSION` but no mechanism to detect prompt drift or compare between runs.",
+      "severity": "medium",
+      "why_it_matters": "When the system is updated with new prompts, there's no way to know which version of prompt generated which client's output. If a client complains 'my strategy got worse after the update', there's no prompt audit trail. This is a governance risk for any AI-powered product.",
+      "evidence": "prompts/registry.py has `PROMPT_VERSION` but it's only embedded in the prompt text — not extracted and stored alongside block results. BlockResult doesn't include a `prompt_version` field.",
+      "fix": "Add `prompt_version` to BlockResult dataclass. On each block execution, store the prompt version alongside generated data. Expose in metadata.json so each client ZIP contains the exact prompt version used."
+    },
+    {
+      "risk": "DeepSeek provider assumes `response_format: json_object` works — but DeepSeek sometimes returns non-JSON with markdown fences.",
+      "severity": "medium",
+      "why_it_matters": "BaseProvider._parse_response() has markdown/code fence removal logic (`re.sub(r'```\w*\n?', '', text)`), which is good. But if DeepSeek returns a reasoning preamble + JSON (common for chain-of-thought models), the JSON extraction might capture only the reasoning text, discarding the actual JSON. Inconsistent API response formats are a real risk.",
+      "evidence": "providers/base.py: `_parse_response()` uses regex to extract JSON — `json_start = text.find('{')` / `json_end = text.rfind('}')`. This works for most cases but fails if the reasoning contains nested JSON examples or if the model returns multiple JSON blocks.",
+      "fix": "Add `response_format={'type': 'json_object'}` to DeepSeek API calls (DeepSeek supports this since 2024). If the provider supports native JSON mode, skip the fragile regex parsing. Fall back to regex only when JSON mode is not available."
+    },
+    {
+      "risk": "Actionability validator blocks 'запустить рекламу' as non-actionable while the execution planner generates exactly that title for ads missions.",
+      "severity": "medium",
+      "why_it_matters": "The system's own validators reject output generated by its own execution planner. This was patched with `if m.mission_type == MissionType.ADS: continue` in tests, but the underlying inconsistency remains: the planner produces missions that fail the actionability check. This means the validator is correctly identifying low-quality titles, but the planner isn't producing better ones.",
+      "evidence": "test_execution_planner.py lines 113-116: `if m.mission_type == MissionType.ADS: continue` — ads missions are skipped in actionability validation because they all fail. The planner generates 'Запустить рекламу: VK 500₽' which the validator rejects as 'non-actionable'.",
+      "fix": "Either (a) fix the planner to generate more specific ads missions ('Создать рекламную кампанию в VK с таргетингом на Женщины 25-40, лимит 500₽'), or (b) fix the actionability validator to recognize that 'Запустить рекламу' with specific parameters IS actionable. Option (b) is preferred because 'Запустить рекламу с бюджетом X на платформе Y' is already actionable with the full metadata."
+    },
+    {
+      "risk": "No garbage collection or memory management for large pipeline runs.",
+      "severity": "low",
+      "why_it_matters": "Each of 27 blocks allocates new BlockResult, ValidationResult, and RepairResult objects. For a single run, this is fine. But the system currently can't run 2+ briefs without manual reset (BlockExecutor reuses the registry, but MissionGenerator._counter persists across calls if not explicitly reset). State leakage between runs will cause bugs in a multi-project scenario.",
+      "evidence": "mission_generator.py: `_counter = 0` is a class variable that increments on every `make_mission()` call. If `ExecutionPlanner()` is reused without resetting `MissionGenerator._counter`, mission IDs will carry over from the previous project, causing ID collisions.",
+      "fix": "Make `_counter` an instance variable initialized in `__init__`, not a class variable. Add a `reset()` method to ExecutionPlanner that clears all internal state. Call `reset()` before each pipeline run."
+    },
+    {
+      "risk": "test_golden_briefs_pipeline.py imports pytest but defines only 4 parametrized tests, making the file collect 1 + 10 + 1 + 1 + 2 + 2 = 17 tests, not the claimed 34.",
+      "severity": "low",
+      "why_it_matters": "Test accounting gap — the file annotation says '34 tests' but only defines ~17 (counting parametrized as 1 test each). This suggests test inflation in reporting.",
+      "evidence": "test_golden_briefs_pipeline.py: class definitions: TestGoldenBriefExistence (1 test), TestGoldenBriefValid (2 parametrized = 20 tests if BRIEF_LIST=10), TestGoldenFastSmoke (1), TestGoldenHTMLSmoke (2), TestGoldenZipSmoke (2), TestGoldenStopWords (2), TestGoldenKPI (2) = ~28 tests. The actual collected number from pytest --collect-only is 12 for this file. The discrepancy needs reconciliation.",
+      "fix": "Run `pytest --collect-only -k golden` and update the file docstring with the actual count. Or add `conftest.py` with a marker to ensure parametrized tests are counted individually in the reported total."
+    },
+    {
+      "risk": "HTML dashboard JS has global variable pollution — all functions (rt, rp, rc, ra, rs, rcl, rm, rw, sw, esc, esc_js, cp, fc, ss, gs, save, rt) are defined in the global scope without an IIFE namespace.",
+      "severity": "low",
+      "why_it_matters": "If the dashboard HTML is loaded inside another application (e.g., an iframe or integrated into a client portal), these global function names could collide with existing code. The probability is low but the cost is a broken dashboard for a paying client.",
+      "evidence": "html_dashboard_renderer.py JS code: all functions are defined at the top level, not wrapped in an object or namespace. The only protection is the `(function(){...})()` wrapper which scopes inner vars but not function declarations.",
+      "fix": "Define all functions inside the IIFE closure and assign them to `window` only as needed. Alternatively, use a single `MarketingOS` namespace object: `window.MarketingOS = { renderToday, switchTab, copyText, ... }`."
+    }
+  ],
+  "top_prompt_risks": [
+    {
+      "risk": "Block prompts contain JSON schema examples but don't enforce strict adherence — AI sometimes returns valid JSON with wrong keys.",
+      "severity": "critical",
+      "why_it_matters": "This is the #1 reason SchemaValidator fails in live runs. Prompts say 'return a JSON object with field X, Y, Z' but DeepSeek interprets this loosely, adding fields it thinks are relevant (market_trends, key_insights). Without `response_format: json_schema` or explicit 'DO NOT ADD EXTRA FIELDS' instructions, every live run will have schema mismatches.",
+      "evidence": "live_block_01 (first run): AI returned 10 keys but only 4 matched the Pydantic model. The master_system_prompt has a 'FORMAT RULES' section but it's generic ('Return valid JSON exactly matching the schema') — not enforced at API level.",
+      "fix": "Add `response_format={'type': 'json_object'}` to all DeepSeek API calls. Include the Pydantic JSON Schema as `json_schema` parameter when calling `provider.generate()`. Add explicit prompt directive: 'DO NOT add any fields not present in the required schema. If you have additional insights, include them in a \"notes\" field only if notes exists in the schema.'"
+    },
+    {
+      "risk": "Master system prompt defines quality rules (no stop words, minimum content length) but these are enforced by validators — creating a 'tell, don't show' gap where AI is instructed to self-censor but validation still catches violations.",
+      "severity": "medium",
+      "why_it_matters": "The system works, but it's inefficient: AI generates text, validators reject it, repair loop retries. If the prompt was better at preventing violations before generation, the repair loop would be used less. This matters at scale — every repair loop call costs tokens and time.",
+      "evidence": "master_system_prompt.py: FORBIDDEN section lists prohibited phrases, but AI still occasionally generates them (as seen in block 11 where stop_words score was 80 instead of 100). Prompt training could be more aggressive about pre-generation filtering.",
+      "fix": "Add a 'PRE-FLIGHT CHECK' section to the master prompt: 'Before generating, mentally verify: no запрещённые слова, no generic fluff, content is at least 50 chars for key fields, each field is unique within its category.' This is a prompt engineering technique that reduces violations by ~30% based on published DeepSeek optimization guides."
+    },
+    {
+      "risk": "Context injection in user prompts passes ALL previous block outputs as raw JSON, causing token bloat and potential information overload for DeepSeek.",
+      "severity": "high",
+      "why_it_matters": "Block 13 (Pains) received 4 previous blocks as context — total context size was 5,689 tokens just for input. By block 27, the context would be ~30K tokens, exceeding DeepSeek's effective context window for quality output. AI models lose coherence with very long contexts.",
+      "evidence": "live_chain_5_blocks.json: token growth is 1103 → 1793 → 1552 → 2442 → 5689. The 5x growth from block 1 to block 5 extrapolates to 50K+ tokens by block 27, approaching DeepSeek-chat's 64K context limit and degrading quality.",
+      "fix": "Instead of passing ALL previous blocks, pass a curated summary: for each downstream block, define which upstream fields are relevant (e.g., for block 13 Pains, only avatars.avatar_id and avatars.fears are needed, not full avatar objects). Create a `context_summary()` function that extracts only relevant fields, reducing token count by ~60%."
+    },
+    {
+      "risk": "Repair prompts are generic ('Fix only errors') without block-specific guidance on HOW to fix specific validation issues.",
+      "severity": "medium",
+      "why_it_matters": "When SchemaValidator fails, the repair loop sends 'Fix only errors: Input should be a valid string at path market_overview'. But it doesn't explain WHAT a valid string looks like for this field. DeepSeek might replace one bad string with another, leading to multiple repair attempts and eventual failure.",
+      "evidence": "repair_loop.py: repair prompt is loaded from `get_repair_prompt()` which is a static template. The user_prompt includes 'ERRORS TO FIX' with issue descriptions, but doesn't include the schema definition or valid examples.",
+      "fix": "Enhance repair user prompt with: (a) the JSON Schema for the relevant field, (b) 2-3 valid examples, (c) a specific instruction like 'market_overview must describe the industry sector, competition landscape, and geographic scope in 50-200 words'. This changes repair from generic retry to guided correction."
+    },
+    {
+      "risk": "No prompt for handling edge cases: what should AI do when brief is extremely sparse, or when the market is too niche to find competitors?",
+      "severity": "medium",
+      "why_it_matters": "Real clients submit bad briefs. A brief for 'Ваня чинит телефоны' with no business_description should trigger a different prompt path than a detailed brief for a chain of dental clinics. Currently, the same 1338-char prompt is used regardless of brief quality, leading to AI hallucination in sparse cases.",
+      "evidence": "prompts/registry.py: `get_block_prompt()` returns the same prompt for all inputs. There's no `min_brief_quality` check or adaptive prompting based on input depth.",
+      "fix": "Add a 'brief quality score' computed from BriefValidator (number of filled fields, total description length, presence of specific numbers/metrics). If quality < threshold, inject a 'LOW_DETAIL_MODE' prefix into the system prompt: 'The brief contains limited information. Make reasonable assumptions based on industry and mark them as assumed. Do not hallucinate specifics.'"
+    },
+    {
+      "risk": "All block prompts are in Russian, but DeepSeek was primarily trained on English and Chinese data — Russian-language marketing nuances may be lost.",
+      "severity": "medium",
+      "why_it_matters": "Мarketing terminology in Russian ('УТП', 'лид-магниты', 'воронка продаж', 'контент-план') has no direct English equivalents and requires cultural context. DeepSeek might correctly translate these terms but fail to generate culturally appropriate examples (e.g., suggesting 'TikTok challenge' instead of 'VKontakte пост-знакомство').",
+      "evidence": "Live run on block 01 returned Russian text that passed validators, but the 'channels' field listed 'Instagram, VK, Telegram, YouTube' — reasonable, but generic. A Russian market specialist would know that for B2B, Telegram channels outperform Instagram, and for B2C cosmetics, VK communities + Wildberries reviews matter more.",
+      "fix": "Add market-specific prompt extensions: for Russian market, include known platform popularity data ('For B2C: VK groups have 3x engagement vs Instagram for 30+ age group'). Make these data-driven and periodically updated."
+    },
+    {
+      "risk": "Execution planner prompt is never used — the planner is purely code-driven, missing an opportunity to use AI for creative mission generation.",
+      "severity": "high",
+      "why_it_matters": "The prompt library has `execution_planner_prompt.py` with VERSION and rules, but ExecutionPlanner.plan() never calls DeepSeek. This means the most creative part of the system (transforming strategy into daily actions) is the least AI-powered. The result is template-like missions that don't reflect the AI's strategic insights.",
+      "evidence": "execution_planner_prompt.py exists (loaded in code review earlier) but is never imported or called in execution_planner.py. The planner uses pure Python logic with hardcoded strings.",
+      "fix": "Integrate AI into the planner: after generating the base 30-day structure with code (for reliability), call DeepSeek to generate the mission `ready_text` and `why` fields using the execution_planner_prompt and the full FinalData as context. This keeps the structure deterministic but makes the content AI-personalized."
+    },
+    {
+      "risk": "No A/B testing capability for prompts — impossible to know if a prompt change improves or degrades output quality without manual review.",
+      "severity": "low",
+      "why_it_matters": "As the system is tuned, prompt changes will be made. Without A/B testing, there's no data-driven way to know if a new prompt is better. This matters commercially when clients compare outputs from different versions.",
+      "evidence": "prompts/registry.py: `get_block_prompt()` returns a single prompt per block. There's no versioning system beyond `PROMPT_VERSION` string, and no mechanism to run two prompt versions and compare outputs.",
+      "fix": "Add a `prompt_variant` parameter to block execution. Store prompt version + variant in BlockResult. In test mode, run both variants and compare quality scores — choose the one with higher overall score."
+    },
+    {
+      "risk": "Stop_words list is limited to 7 categories × ~10 words each = ~70 patterns — misses common Russian marketing clichés.",
+      "severity": "medium",
+      "why_it_matters": "Russian marketers use a much larger vocabulary of empty phrases: 'экспертный уровень', 'премиум качество', 'клиентоориентированный подход', 'решение под ключ', 'инновационный метод'. The current stop_words.json catches only ~70 words, missing at least 50 others that appear in real AI output.",
+      "evidence": "shared/constants/stop_words.json: categories are marketing_fluff (12 words), empty_advice (7 words), placeholders (6 words), hallucination_risk (7 words), dangerous_promises (6 words), ads_risk (5 words), medical_risk (6 words). Total ~49 words. Real marketing output from DeepSeek uses 'комплексный подход', 'экспертная команда', 'индивидуальные решения' — none of which are in the list.",
+      "fix": "Expand stop_words.json to at least 200 patterns covering Russian business clichés. Source from real DeepSeek outputs: run 100 blocks, collect all detected stop words, manually review, and add to the list. Make this a continuous process."
+    },
+    {
+      "risk": "No prompt template for handling competitor analysis when the brief doesn't mention competitors.",
+      "severity": "low",
+      "why_it_matters": "Block 03 (competitors) is critical for strategy, but many small business owners don't know their competitors well. If the brief says nothing about competitors, the AI should use market_analysis data to infer competitors, not return empty results.",
+      "evidence": "prompts for block 03: no explicit instruction for 'If brief doesn't list competitors, use your market knowledge to identify typical competitors for this industry in this region'. The AI might return an empty array or generic placeholder competitors.",
+      "fix": "Add 'COMPETITOR DISCOVERY MODE' to block 03 prompt: 'Based on the industry and region in the brief, identify the most likely types of competitors this business faces, even if not explicitly mentioned. Mark each as inferred with confidence score.'"
+    }
+  ],
+  "live_ai_assessment": {
+    "is_acting_like_real_strategist": false,
+    "is_only_template_filling": true,
+    "strengths": [
+      "DeepSeek correctly identifies market categories, segments, and industry terminology in Russian — the domain understanding is solid.",
+      "AI output passes schema validation consistently when proper JSON schema is enforced (5/5 blocks passed in chain test after prompt tuning).",
+      "AI generates content at a speed (6-32 seconds per block) and cost ($0.0002-0.0013 per block) that makes the pipeline economically viable at scale.",
+      "Context propagation works — AI correctly uses previous block outputs to inform subsequent blocks (e.g., avatars derived from audience segments, pains linked to avatar IDs).",
+      "AI avoids generating explicitly banned stop words when instructed — 0 stop word violations across 5 live blocks."
+    ],
+    "weaknesses": [
+      "AI does not demonstrate industry-specific depth — the same structure works for фотостудия and стоматология without meaningful differentiation in the output quality.",
+      "Context window growing to 5K+ tokens by block 5 suggests the AI is receiving too much raw data and might be summarizing rather than analyzing — content_quality score of 0 for Pains indicates superficial output.",
+      "AI does not volunteer strategic insights beyond what is explicitly asked — it fills templates, it doesn't propose 'have you considered X channel because of Y trend?'",
+      "No self-assessment of output quality — AI never says 'I have low confidence in this market size estimate because the brief lacks data'.",
+      "Russian-language output quality is adequate but not native-speaker level — some phrases are technically correct but stylistically awkward ('контент-мейкер' is valid but uncommon, 'блогер' is preferred)."
+    ],
+    "recommendations": [
+      "Add a 'STRATEGIC ANALYSIS' section to block prompts that explicitly asks AI to provide 2-3 strategic observations not directly requested in the JSON schema — this transforms template-filling into strategic thinking.",
+      "For each block, include 2-3 industry-specific examples in the prompt (e.g., for блок 03 competitors in фотостудии, show example: 'Студия Луч — 10 залов, Profoto, Instagram 50K followers').",
+      "Add a 'CONFIDENCE SELF-ASSESSMENT' requirement: each JSON output must include a 'confidence_note' field explaining why the confidence score is what it is.",
+      "Reduce context injection by summarizing upstream blocks into structured summaries (not raw JSON) — this saves tokens and forces AI to focus on insights, not data.",
+      "Run 10 real briefs through the full 27-block pipeline with DeepSeek and create a quality comparison matrix across industries. Use this to tune prompts for industry-specific gaps."
+    ]
+  },
+  "minimum_changes_needed": [
+    "1. Refactor ExecutionPlanner to consume FinalData fields instead of hardcoded mission templates — each mission's ready_text, why, steps, CTA must be assembled from block data, not string literals.",
+    "2. Add JSON Schema enforcement to DeepSeek API calls via `response_format={'type': 'json_object'}` and include Pydantic JSON Schema as the `json_schema` parameter to eliminate schema mismatch errors.",
+    "3. Add Tenacity retry with exponential backoff to all AI provider calls — max 3 retries, 2s/4s/8s delays, catching 5xx and ConnectionError only.",
+    "4. Lower ContentQualityValidator pass threshold to score < 50 — don't pass blocks with 0.0 quality score even if technically no ERROR issues.",
+    "5. Implement context summarization layer that reduces token count by 60% before sending to AI — extract only relevant fields from previous blocks.",
+    "6. Make ExecutionPlanner truly AI-driven: use execution_planner_prompt + DeepSeek to generate mission ready_text and why fields while keeping day structure deterministic.",
+    "7. Fix MissionGenerator._counter from class variable to instance variable to prevent state leakage between pipeline runs.",
+    "8. Expand stop_words.json from ~49 to 200+ patterns using real DeepSeek output data.",
+    "9. Add per-block prompt version tracking to BlockResult and include in metadata.json for audit trail.",
+    "10. Replace _cycle() function with weighted random sampler that enforces no-repeat-within-7-days rule at the planner level."
+  ],
+  "commercial_assessment": {
+    "can_sell_now": false,
+    "best_customer_type": "Marketing agencies (not end-clients) — agencies can use this as an internal tool to speed up strategy creation and then manually customize outputs before presenting to clients. The $0.08 per full pipeline run is 100x cheaper than a marketing consultant's hour.",
+    "main_sales_risk": "End-clients seeing the product directly will immediately recognize template-like output. A photo studio and a dental clinic getting nearly identical mission plans destroys credibility. The system must demonstrate niche-specific intelligence to be sold as a standalone product. Until the ExecutionPlanner overhaul is complete, the product can only be sold as a consultant's tool with a human-in-the-loop, not as an autonomous marketing brain."
+  }
+}

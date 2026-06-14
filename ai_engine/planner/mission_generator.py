@@ -7,7 +7,8 @@ from shared.schemas.blocks import MissionType, Difficulty, Platform, ContentForm
 class MissionGenerator:
     """Creates Mission objects with all required fields."""
 
-    _counter = 0
+    def __init__(self, start_counter: int = 0):
+        self._counter = start_counter
 
     def _next_id(self) -> str:
         self._counter += 1

@@ -23,6 +23,12 @@ class _PromptRegistry:
         self._prompts: dict[str, str] = {}
         self._expected_slugs: list[str] = []
 
+    @staticmethod
+    def _ensure_version(prompt: str) -> str:
+        if "version" in prompt.lower():
+            return prompt
+        return "VERSION: 1.0.0\n\n" + prompt.lstrip()
+
     def register(self, block_id: str, prompt: str) -> None:
         """Register a block prompt.
 
@@ -30,7 +36,7 @@ class _PromptRegistry:
             block_id: e.g., '01_market_analysis'
             prompt: The prompt string
         """
-        self._prompts[block_id] = prompt
+        self._prompts[block_id] = self._ensure_version(prompt)
 
     def get(self, block_id: str) -> Optional[str]:
         """Get a block prompt by ID.

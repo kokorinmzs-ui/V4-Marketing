@@ -1,0 +1,183 @@
+{
+  "provider": "deepseek",
+  "model": "deepseek-chat",
+  "chain": "01 → 02 → 10 → 11 → 13",
+  "total_tokens": 12579,
+  "total_cost": 0.002711,
+  "total_time_sec": 66.17,
+  "all_passed": true,
+  "blocks": [
+    {
+      "block_id": "01_market_analysis",
+      "name": "Market Analysis",
+      "status": "passed",
+      "provider_used": "deepseek",
+      "model_used": "deepseek-chat",
+      "tokens_in": 732,
+      "tokens_out": 371,
+      "cost": 0.000206,
+      "generation_time_sec": 6.16,
+      "schema_validator": {
+        "passed": true,
+        "score": 100.0,
+        "issues": []
+      },
+      "stop_words": {
+        "passed": true,
+        "score": 100.0
+      },
+      "content_quality": {
+        "passed": true,
+        "score": 100.0
+      },
+      "raw_keys": [
+        "status",
+        "data"
+      ],
+      "normalized_keys": [
+        "market_overview",
+        "market_size",
+        "seasonality",
+        "buying_triggers",
+        "buying_barriers",
+        "growth_opportunities",
+        "channels",
+        "risks",
+        "confidence"
+      ]
+    },
+    {
+      "block_id": "02_business_diagnosis",
+      "name": "Business Diagnosis",
+      "status": "passed",
+      "provider_used": "deepseek",
+      "model_used": "deepseek-chat",
+      "tokens_in": 865,
+      "tokens_out": 928,
+      "cost": 0.000381,
+      "generation_time_sec": 9.19,
+      "schema_validator": {
+        "passed": true,
+        "score": 100.0,
+        "issues": []
+      },
+      "stop_words": {
+        "passed": true,
+        "score": 100.0
+      },
+      "content_quality": {
+        "passed": true,
+        "score": 100.0
+      },
+      "raw_keys": [
+        "status",
+        "data"
+      ],
+      "normalized_keys": [
+        "constraints",
+        "quick_wins",
+        "growth_barriers",
+        "focus_areas",
+        "confidence"
+      ]
+    },
+    {
+      "block_id": "10_audience",
+      "name": "Audience Analysis",
+      "status": "passed",
+      "provider_used": "deepseek",
+      "model_used": "deepseek-chat",
+      "tokens_in": 914,
+      "tokens_out": 638,
+      "cost": 0.000307,
+      "generation_time_sec": 6.83,
+      "schema_validator": {
+        "passed": true,
+        "score": 100.0,
+        "issues": []
+      },
+      "stop_words": {
+        "passed": true,
+        "score": 100.0
+      },
+      "content_quality": {
+        "passed": true,
+        "score": 100.0
+      },
+      "raw_keys": [
+        "status",
+        "data"
+      ],
+      "normalized_keys": [
+        "segments",
+        "max_segments",
+        "confidence"
+      ]
+    },
+    {
+      "block_id": "11_avatars",
+      "name": "Avatars",
+      "status": "passed",
+      "provider_used": "deepseek",
+      "model_used": "deepseek-chat",
+      "tokens_in": 1278,
+      "tokens_out": 1164,
+      "cost": 0.000505,
+      "generation_time_sec": 11.52,
+      "schema_validator": {
+        "passed": true,
+        "score": 100.0,
+        "issues": []
+      },
+      "stop_words": {
+        "passed": true,
+        "score": 80.0
+      },
+      "content_quality": {
+        "passed": true,
+        "score": 90.0
+      },
+      "raw_keys": [
+        "status",
+        "data"
+      ],
+      "normalized_keys": [
+        "avatars",
+        "similarity_score",
+        "confidence"
+      ]
+    },
+    {
+      "block_id": "13_pains",
+      "name": "Pains",
+      "status": "passed",
+      "provider_used": "deepseek",
+      "model_used": "deepseek-chat",
+      "tokens_in": 2007,
+      "tokens_out": 3682,
+      "cost": 0.001312,
+      "generation_time_sec": 32.47,
+      "schema_validator": {
+        "passed": true,
+        "score": 100.0,
+        "issues": []
+      },
+      "stop_words": {
+        "passed": true,
+        "score": 100.0
+      },
+      "content_quality": {
+        "passed": true,
+        "score": 0.0
+      },
+      "raw_keys": [
+        "status",
+        "data"
+      ],
+      "normalized_keys": [
+        "pains",
+        "confidence"
+      ]
+    }
+  ]
+}

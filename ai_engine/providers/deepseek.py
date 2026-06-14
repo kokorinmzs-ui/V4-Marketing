@@ -34,6 +34,35 @@ class DeepSeekProvider(BaseProvider):
             self._call_api, system_prompt, user_prompt, json_schema
         )
 
+    def _build_request_body(
+        self,
+        system_prompt: str,
+        user_prompt: str,
+        json_schema: Optional[dict[str, Any]] = None,
+    ) -> dict[str, Any]:
+        """Build the request body for API call (testable)."""
+        model = self.config.model or os.getenv("DEEPSEEK_MODEL", "deepseek-chat")
+        messages = [{"role": "system", "content": system_prompt}]
+        if user_prompt:
+            messages.append({"role": "user", "content": user_prompt})
+
+        body: dict[str, Any] = {
+            "model": model,
+            "messages": messages,
+            "temperature": 0.3,
+            "max_tokens": 4096,
+            "stream": False,
+        }
+
+        if json_schema and isinstance(json_schema, dict):
+            body["response_format"] = {
+                "type": "json_schema",
+                "json_schema": {"name": "response", "strict": True, "schema": json_schema},
+            }
+        else:
+            body["response_format"] = {"type": "json_object"}
+        return body
+
     def _call_api(
         self,
         system_prompt: str,
@@ -67,8 +96,17 @@ class DeepSeekProvider(BaseProvider):
                 "stream": False,
             }
 
-            # If JSON schema is requested, try response_format
-            if json_schema:
+            # Use strict JSON schema if provided, otherwise json_object mode
+            if json_schema and isinstance(json_schema, dict):
+                body["response_format"] = {
+                    "type": "json_schema",
+                    "json_schema": {
+                        "name": "response",
+                        "strict": True,
+                        "schema": json_schema,
+                    },
+                }
+            else:
                 body["response_format"] = {"type": "json_object"}
 
             response = httpx.post(

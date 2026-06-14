@@ -1,0 +1,246 @@
+{
+  "golden_briefs": [
+    {
+      "project_name": "Автосервис Мотор",
+      "industry": "автосервис",
+      "status": "completed",
+      "llm_mode": "auto",
+      "live_enabled": false,
+      "providers": [
+        "mock"
+      ],
+      "models": [
+        "mock"
+      ],
+      "final_data_size": 85947,
+      "evm_size": 84641,
+      "dashboard_size": 189991,
+      "zip_size": 20092,
+      "missions_count": 56,
+      "content_count": 30,
+      "ads_count": 4,
+      "sales_count": 6,
+      "quality_score": 95.0,
+      "warnings": [],
+      "time_sec": 0.083
+    },
+    {
+      "project_name": "B2B Маркетинг Сервис",
+      "industry": "b2b_маркетинг",
+      "status": "completed",
+      "llm_mode": "auto",
+      "live_enabled": false,
+      "providers": [
+        "mock"
+      ],
+      "models": [
+        "mock"
+      ],
+      "final_data_size": 86635,
+      "evm_size": 85015,
+      "dashboard_size": 190688,
+      "zip_size": 20180,
+      "missions_count": 56,
+      "content_count": 30,
+      "ads_count": 4,
+      "sales_count": 6,
+      "quality_score": 95.0,
+      "warnings": [],
+      "time_sec": 0.068
+    },
+    {
+      "project_name": "Салон Красоты Глянец",
+      "industry": "бьюти",
+      "status": "completed",
+      "llm_mode": "auto",
+      "live_enabled": false,
+      "providers": [
+        "mock"
+      ],
+      "models": [
+        "mock"
+      ],
+      "final_data_size": 85963,
+      "evm_size": 84867,
+      "dashboard_size": 190597,
+      "zip_size": 20138,
+      "missions_count": 56,
+      "content_count": 30,
+      "ads_count": 4,
+      "sales_count": 6,
+      "quality_score": 95.0,
+      "warnings": [],
+      "time_sec": 0.068
+    },
+    {
+      "project_name": "Клининг Сервис Дом",
+      "industry": "клининг",
+      "status": "completed",
+      "llm_mode": "auto",
+      "live_enabled": false,
+      "providers": [
+        "mock"
+      ],
+      "models": [
+        "mock"
+      ],
+      "final_data_size": 86439,
+      "evm_size": 84911,
+      "dashboard_size": 190688,
+      "zip_size": 20140,
+      "missions_count": 56,
+      "content_count": 30,
+      "ads_count": 4,
+      "sales_count": 6,
+      "quality_score": 95.0,
+      "warnings": [],
+      "time_sec": 0.069
+    },
+    {
+      "project_name": "Стоматология Белый Клык",
+      "industry": "стоматология",
+      "status": "completed",
+      "llm_mode": "auto",
+      "live_enabled": false,
+      "providers": [
+        "mock"
+      ],
+      "models": [
+        "mock"
+      ],
+      "final_data_size": 86820,
+      "evm_size": 85197,
+      "dashboard_size": 191566,
+      "zip_size": 20263,
+      "missions_count": 56,
+      "content_count": 30,
+      "ads_count": 4,
+      "sales_count": 6,
+      "quality_score": 95.0,
+      "warnings": [],
+      "time_sec": 0.071
+    },
+    {
+      "project_name": "Фитнес-Студия Драйв",
+      "industry": "фитнес",
+      "status": "completed",
+      "llm_mode": "auto",
+      "live_enabled": false,
+      "providers": [
+        "mock"
+      ],
+      "models": [
+        "mock"
+      ],
+      "final_data_size": 86388,
+      "evm_size": 84948,
+      "dashboard_size": 190759,
+      "zip_size": 20201,
+      "missions_count": 56,
+      "content_count": 30,
+      "ads_count": 4,
+      "sales_count": 6,
+      "quality_score": 95.0,
+      "warnings": [],
+      "time_sec": 0.073
+    },
+    {
+      "project_name": "Юридическая Фирма Право",
+      "industry": "юридические_услуги",
+      "status": "completed",
+      "llm_mode": "auto",
+      "live_enabled": false,
+      "providers": [
+        "mock"
+      ],
+      "models": [
+        "mock"
+      ],
+      "final_data_size": 86958,
+      "evm_size": 85092,
+      "dashboard_size": 191272,
+      "zip_size": 20265,
+      "missions_count": 56,
+      "content_count": 30,
+      "ads_count": 4,
+      "sales_count": 6,
+      "quality_score": 95.0,
+      "warnings": [],
+      "time_sec": 0.071
+    },
+    {
+      "project_name": "Онлайн-Школа Код",
+      "industry": "онлайн-образование",
+      "status": "completed",
+      "llm_mode": "auto",
+      "live_enabled": false,
+      "providers": [
+        "mock"
+      ],
+      "models": [
+        "mock"
+      ],
+      "final_data_size": 86627,
+      "evm_size": 84769,
+      "dashboard_size": 190081,
+      "zip_size": 20140,
+      "missions_count": 56,
+      "content_count": 30,
+      "ads_count": 4,
+      "sales_count": 6,
+      "quality_score": 95.0,
+      "warnings": [],
+      "time_sec": 0.072
+    },
+    {
+      "project_name": "Фотостудия Воздух",
+      "industry": "фотостудии",
+      "status": "completed",
+      "llm_mode": "auto",
+      "live_enabled": false,
+      "providers": [
+        "mock"
+      ],
+      "models": [
+        "mock"
+      ],
+      "final_data_size": 86276,
+      "evm_size": 84714,
+      "dashboard_size": 190195,
+      "zip_size": 20099,
+      "missions_count": 56,
+      "content_count": 30,
+      "ads_count": 4,
+      "sales_count": 6,
+      "quality_score": 95.0,
+      "warnings": [],
+      "time_sec": 0.07
+    },
+    {
+      "project_name": "Ресторан Седьмое Небо",
+      "industry": "ресторанный_бизнес",
+      "status": "completed",
+      "llm_mode": "auto",
+      "live_enabled": false,
+      "providers": [
+        "mock"
+      ],
+      "models": [
+        "mock"
+      ],
+      "final_data_size": 86510,
+      "evm_size": 84934,
+      "dashboard_size": 190804,
+      "zip_size": 20224,
+      "missions_count": 56,
+      "content_count": 30,
+      "ads_count": 4,
+      "sales_count": 6,
+      "quality_score": 95.0,
+      "warnings": [],
+      "time_sec": 0.069
+    }
+  ],
+  "total": 10,
+  "passed": 10
+}

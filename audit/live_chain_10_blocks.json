@@ -1,0 +1,217 @@
+{
+  "provider": "deepseek",
+  "model": "deepseek-chat",
+  "chain": "01→02→03→04→06→10→11→13→14→15",
+  "total_time_sec": 197.9,
+  "total_cost": 0.009281,
+  "all_passed": false,
+  "blocks": [
+    {
+      "block_id": "01_market_analysis",
+      "name": "Market Analysis",
+      "status": "failed",
+      "tokens_in": 657,
+      "tokens_out": 733,
+      "cost": 0.000297,
+      "time_sec": 9.26,
+      "schema_passed": false,
+      "stopwords_passed": true,
+      "content_quality_passed": true,
+      "content_quality_score": 100.0,
+      "data_keys": [
+        "market_size",
+        "competitors",
+        "market_trends",
+        "seasonality",
+        "price_benchmark",
+        "key_insights",
+        "risks",
+        "recommendations",
+        "confidence_score"
+      ]
+    },
+    {
+      "block_id": "02_business_diagnosis",
+      "name": "Business Diagnosis",
+      "status": "passed",
+      "tokens_in": 1376,
+      "tokens_out": 1848,
+      "cost": 0.00071,
+      "time_sec": 18.98,
+      "schema_passed": true,
+      "stopwords_passed": true,
+      "content_quality_passed": true,
+      "content_quality_score": 100.0,
+      "data_keys": [
+        "bottlenecks",
+        "critical_bottleneck",
+        "bottleneck_impact_on_kpi",
+        "bottleneck_root_causes",
+        "bottleneck_priority_score",
+        "recommendations",
+        "confidence_score"
+      ]
+    },
+    {
+      "block_id": "03_competitors",
+      "name": "Competitors",
+      "status": "passed",
+      "tokens_in": 2959,
+      "tokens_out": 3112,
+      "cost": 0.001286,
+      "time_sec": 25.78,
+      "schema_passed": true,
+      "stopwords_passed": true,
+      "content_quality_passed": true,
+      "content_quality_score": 100.0,
+      "data_keys": [
+        "competitors",
+        "competitive_advantages",
+        "competitive_disadvantages",
+        "market_positioning",
+        "price_positioning",
+        "key_differentiators",
+        "competitor_weaknesses_to_exploit",
+        "competitor_strengths_to_learn",
+        "market_gaps",
+        "competitive_threats",
+        "recommendations",
+        "confidence_score"
+      ]
+    },
+    {
+      "block_id": "04_platform",
+      "name": "Marketing Platform",
+      "status": "failed",
+      "tokens_in": 2964,
+      "tokens_out": 1054,
+      "cost": 0.00071,
+      "time_sec": 11.62,
+      "schema_passed": false,
+      "stopwords_passed": false,
+      "content_quality_passed": true,
+      "content_quality_score": 70.0,
+      "data_keys": [
+        "positioning",
+        "unique_selling_proposition",
+        "reasons_to_believe",
+        "tone_of_voice",
+        "marketing_kpis",
+        "confidence_score"
+      ]
+    },
+    {
+      "block_id": "06_product_system",
+      "name": "Product System",
+      "status": "passed",
+      "tokens_in": 2958,
+      "tokens_out": 1404,
+      "cost": 0.000807,
+      "time_sec": 14.89,
+      "schema_passed": true,
+      "stopwords_passed": true,
+      "content_quality_passed": true,
+      "content_quality_score": 100.0,
+      "data_keys": [
+        "lead_magnet",
+        "tripwire",
+        "core_offer",
+        "profit_booster",
+        "subscription",
+        "referral"
+      ]
+    },
+    {
+      "block_id": "10_audience",
+      "name": "Audience Analysis",
+      "status": "passed",
+      "tokens_in": 2954,
+      "tokens_out": 2090,
+      "cost": 0.000999,
+      "time_sec": 19.96,
+      "schema_passed": true,
+      "stopwords_passed": true,
+      "content_quality_passed": true,
+      "content_quality_score": 100.0,
+      "data_keys": [
+        "segments",
+        "segment_priorities",
+        "segment_insights",
+        "confidence_score"
+      ]
+    },
+    {
+      "block_id": "11_avatars",
+      "name": "Avatars",
+      "status": "failed",
+      "tokens_in": 2962,
+      "tokens_out": 3688,
+      "cost": 0.001447,
+      "time_sec": 40.74,
+      "schema_passed": false,
+      "stopwords_passed": true,
+      "content_quality_passed": true,
+      "content_quality_score": 100.0,
+      "data_keys": [
+        "avatars",
+        "segmentation_summary",
+        "confidence_score"
+      ]
+    },
+    {
+      "block_id": "13_pains",
+      "name": "Pains",
+      "status": "passed",
+      "tokens_in": 2960,
+      "tokens_out": 1856,
+      "cost": 0.000934,
+      "time_sec": 13.78,
+      "schema_passed": true,
+      "stopwords_passed": true,
+      "content_quality_passed": true,
+      "content_quality_score": 100.0,
+      "data_keys": [
+        "avatar_pains",
+        "confidence_score"
+      ]
+    },
+    {
+      "block_id": "14_triggers",
+      "name": "Triggers",
+      "status": "failed",
+      "tokens_in": 2960,
+      "tokens_out": 2792,
+      "cost": 0.001196,
+      "time_sec": 26.46,
+      "schema_passed": false,
+      "stopwords_passed": false,
+      "content_quality_passed": true,
+      "content_quality_score": 90.0,
+      "data_keys": [
+        "triggers",
+        "summary",
+        "confidence_score"
+      ]
+    },
+    {
+      "block_id": "15_offers",
+      "name": "Offers",
+      "status": "failed",
+      "tokens_in": 2961,
+      "tokens_out": 1716,
+      "cost": 0.000895,
+      "time_sec": 16.42,
+      "schema_passed": false,
+      "stopwords_passed": true,
+      "content_quality_passed": true,
+      "content_quality_score": 100.0,
+      "data_keys": [
+        "offers",
+        "total_offers",
+        "coverage",
+        "summary",
+        "confidence_score"
+      ]
+    }
+  ]
+}

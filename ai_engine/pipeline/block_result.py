@@ -36,6 +36,8 @@ class BlockResult:
     elapsed_seconds: float = 0.0
     usage: LLMUsage = field(default_factory=LLMUsage)
     total_usage: LLMUsage = field(default_factory=LLMUsage)
+    provider_used: str = ""
+    model_used: str = ""
 
     # Errors
     error: str = ""

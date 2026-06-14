@@ -7,7 +7,8 @@ from shared.schemas.blocks import Platform, ContentFormat, ContentArchetype
 class ContentActionBuilder:
     """Builds ContentTask entries for the Content Library tab."""
 
-    _counter = 0
+    def __init__(self):
+        self._counter = 0
 
     def build_from_mission(self, mission_id: str, day: int, title: str,
                            content_format: str, ready_text: str, cta: str,

@@ -1,0 +1,26 @@
+{
+  "timestamp_utc": "2026-06-14T04:44:36.154987+00:00",
+  "env": {
+    "PIPELINE_LLM_MODE": "live",
+    "PRIMARY_LLM_PROVIDER": "deepseek",
+    "FALLBACK_LLM_PROVIDER": "openai",
+    "DEEPSEEK_API_KEY_exists": true,
+    "OPENAI_API_KEY_exists": true
+  },
+  "live_ready": true,
+  "reason": "ok",
+  "status": "ok",
+  "provider_used": "deepseek",
+  "model_used": "deepseek-chat",
+  "tokens": {
+    "input": 70,
+    "output": 60,
+    "total": 130
+  },
+  "cost": 2.7e-05,
+  "response": {
+    "status": "ok",
+    "provider_used": "deepseek",
+    "model_used": "deepseek-chat"
+  }
+}

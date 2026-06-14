@@ -1,0 +1,91 @@
+{
+  "marker": "Агентство B2B маркетинга. Лидогенерация, email-маркетинг, контент-стратегия. 10+ клиентов. B2B_UNIQUE_MARKER_999",
+  "market_overview": [
+    {
+      "trend": "Рост спроса на автоматизацию лидогенерации",
+      "impact": "высокий",
+      "relevance_to_project": "Прямое — продукт лидогенерации 50 000 ₽/мес востребован",
+      "confidence": "high"
+    },
+    {
+      "trend": "Уход от массовых рассылок к персонализированным email-кампаниям",
+      "impact": "высокий",
+      "relevance_to_project": "Прямое — email-маркетинг как ключевая услуга",
+      "confidence": "high"
+    },
+    {
+      "trend": "Увеличение доли LinkedIn и Telegram как каналов B2B-коммуникации",
+      "impact": "средний",
+      "relevance_to_project": "Прямое — каналы продвижения совпадают",
+      "confidence": "high"
+    }
+  ],
+  "segments_count": 3,
+  "avatars_count": 5,
+  "pains_count": 0,
+  "offers_count": 15,
+  "missions_count": 0,
+  "mission_titles": [],
+  "ctas": [],
+  "total_tokens": 28496,
+  "total_cost": 0.005355,
+  "total_time_sec": 92.3,
+  "html_size": 0,
+  "blocks": [
+    {
+      "block_id": "01_market_analysis",
+      "schema_passed": false,
+      "stopwords_passed": true,
+      "content_quality_passed": true,
+      "cq_score": 100.0,
+      "tokens_in": 640,
+      "tokens_out": 1043,
+      "cost": 0.000382,
+      "time_sec": 0
+    },
+    {
+      "block_id": "10_audience",
+      "schema_passed": false,
+      "stopwords_passed": true,
+      "content_quality_passed": true,
+      "cq_score": 100.0,
+      "tokens_in": 1721,
+      "tokens_out": 1127,
+      "cost": 0.000557,
+      "time_sec": 0
+    },
+    {
+      "block_id": "11_avatars",
+      "schema_passed": true,
+      "stopwords_passed": true,
+      "content_quality_passed": true,
+      "cq_score": 100.0,
+      "tokens_in": 2846,
+      "tokens_out": 2857,
+      "cost": 0.001198,
+      "time_sec": 0
+    },
+    {
+      "block_id": "13_pains",
+      "schema_passed": true,
+      "stopwords_passed": true,
+      "content_quality_passed": true,
+      "cq_score": 90.0,
+      "tokens_in": 5702,
+      "tokens_out": 2136,
+      "cost": 0.001396,
+      "time_sec": 0
+    },
+    {
+      "block_id": "15_offers",
+      "schema_passed": false,
+      "stopwords_passed": true,
+      "content_quality_passed": true,
+      "cq_score": 80.0,
+      "tokens_in": 7832,
+      "tokens_out": 2592,
+      "cost": 0.001822,
+      "time_sec": 0
+    }
+  ]
+}

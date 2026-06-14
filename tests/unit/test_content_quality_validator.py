@@ -59,3 +59,18 @@ class TestContentQualityScore:
     def test_score_drops_on_warning(self):
         result = validate_content_quality({"title": "расскажем о нашей компании"})
         assert result.score < 100.0
+
+
+class TestContentQualityContract:
+    def test_low_score_for_multiple_warnings_forces_fail(self):
+        result = validate_content_quality(
+            {
+                "title": "расскажем о нашей компании",
+                "ready_text": "будьте в курсе",
+                "cta": "лучшее качество",
+                "message": "мы на рынке",
+                "offer": "наш профессиональный подход",
+            }
+        )
+        assert result.score < 50
+        assert result.passed is False

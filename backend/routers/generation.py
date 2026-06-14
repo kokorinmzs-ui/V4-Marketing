@@ -16,9 +16,13 @@ router = APIRouter(prefix="/projects/{project_id}", tags=["generation"])
 def generate_project(
     project_id: str,
     generation_service: GenerationService = Depends(get_generation_service),
-) -> dict[str, str]:
+) -> dict[str, object]:
     try:
         result = generation_service.generate(project_id)
-        return {"project_id": result["project_id"], "status": result["status"]}
+        return {
+            "project_id": result["project_id"],
+            "status": result["status"],
+            "llm_summary": result.get("llm_summary", {}),
+        }
     except ProjectNotFoundError as exc:
         raise HTTPException(status_code=404, detail="Project not found") from exc

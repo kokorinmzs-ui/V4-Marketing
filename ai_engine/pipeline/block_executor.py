@@ -29,9 +29,11 @@ class BlockExecutor:
         generate_func: Any,
         repair_prompt: str,
         max_repair_attempts: int = 3,
+        system_prompt_prefix: str = "",
     ):
         self._block_registry = block_registry
         self._generate = generate_func
+        self._system_prompt_prefix = system_prompt_prefix.strip()
         self._repair_loop = RepairLoop(
             repair_prompt=repair_prompt,
             generate_func=generate_func,
@@ -65,8 +67,11 @@ class BlockExecutor:
         )
 
         # === STEP 1: GENERATE ===
+        system_prompt = block_def.prompt
+        if self._system_prompt_prefix:
+            system_prompt = f"{self._system_prompt_prefix}\n\n{block_def.prompt}".strip()
         generate_response = self._generate(
-            system_prompt=block_def.prompt,
+            system_prompt=system_prompt,
             user_prompt=self._build_user_prompt(block_def, context),
             json_schema=block_def.json_schema,
         )
@@ -80,6 +85,8 @@ class BlockExecutor:
         result.data = generate_response.data if isinstance(generate_response.data, dict) else {}
         result.raw_response = ""
         result.usage = generate_response.usage
+        result.provider_used = getattr(generate_response, "provider_used", "")
+        result.model_used = getattr(generate_response, "model_used", "")
 
         # === STEP 2: VALIDATE ===
         validation_results = self._run_validators(

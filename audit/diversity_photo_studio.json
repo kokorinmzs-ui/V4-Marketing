@@ -1,0 +1,88 @@
+{
+  "marker": "Аренда фотостудий в Москве. 7 залов, Profoto, циклорама. Работаем с 2018 года. PHOTO_UNIQUE_MARKER_777",
+  "market_overview": [
+    {
+      "trend": "Рост спроса на контент для соцсетей",
+      "impact": "Увеличение числа content makers и блогеров как клиентов",
+      "source": "Аналитика рынка SMM, 2024"
+    },
+    {
+      "trend": "Популяризация циклорам и Profoto",
+      "impact": "Повышение требований к оборудованию студий",
+      "source": "Обзор фотоиндустрии, 2023"
+    },
+    {
+      "trend": "Рост аренды на полный день",
+      "impact": "Увеличение среднего чека и загрузки",
+      "source": "Данные бронирований фотостудий Москвы"
+    }
+  ],
+  "segments_count": 3,
+  "avatars_count": 5,
+  "pains_count": 0,
+  "offers_count": 10,
+  "missions_count": 0,
+  "mission_titles": [],
+  "ctas": [],
+  "total_tokens": 24138,
+  "total_cost": 0.004457,
+  "total_time_sec": 69.6,
+  "html_size": 0,
+  "blocks": [
+    {
+      "block_id": "01_market_analysis",
+      "schema_passed": false,
+      "stopwords_passed": true,
+      "content_quality_passed": true,
+      "cq_score": 100.0,
+      "tokens_in": 632,
+      "tokens_out": 1013,
+      "cost": 0.000372,
+      "time_sec": 0
+    },
+    {
+      "block_id": "10_audience",
+      "schema_passed": false,
+      "stopwords_passed": true,
+      "content_quality_passed": true,
+      "cq_score": 80.0,
+      "tokens_in": 1707,
+      "tokens_out": 1152,
+      "cost": 0.000562,
+      "time_sec": 0
+    },
+    {
+      "block_id": "11_avatars",
+      "schema_passed": true,
+      "stopwords_passed": true,
+      "content_quality_passed": true,
+      "cq_score": 80.0,
+      "tokens_in": 2861,
+      "tokens_out": 1750,
+      "cost": 0.000891,
+      "time_sec": 0
+    },
+    {
+      "block_id": "13_pains",
+      "schema_passed": true,
+      "stopwords_passed": true,
+      "content_quality_passed": true,
+      "cq_score": 100.0,
+      "tokens_in": 4610,
+      "tokens_out": 2037,
+      "cost": 0.001216,
+      "time_sec": 0
+    },
+    {
+      "block_id": "15_offers",
+      "schema_passed": false,
+      "stopwords_passed": false,
+      "content_quality_passed": true,
+      "cq_score": 100.0,
+      "tokens_in": 6637,
+      "tokens_out": 1739,
+      "cost": 0.001416,
+      "time_sec": 0
+    }
+  ]
+}

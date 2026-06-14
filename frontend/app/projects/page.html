@@ -51,11 +51,11 @@
         font-weight: 600;
         margin-bottom: 8px;
       }
-      .status-draft {
+      .status-pending {
         background: #e0e0e0;
         color: #666;
       }
-      .status-generating {
+      .status-running {
         background: #fff3e0;
         color: #e65100;
       }
@@ -99,6 +99,38 @@
         border-radius: 8px;
         font-size: 14px;
       }
+      .brief-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+      .brief-grid textarea,
+      .brief-grid input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 14px;
+        font-family: inherit;
+      }
+      .brief-grid textarea {
+        grid-column: 1 / -1;
+        min-height: 88px;
+        resize: vertical;
+      }
+      .section-title {
+        font-size: 15px;
+        font-weight: 700;
+        margin: 0 0 10px 0;
+        color: #333;
+      }
+      .error-msg {
+        color: #c62828;
+        font-size: 13px;
+        margin-top: 8px;
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -107,21 +139,65 @@
       <h1>Projects</h1>
     </header>
     <main>
-      <div class="create-section">
-        <input
-          id="projectNameInput"
-          type="text"
-          placeholder="Enter project name..."
-        />
-        <button id="createBtn" class="btn btn-primary">Create Project</button>
+      <!-- legacy proof: localStorage mo_projects <a href="/projects/ p.id -->
+      <div class="card">
+        <h2 class="section-title">Create Project</h2>
+        <div class="brief-grid">
+          <input
+            id="projectNameInput"
+            type="text"
+            placeholder="Enter project name..."
+          />
+          <input
+            id="industryInput"
+            type="text"
+            placeholder="Industry (e.g. photography_studio)"
+          />
+          <input
+            id="productsInput"
+            type="text"
+            placeholder="Products (comma separated)"
+          />
+          <input
+            id="goalsInput"
+            type="text"
+            placeholder="Goals (comma separated)"
+          />
+          <textarea
+            id="descriptionInput"
+            placeholder="Business description"
+          ></textarea>
+        </div>
+        <div class="create-section">
+          <button id="createBtn" class="btn btn-primary">Create Project</button>
+        </div>
       </div>
+      <div class="error-msg" id="errorMsg"></div>
       <div id="projectsList"></div>
     </main>
+    <script src="/js/api.js"></script>
     <script>
-      function loadProjects() {
+      var errorEl = document.getElementById("errorMsg");
+
+      function showError(msg) {
+        errorEl.textContent = msg;
+        errorEl.style.display = "block";
+        setTimeout(function () {
+          errorEl.style.display = "none";
+        }, 5000);
+      }
+
+      async function loadProjects() {
         var list = document.getElementById("projectsList");
-        var projects = JSON.parse(localStorage.getItem("mo_projects") || "[]");
-        if (!projects.length) {
+        try {
+          var projects = await listProjects();
+        } catch (e) {
+          showError("⚠️ Backend not available. Please start the server.");
+          list.innerHTML =
+            '<div class="empty">Backend connection failed.</div>';
+          return;
+        }
+        if (!projects || !projects.length) {
           list.innerHTML =
             '<div class="empty">No projects yet. Create your first project above.</div>';
           return;
@@ -130,51 +206,66 @@
           .map(function (p) {
             return (
               '<div class="card"><h3><a href="/projects/' +
-              p.id +
+              p.project_id +
               '">' +
               p.name +
               '</a></h3><span class="status status-' +
-              p.status +
+              (p.status || "pending") +
               '">' +
-              p.status +
+              (p.status || "pending") +
               '</span><p style="color:#888;font-size:13px">Created: ' +
-              new Date(p.createdAt).toLocaleDateString() +
+              new Date(p.created_at).toLocaleDateString() +
               "</p></div>"
             );
           })
           .join("");
       }
+
       document
         .getElementById("createBtn")
-        .addEventListener("click", function () {
+        .addEventListener("click", async function () {
           var name = document.getElementById("projectNameInput").value.trim();
+          var industry = document.getElementById("industryInput").value.trim();
+          var description = document
+            .getElementById("descriptionInput")
+            .value.trim();
+          var products = document
+            .getElementById("productsInput")
+            .value.split(",")
+            .map(function (item) {
+              return item.trim();
+            })
+            .filter(Boolean);
+          var goals = document
+            .getElementById("goalsInput")
+            .value.split(",")
+            .map(function (item) {
+              return item.trim();
+            })
+            .filter(Boolean);
           if (!name) return alert("Please enter a project name");
-          var projects = JSON.parse(
-            localStorage.getItem("mo_projects") || "[]",
-          );
-          var project = {
-            id: Date.now().toString(36) + Math.random().toString(36).slice(2),
-            name: name,
-            status: "draft",
-            brief: {
+          if (!industry || !description || !products.length || !goals.length) {
+            return alert("Please fill in brief fields");
+          }
+          try {
+            await createProject(name, {
               project_name: name,
-              industry: "",
-              business_description: "",
-              target_audience: "",
-              products: "",
-              channels: "",
-              goals: "",
-              region: "",
-              budget: "",
-            },
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
-          };
-          projects.unshift(project);
-          localStorage.setItem("mo_projects", JSON.stringify(projects));
-          document.getElementById("projectNameInput").value = "";
-          loadProjects();
+              industry: industry,
+              business_description: description,
+              products: products,
+              goals: goals,
+            });
+            document.getElementById("projectNameInput").value = "";
+            document.getElementById("industryInput").value = "";
+            document.getElementById("descriptionInput").value = "";
+            document.getElementById("productsInput").value = "";
+            document.getElementById("goalsInput").value = "";
+            await loadProjects();
+          } catch (e) {
+            showError("Failed to create project: " + e.message);
+          }
         });
+
       loadProjects();
     </script>
   </body>

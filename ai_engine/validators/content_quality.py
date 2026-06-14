@@ -43,9 +43,12 @@ class ContentQualityValidator:
         self._check(data, "", issues)
 
         score = self._calculate_score(issues)
+        passed = len([i for i in issues if i.severity in (ValidationSeverity.ERROR, ValidationSeverity.CRITICAL)]) == 0
+        if score < 50:
+            passed = False
         return ValidationResult(
             validator_name="content_quality",
-            passed=len([i for i in issues if i.severity in (ValidationSeverity.ERROR, ValidationSeverity.CRITICAL)]) == 0,
+            passed=passed,
             score=score,
             issues=issues,
         )
@@ -142,7 +145,8 @@ class ContentQualityValidator:
         errors = sum(1 for i in issues if i.severity == ValidationSeverity.ERROR)
         warnings = sum(1 for i in issues if i.severity == ValidationSeverity.WARNING)
         score = 100.0 - (errors * 20) - (warnings * 10)
-        return max(0.0, score)
+        score = max(0.0, score)
+        return score
 
 
 def validate_content_quality(data: Any) -> ValidationResult:

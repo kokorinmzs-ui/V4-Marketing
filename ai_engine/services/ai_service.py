@@ -27,10 +27,11 @@ class AIServiceConfig:
 
     primary_provider: str = field(default_factory=lambda: os.getenv("PRIMARY_LLM_PROVIDER", "deepseek"))
     fallback_provider: str = field(default_factory=lambda: os.getenv("FALLBACK_LLM_PROVIDER", "openai"))
-    deepseek_api_key: str = ""
-    deepseek_model: str = "deepseek-chat"
-    openai_api_key: str = ""
-    openai_model: str = "gpt-4o"
+    deepseek_api_key: str = field(default_factory=lambda: os.getenv("DEEPSEEK_API_KEY", ""))
+    deepseek_model: str = field(default_factory=lambda: os.getenv("DEEPSEEK_MODEL", "deepseek-chat"))
+    deepseek_base_url: str = field(default_factory=lambda: os.getenv("DEEPSEEK_BASE_URL", ""))
+    openai_api_key: str = field(default_factory=lambda: os.getenv("OPENAI_API_KEY", ""))
+    openai_model: str = field(default_factory=lambda: os.getenv("OPENAI_MODEL", "gpt-4o"))
     timeout_seconds: float = 120.0
     max_retries: int = 3
     retry_delays: tuple[float, ...] = (1.0, 5.0, 15.0)
@@ -74,6 +75,7 @@ class AIService:
         deepseek_cfg = ProviderConfig(
             api_key=self.config.deepseek_api_key,
             model=self.config.deepseek_model,
+            base_url=self.config.deepseek_base_url,
             timeout_seconds=self.config.timeout_seconds,
             max_retries=self.config.max_retries,
             retry_delays=self.config.retry_delays,

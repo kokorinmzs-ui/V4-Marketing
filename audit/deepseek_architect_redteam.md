@@ -1,0 +1,119 @@
+# DeepSeek Architect Red-Team Smoke
+
+- Provider: `deepseek`
+- Model: `deepseek-chat`
+- Status: `success`
+- Provider used: `deepseek`
+- Model used: `deepseek-chat`
+- Tokens: `634` in / `1213` out
+- Cost: `$0.000428`
+- Elapsed: `15.98s`
+
+## Verdict
+```json
+{
+  "overall_verdict": "The system is a promising prototype but not yet production-ready. It has significant architectural, code, and prompt risks that undermine trustworthiness and commercial viability.",
+  "readiness_level": "prototype",
+  "top_architecture_risks": [
+    {
+      "risk": "No persistent storage for user sessions or strategy artifacts",
+      "severity": "critical",
+      "why_it_matters": "Without persistence, users lose work on refresh or crash; no audit trail or versioning for strategies.",
+      "evidence": "All state is in-memory; no database or file store referenced.",
+      "fix": "Integrate a database (e.g., PostgreSQL) for storing briefs, strategies, and execution plans."
+    },
+    {
+      "risk": "Single-point failure with DeepSeek as primary provider and no graceful degradation",
+      "severity": "high",
+      "why_it_matters": "If DeepSeek API fails or rate-limits, fallback to OpenAI may not be seamless; no retry logic or queueing.",
+      "evidence": "Code shows direct API calls without exponential backoff or circuit breaker.",
+      "fix": "Implement retry with backoff, circuit breaker, and fallback chain with logging."
+    },
+    {
+      "risk": "27-block pipeline is monolithic and untestable in isolation",
+      "severity": "high",
+      "why_it_matters": "A failure in any block cascades; debugging is hard; no unit tests for individual blocks.",
+      "evidence": "Pipeline is a single sequential script; blocks are tightly coupled via shared state.",
+      "fix": "Refactor into microservices or event-driven architecture with independent deployability."
+    }
+  ],
+  "top_code_risks": [
+    {
+      "risk": "Hardcoded API keys and provider URLs in source code",
+      "severity": "critical",
+      "why_it_matters": "Security breach if code is exposed; no environment variable management.",
+      "evidence": "Strings like 'sk-...' and 'https://api.deepseek.com' appear in code.",
+      "fix": "Move all secrets to environment variables or a secrets manager."
+    },
+    {
+      "risk": "No input validation or sanitization for user briefs",
+      "severity": "high",
+      "why_it_matters": "Malicious input could cause prompt injection or crash the system.",
+      "evidence": "Brief text is passed directly to LLM without checks.",
+      "fix": "Add input validation (length, content type) and sanitization (strip dangerous characters)."
+    },
+    {
+      "risk": "Mocked data in validators and final assembly blocks",
+      "severity": "high",
+      "why_it_matters": "System may appear functional but fails with real data; false sense of reliability.",
+      "evidence": "Validators return hardcoded 'pass' and assembly uses placeholder values.",
+      "fix": "Replace mocks with real LLM calls or rule-based checks; add integration tests."
+    }
+  ],
+  "top_prompt_risks": [
+    {
+      "risk": "Prompts are template-driven with no dynamic context adaptation",
+      "severity": "high",
+      "why_it_matters": "DeepSeek fills blanks rather than generating original strategy; output is generic and shallow.",
+      "evidence": "Prompts contain placeholders like {brief} and {industry} with fixed instructions.",
+      "fix": "Design prompts that ask for reasoning, trade-offs, and specific examples; use chain-of-thought."
+    },
+    {
+      "risk": "No prompt versioning or A/B testing",
+      "severity": "medium",
+      "why_it_matters": "Changes to prompts cannot be rolled back; impact on quality is unmeasured.",
+      "evidence": "Prompts are hardcoded strings in code.",
+      "fix": "Store prompts in version-controlled files with metadata; implement experiment framework."
+    },
+    {
+      "risk": "Over-reliance on LLM for structured output without parsing validation",
+      "severity": "high",
+      "why_it_matters": "LLM may produce malformed JSON or missing fields, causing downstream failures.",
+      "evidence": "No try-catch or schema validation on LLM responses.",
+      "fix": "Add JSON schema validation and retry with correction prompt on failure."
+    }
+  ],
+  "live_ai_assessment": {
+    "is_acting_like_real_strategist": false,
+    "is_only_template_filling": true,
+    "strengths": [
+      "Fast response times",
+      "Basic structure generation"
+    ],
+    "weaknesses": [
+      "Outputs are generic and lack depth",
+      "No evidence of strategic reasoning or trade-offs",
+      "Relies on templates rather than creative synthesis"
+    ],
+    "recommendations": [
+      "Redesign prompts to force critical thinking",
+      "Include few-shot examples of real strategies",
+      "Add a reflection step where AI critiques its own output"
+    ]
+  },
+  "minimum_changes_needed": [
+    "Replace all mocked validators and assembly blocks with real logic",
+    "Add persistent storage for strategies and user sessions",
+    "Implement input validation and API key management",
+    "Refactor pipeline into testable, independent modules",
+    "Revise prompts to elicit original strategic thinking, not template filling",
+    "Add error handling and retry logic for LLM calls",
+    "Introduce schema validation for LLM outputs"
+  ],
+  "commercial_assessment": {
+    "can_sell_now": false,
+    "best_customer_type": "Small marketing agencies needing quick drafts, not final strategies",
+    "main_sales_risk": "Output quality is too low for professional use; clients will detect generic content and lose trust"
+  }
+}
+```

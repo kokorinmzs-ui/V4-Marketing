@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 import json
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 from ai_engine.blocks.definitions import register_blocks_01_10, register_blocks_11_20, register_blocks_21_27
+from ai_engine.prompts.registry import get_master_system_prompt, get_repair_prompt
 from ai_engine.exporters.html_dashboard_renderer import render_dashboard
 from ai_engine.exporters.package_builder import PackageBuilder
 from ai_engine.exporters.zip_exporter import ZipExporter
@@ -15,16 +17,18 @@ from ai_engine.pipeline.block_executor import BlockExecutor
 from ai_engine.pipeline.block_registry import BlockRegistry
 from ai_engine.pipeline.final_data_assembler import FinalDataAssembler
 from ai_engine.planner.execution_planner import ExecutionPlanner
-from ai_engine.prompts.registry import get_repair_prompt
+from ai_engine.services.ai_service import AIService, AIServiceConfig, AIServiceResponse
 from ai_engine.providers.base import LLMUsage
-from ai_engine.services.ai_service import AIServiceResponse
 from backend.models.project import ProjectRecord
 from backend.services.project_service import ProjectService
 
 
 class GenerationService:
-    def __init__(self, project_service: ProjectService):
+    def __init__(self, project_service: ProjectService, ai_service: AIService | None = None):
         self.project_service = project_service
+        self.ai_service = ai_service or AIService(AIServiceConfig())
+        self._llm_mode = self._resolve_llm_mode()
+        self._strict_assembly = self._resolve_strict_assembly()
 
     def generate(self, project_id: str) -> dict[str, Any]:
         project = self.project_service.get_project(project_id)
@@ -32,10 +36,11 @@ class GenerationService:
 
         try:
             block_results = self._run_blocks(project)
+            llm_summary = self._summarize_llm_usage(block_results)
             assembler = FinalDataAssembler()
             for block_id, result in block_results.items():
                 assembler.add_block(block_id, result.status == "passed", result.data)
-            assembly = assembler.assemble()
+            assembly = assembler.assemble(strict=self._strict_assembly)
             if not assembly.success or not assembly.final_data:
                 raise RuntimeError("; ".join(assembly.errors) or "FinalData assembly failed")
 
@@ -69,6 +74,7 @@ class GenerationService:
                 "status": "completed",
                 "artifacts_dir": str(artifacts_dir),
                 "files": list(files.keys()),
+                "llm_summary": llm_summary,
             }
         except Exception as exc:
             self.project_service.set_status(project_id, "failed", 100, last_error=str(exc))
@@ -88,20 +94,80 @@ class GenerationService:
                 self._make_generate_func(block_id, payloads),
                 get_repair_prompt(),
                 max_repair_attempts=1,
+                system_prompt_prefix=get_master_system_prompt(),
             ).execute(block_id)
         return results
 
-    @staticmethod
-    def _make_generate_func(block_id: str, payloads: dict[str, dict[str, Any]]):
+    def _summarize_llm_usage(self, block_results: dict[str, Any]) -> dict[str, Any]:
+        providers: list[str] = []
+        models: list[str] = []
+        total_input_tokens = 0
+        total_output_tokens = 0
+        total_cost = 0.0
+
+        for result in block_results.values():
+            provider_used = getattr(result, "provider_used", "") or ""
+            model_used = getattr(result, "model_used", "") or ""
+            if provider_used and provider_used not in providers:
+                providers.append(provider_used)
+            if model_used and model_used not in models:
+                models.append(model_used)
+
+            usage = getattr(result, "usage", None)
+            if usage is not None:
+                total_input_tokens += getattr(usage, "input_tokens", 0) or 0
+                total_output_tokens += getattr(usage, "output_tokens", 0) or 0
+                total_cost += getattr(usage, "cost", 0.0) or 0.0
+
+        return {
+            "mode": self._llm_mode,
+            "live_enabled": self._use_live_llm(),
+            "providers": providers,
+            "models": models,
+            "input_tokens": total_input_tokens,
+            "output_tokens": total_output_tokens,
+            "cost": round(total_cost, 6),
+        }
+
+    def _make_generate_func(self, block_id: str, payloads: dict[str, dict[str, Any]]):
         def fn(**_kwargs):
+            if self._use_live_llm():
+                response = self.ai_service.generate(
+                    system_prompt=_kwargs.get("system_prompt", ""),
+                    user_prompt=_kwargs.get("user_prompt", ""),
+                    json_schema=_kwargs.get("json_schema"),
+                )
+                return response
             data = payloads.get(block_id, {"status": "ok"})
             return AIServiceResponse(
                 status="success",
                 data=data,
                 usage=LLMUsage(model="mock", input_tokens=100, output_tokens=50, cost=0.001),
+                provider_used="mock",
+                model_used="mock",
             )
 
         return fn
+
+    def _use_live_llm(self) -> bool:
+        if self._llm_mode == "live":
+            return True
+        if self._llm_mode == "deterministic":
+            return False
+        config = self.ai_service.config
+        return bool(config.deepseek_api_key or config.openai_api_key)
+
+    @staticmethod
+    def _resolve_llm_mode() -> str:
+        mode = (os.getenv("PIPELINE_LLM_MODE") or "auto").strip().lower()
+        if mode in {"live", "deterministic", "auto"}:
+            return mode
+        return "auto"
+
+    @staticmethod
+    def _resolve_strict_assembly() -> bool:
+        value = (os.getenv("PIPELINE_STRICT_ASSEMBLY") or "true").strip().lower()
+        return value not in {"0", "false", "no", "off", "soft"}
 
     def _build_block_payloads(self, project: ProjectRecord) -> dict[str, dict[str, Any]]:
         brief = project.brief
@@ -482,4 +548,3 @@ class GenerationService:
                 "quality_score": 95.0,
             },
         }
-
