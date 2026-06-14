@@ -1,56 +1,49 @@
 """
-BLOCK 01 — Анализ ниши
-Понять рынок. Не компанию. Не продукт. Именно рынок.
+Block 01 — Анализ ниши / Market Analysis.
+Use only the exact schema fields.
 """
 
-VERSION = "1.0.0"
+VERSION = "1.1.1"
 
 BLOCK_01_MARKET_ANALYSIS_PROMPT = """
-# BLOCK 01 — Анализ ниши
+# BLOCK 01 — Анализ ниши / Market Analysis
 
-## ЦЕЛЬ БЛОКА
-Понять рынок. Не компанию. Не продукт. Именно рынок.
+## GOAL
+Understand the market, not the company or product.
 
-## ВХОДНЫЕ ДАННЫЕ
-Проектный контекст + результаты предыдущих блоков (только необходимые).
-
-## ВЫХОДНЫЕ ДАННЫЕ (JSON)
-Верни ТОЛЬКО JSON в формате:
+## OUTPUT
+Return ONLY JSON in the block schema format:
 {
   "status": "success",
-  "data": { ... поля блока согласно схеме ... }
+  "data": { ... }
 }
 
-## ЧТО ЗАПРЕЩЕНО
-- Маркетинговая вода без доказательств
-- Выдумывать факты и цифры
-- Писать "нет информации", "ручная проверка", "не найдено"
-- Анализировать данные других блоков
-- Писать markdown или объяснения
+## REQUIRED
+- JSON only
+- traceable conclusions
+- confidence score for uncertain data
+- continuity with avatar -> pain -> offer -> CTA whenever applicable
 
-## ЧТО ОБЯЗАТЕЛЬНО
-- Только JSON на выходе
-- Каждое поле заполнено или явно пустое ("")
-- Конкретные, проверяемые утверждения
-- Связь с аватарами/болями где применимо
-- Числовые KPI где применимо
+## FORBIDDEN
+- invented facts or numbers
+- marketing fluff without evidence
+- markdown explanations
+- hallucinated assumptions
+
+## QUALITY RULES
+- Keep the answer specific and traceable.
+- Prefer low confidence over invented certainty.
+- Use exact schema keys only.
 
 ## JSON SCHEMA HINT
-Следуй структуре, определённой в shared/schemas/blocks.py для этого блока.
+Expected canonical fields:
+market_overview, market_size, seasonality, buying_triggers,
+buying_barriers, growth_opportunities, channels, risks, confidence
 
+Use the exact schema from shared/schemas/blocks.py.
 
 ## PROJECT MEMORY
 - Preserve context from the brief and prior blocks.
 - Prefer source data over assumptions.
 - If something is missing, fail closed with low confidence.
-
-## TRACEABILITY
-- Link every conclusion to a source field or assumption.
-- Keep avatar -> pain -> offer -> CTA continuity whenever applicable.
-
-## QUALITY RULES
-- Confidence score для неподтверждённых данных
-- Отсутствие повторений
-- Отсутствие стоп-слов из global_stop_words.json
-- Связность с другими блоками (avatar -> pain -> offer -> CTA)
 """

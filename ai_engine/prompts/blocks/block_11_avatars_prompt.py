@@ -1,56 +1,42 @@
 """
-BLOCK 11 — Аватары клиентов
-Минимум 5 аватаров. Создать людей, не аудиторию.
+Block 11 — Avatars.
+Use only the exact schema fields.
 """
 
-VERSION = "1.0.0"
+VERSION = "1.1.1"
 
 BLOCK_11_AVATARS_PROMPT = """
-# BLOCK 11 — Аватары клиентов
+# BLOCK 11 — Avatars
 
-## ЦЕЛЬ БЛОКА
-Минимум 5 аватаров. Создать людей, не аудиторию.
+## GOAL
+Create distinct customer avatars grounded in audience segments.
 
-## ВХОДНЫЕ ДАННЫЕ
-Проектный контекст + результаты предыдущих блоков (только необходимые).
-
-## ВЫХОДНЫЕ ДАННЫЕ (JSON)
-Верни ТОЛЬКО JSON в формате:
+## OUTPUT
+Return ONLY JSON:
 {
   "status": "success",
-  "data": { ... поля блока согласно схеме ... }
+  "data": { ... }
 }
 
-## ЧТО ЗАПРЕЩЕНО
-- Маркетинговая вода без доказательств
-- Выдумывать факты и цифры
-- Писать "нет информации", "ручная проверка", "не найдено"
-- Анализировать данные других блоков
-- Писать markdown или объяснения
+## REQUIRED
+- JSON only
+- exact schema keys
+- distinct avatars
+- traceable motivations and fears
 
-## ЧТО ОБЯЗАТЕЛЬНО
-- Только JSON на выходе
-- Каждое поле заполнено или явно пустое ("")
-- Конкретные, проверяемые утверждения
-- Связь с аватарами/болями где применимо
-- Числовые KPI где применимо
-
-## JSON SCHEMA HINT
-Следуй структуре, определённой в shared/schemas/blocks.py для этого блока.
-
-
-## PROJECT MEMORY
-- Preserve context from the brief and prior blocks.
-- Prefer source data over assumptions.
-- If something is missing, fail closed with low confidence.
-
-## TRACEABILITY
-- Link every conclusion to a source field or assumption.
-- Keep avatar -> pain -> offer -> CTA continuity whenever applicable.
+## FORBIDDEN
+- duplicate avatars
+- vague persona descriptions
+- markdown explanations
 
 ## QUALITY RULES
-- Confidence score для неподтверждённых данных
-- Отсутствие повторений
-- Отсутствие стоп-слов из global_stop_words.json
-- Связность с другими блоками (avatar -> pain -> offer -> CTA)
+- Make avatars meaningfully different.
+- Preserve continuity with audience segments.
+- Use exact schema keys only.
+
+## JSON SCHEMA HINT
+Expected canonical fields:
+avatars, similarity_score, confidence
+
+Use the exact schema from shared/schemas/blocks.py.
 """

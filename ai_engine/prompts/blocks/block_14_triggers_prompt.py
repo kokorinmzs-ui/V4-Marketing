@@ -1,56 +1,40 @@
 """
-BLOCK 14 — Маркетинговые триггеры
-Минимум 10 триггеров на аватара.
+Block 14 — Triggers.
+Use only the exact schema fields.
 """
 
-VERSION = "1.0.0"
+VERSION = "1.1.1"
 
 BLOCK_14_TRIGGERS_PROMPT = """
-# BLOCK 14 — Маркетинговые триггеры
+# BLOCK 14 — Triggers
 
-## ЦЕЛЬ БЛОКА
-Минимум 10 триггеров на аватара.
+## GOAL
+Map pains to triggers that change the buying decision.
 
-## ВХОДНЫЕ ДАННЫЕ
-Проектный контекст + результаты предыдущих блоков (только необходимые).
-
-## ВЫХОДНЫЕ ДАННЫЕ (JSON)
-Верни ТОЛЬКО JSON в формате:
+## OUTPUT
+Return ONLY JSON:
 {
   "status": "success",
-  "data": { ... поля блока согласно схеме ... }
+  "data": { ... }
 }
 
-## ЧТО ЗАПРЕЩЕНО
-- Маркетинговая вода без доказательств
-- Выдумывать факты и цифры
-- Писать "нет информации", "ручная проверка", "не найдено"
-- Анализировать данные других блоков
-- Писать markdown или объяснения
+## REQUIRED
+- JSON only
+- exact schema keys
+- trigger text tied to pain and avatar
 
-## ЧТО ОБЯЗАТЕЛЬНО
-- Только JSON на выходе
-- Каждое поле заполнено или явно пустое ("")
-- Конкретные, проверяемые утверждения
-- Связь с аватарами/болями где применимо
-- Числовые KPI где применимо
-
-## JSON SCHEMA HINT
-Следуй структуре, определённой в shared/schemas/blocks.py для этого блока.
-
-
-## PROJECT MEMORY
-- Preserve context from the brief and prior blocks.
-- Prefer source data over assumptions.
-- If something is missing, fail closed with low confidence.
-
-## TRACEABILITY
-- Link every conclusion to a source field or assumption.
-- Keep avatar -> pain -> offer -> CTA continuity whenever applicable.
+## FORBIDDEN
+- generic trigger language
+- markdown explanations
+- unrelated actions
 
 ## QUALITY RULES
-- Confidence score для неподтверждённых данных
-- Отсутствие повторений
-- Отсутствие стоп-слов из global_stop_words.json
-- Связность с другими блоками (avatar -> pain -> offer -> CTA)
+- Every trigger must map to a pain and avatar.
+- Use exact schema keys only.
+
+## JSON SCHEMA HINT
+Expected canonical fields:
+triggers, confidence
+
+Use the exact schema from shared/schemas/blocks.py.
 """

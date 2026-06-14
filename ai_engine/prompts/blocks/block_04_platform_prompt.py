@@ -1,56 +1,42 @@
 """
-BLOCK 04 — Маркетинговая платформа
-Собрать основу бренда: позиционирование, УТП, RTB.
+Block 04 — Marketing Platform.
+Use only the exact schema fields.
 """
 
-VERSION = "1.0.0"
+VERSION = "1.1.1"
 
 BLOCK_04_PLATFORM_PROMPT = """
-# BLOCK 04 — Маркетинговая платформа
+# BLOCK 04 — Marketing Platform
 
-## ЦЕЛЬ БЛОКА
-Собрать основу бренда: позиционирование, УТП, RTB.
+## GOAL
+Build the brand foundation: positioning, USP, big idea, tone of voice, proof points.
 
-## ВХОДНЫЕ ДАННЫЕ
-Проектный контекст + результаты предыдущих блоков (только необходимые).
-
-## ВЫХОДНЫЕ ДАННЫЕ (JSON)
-Верни ТОЛЬКО JSON в формате:
+## OUTPUT
+Return ONLY JSON:
 {
   "status": "success",
-  "data": { ... поля блока согласно схеме ... }
+  "data": { ... }
 }
 
-## ЧТО ЗАПРЕЩЕНО
-- Маркетинговая вода без доказательств
-- Выдумывать факты и цифры
-- Писать "нет информации", "ручная проверка", "не найдено"
-- Анализировать данные других блоков
-- Писать markdown или объяснения
+## REQUIRED
+- JSON only
+- exact schema keys
+- traceable decisions
+- no made-up claims
 
-## ЧТО ОБЯЗАТЕЛЬНО
-- Только JSON на выходе
-- Каждое поле заполнено или явно пустое ("")
-- Конкретные, проверяемые утверждения
-- Связь с аватарами/болями где применимо
-- Числовые KPI где применимо
-
-## JSON SCHEMA HINT
-Следуй структуре, определённой в shared/schemas/blocks.py для этого блока.
-
-
-## PROJECT MEMORY
-- Preserve context from the brief and prior blocks.
-- Prefer source data over assumptions.
-- If something is missing, fail closed with low confidence.
-
-## TRACEABILITY
-- Link every conclusion to a source field or assumption.
-- Keep avatar -> pain -> offer -> CTA continuity whenever applicable.
+## FORBIDDEN
+- invented positioning or proof points
+- generic brand slogans
+- markdown explanations
 
 ## QUALITY RULES
-- Confidence score для неподтверждённых данных
-- Отсутствие повторений
-- Отсутствие стоп-слов из global_stop_words.json
-- Связность с другими блоками (avatar -> pain -> offer -> CTA)
+- Keep positioning specific and usable.
+- Make the USP traceable to source data.
+- Use exact schema keys only.
+
+## JSON SCHEMA HINT
+Expected canonical fields:
+positioning, usp, big_idea, tone_of_voice, proof_points, confidence
+
+Use the exact schema from shared/schemas/blocks.py.
 """

@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marketing OS v4 — Live Run</title>
+    <link rel="stylesheet" href="../../../css/styles.css" />
+    <script src="../../../js/api.js" defer></script>
+    <style>
+      .run-grid { display: grid; gap: var(--s4); grid-template-columns: 1.1fr 0.9fr; }
+      .timeline { display: grid; gap: var(--s2); }
+      .block-row {
+        display: grid;
+        grid-template-columns: 24px 1fr auto;
+        gap: var(--s3);
+        align-items: start;
+        padding: var(--s3);
+        border: 1px solid var(--border);
+        border-radius: var(--r-md);
+        background: var(--bg-layer);
+      }
+      .block-row.running { border-color: var(--blue); box-shadow: inset 0 0 0 1px var(--blue-soft); }
+      .block-row.passed { border-color: var(--green); }
+      .block-row.normalized { border-color: var(--accent-border); }
+      .block-row.failed { border-color: var(--red); }
+      .block-badge { width: 18px; height: 18px; border-radius: 999px; margin-top: 4px; background: var(--gray); }
+      .block-row.running .block-badge { background: var(--blue); }
+      .block-row.passed .block-badge { background: var(--green); }
+      .block-row.normalized .block-badge { background: var(--accent); }
+      .block-row.failed .block-badge { background: var(--red); }
+      .run-toolbar { display: flex; gap: var(--s2); flex-wrap: wrap; }
+      .kv-grid { display: grid; gap: var(--s3); grid-template-columns: repeat(5, minmax(0, 1fr)); margin-bottom: var(--s4); }
+      .kv { padding: var(--s4); border: 1px solid var(--border); border-radius: var(--r-md); background: var(--bg-layer); }
+      .kv strong { display: block; font-size: 24px; margin-bottom: var(--s1); }
+      .inspector { display: grid; gap: var(--s3); }
+      .inspector pre {
+        margin: 0;
+        padding: var(--s4);
+        border-radius: var(--r-md);
+        background: #08101c;
+        border: 1px solid var(--border);
+        overflow: auto;
+        white-space: pre-wrap;
+      }
+      @media (max-width: 1080px) { .run-grid, .kv-grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body data-mode="run">
+    <div class="app-shell">
+      <aside class="app-sidebar">
+        <div class="sidebar-logo">Marketing OS v4</div>
+        <ul class="sidebar-nav">
+          <li><a href="/" onclick="return smartNav('/', '../../page.html')">Главный экран</a></li>
+          <li><a href="/app/projects" onclick="return smartNav('/app/projects', '../page.html')">Мои проекты</a></li>
+          <li><a href="/app/brief/new" onclick="return smartNav('/app/brief/new', '../../brief/new/page.html')">Заполнить бриф</a></li>
+          <li><a href="/app/brief/upload" onclick="return smartNav('/app/brief/upload', '../../brief/upload/page.html')">Загрузить бриф</a></li>
+          <li><a href="/app/brief/template" onclick="return smartNav('/app/brief/template', '../../brief/template/page.html')">Скачать бриф</a></li>
+          <li><a class="active" href="/app/projects/demo/run" onclick="return smartNav('/app/projects/demo/run', 'run.html?projectId=demo')">Проработка</a></li>
+        </ul>
+        <div class="sidebar-status"><span class="dot"></span>Живая проработка</div>
+      </aside>
+      <main class="app-content">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">Живая проработка</div>
+            <h1 class="page-title">Проработка проекта</h1>
+            <p class="page-subtitle">Тут видно, как каждый блок появляется, завершает работу и складывается в готовый результат.</p>
+          </div>
+          <div class="run-toolbar">
+            <button class="btn btn-primary" id="startRunBtn" type="button">Запустить</button>
+            <button class="btn btn-secondary" id="replayBtn" type="button">Повтор</button>
+            <a class="btn btn-secondary" id="backLink" href="/app/projects/demo" onclick="return smartNav('/app/projects/demo', 'page.html?projectId=demo')">Назад к проекту</a>
+            <a class="btn btn-secondary" id="reviewLink" href="/app/projects/demo/review" onclick="return smartNav('/app/projects/demo/review', 'review/page.html?projectId=demo')">Проверка</a>
+          </div>
+        </div>
+
+        <div class="kv-grid">
+          <div class="kv"><strong id="kvProgress">0%</strong><span>Прогресс</span></div>
+          <div class="kv"><strong id="kvBlock">—</strong><span>Текущий блок</span></div>
+          <div class="kv"><strong id="kvDone">0</strong><span>Готово блоков</span></div>
+          <div class="kv"><strong id="kvCost">$0.000</strong><span>Стоимость</span></div>
+          <div class="kv"><strong id="kvTokens">0</strong><span>Токены</span></div>
+        </div>
+
+        <section class="run-grid">
+          <article class="card">
+            <div class="card-header">
+              <div>
+              <div class="card-title">Проработка по блокам</div>
+              <div class="card-subtitle">Каждый блок подсвечивается по мере готовности</div>
+              </div>
+              <span class="status-pill status-running" id="timerBadge">00:00</span>
+            </div>
+            <div id="pipeline" class="timeline"></div>
+          </article>
+
+          <article class="card inspector">
+            <div class="card-header">
+              <div>
+            <div class="card-title">Результат</div>
+            <div class="card-subtitle">Текущий текст и итог блока</div>
+              </div>
+            </div>
+            <div class="brief-actions">
+            <a class="btn btn-secondary" id="dashboardLink" href="#">Дашборд</a>
+            <a class="btn btn-secondary" id="zipLink" href="#">Скачать ZIP</a>
+            </div>
+            <pre id="outputPanel">Нажмите «Запустить», чтобы начать проработку.</pre>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const projectId = params.get("projectId") || (window.location.pathname.split("/app/projects/")[1] || "demo").split("/")[0] || "demo";
+      const mode = params.get("mode") || "auto";
+      const blocks = [
+        ["01_market_analysis", "Market analysis"],
+        ["02_business_diagnosis", "Business diagnosis"],
+        ["03_competitors", "Competitors"],
+        ["04_platform", "Platform"],
+        ["05_owner_portrait", "Owner portrait"],
+        ["06_product_system", "Product system"],
+        ["07_flagship", "Flagship"],
+        ["08_product_ladder", "Product ladder"],
+        ["09_lead_magnets", "Lead magnets"],
+        ["10_audience", "Audience"],
+        ["11_avatars", "Avatars"],
+        ["12_psychotypes", "Psychotypes"],
+        ["13_pains", "Pains"],
+        ["14_triggers", "Triggers"],
+        ["15_offers", "Offers"],
+        ["16_funnels", "Funnels"],
+        ["17_advertising", "Advertising"],
+        ["18_content_plan", "Content plan"],
+        ["19_reels", "Reels"],
+        ["20_blog_articles", "Blog articles"],
+        ["21_posts", "Posts"],
+        ["22_visual_briefs", "Visual briefs"],
+        ["23_sales_scripts", "Sales scripts"],
+        ["24_kpi", "KPI"],
+        ["25_first_7_days", "First 7 days"],
+        ["26_launch_plan", "Launch plan"],
+        ["27_quality_control", "Quality control"],
+      ];
+      const pipeline = document.getElementById("pipeline");
+      const state = new Map();
+      let timer = null;
+      let startAt = null;
+
+      document.getElementById("backLink").href = `/app/projects/${encodeURIComponent(projectId)}`;
+      document.getElementById("reviewLink").href = `/app/projects/${encodeURIComponent(projectId)}/review`;
+
+      function renderPipeline() {
+        pipeline.innerHTML = blocks.map(([id, title]) => {
+          const item = state.get(id) || { status: "pending", preview: "" };
+          return `
+            <div class="block-row ${item.status}">
+              <div class="block-badge"></div>
+              <div>
+                <strong>${id}</strong>
+                <div class="card-subtitle">${title}</div>
+                <div class="card-subtitle">${item.preview || "Waiting for run…"}</div>
+              </div>
+              <span class="status-pill status-${item.status}">${item.status}</span>
+            </div>`;
+        }).join("");
+      }
+
+      function setBlock(id, status, preview = "") {
+        state.set(id, { status, preview });
+        renderPipeline();
+      }
+
+      function tickTimer() {
+        if (!startAt) return;
+        const elapsed = Math.floor((Date.now() - startAt) / 1000);
+        const mm = String(Math.floor(elapsed / 60)).padStart(2, "0");
+        const ss = String(elapsed % 60).padStart(2, "0");
+        document.getElementById("timerBadge").textContent = `${mm}:${ss}`;
+      }
+
+      function openStream() {
+        const source = new EventSource(`/projects/${encodeURIComponent(projectId)}/run/stream?mode=${encodeURIComponent(mode)}`);
+        source.addEventListener("run_start", () => {
+          document.getElementById("outputPanel").textContent = "Run started.";
+        });
+        source.addEventListener("block_start", (event) => {
+          const payload = JSON.parse(event.data);
+          document.getElementById("kvBlock").textContent = payload.block_id || payload.block_name || "—";
+          setBlock(payload.block_id, "running", payload.preview || "Running…");
+        });
+        source.addEventListener("block_update", (event) => {
+          const payload = JSON.parse(event.data);
+          setBlock(payload.block_id, payload.status || "running", payload.preview || "");
+          const title = blocks.find(([id]) => id === payload.block_id)?.[1] || payload.block_id;
+          document.getElementById("outputPanel").textContent = `Готовим блок: ${title}\n${payload.preview || "Идёт проработка…"}`;
+        });
+        source.addEventListener("block_normalized", (event) => {
+          const payload = JSON.parse(event.data);
+          setBlock(payload.block_id, "normalized", payload.preview || "Normalized");
+        });
+        source.addEventListener("block_complete", (event) => {
+          const payload = JSON.parse(event.data);
+          setBlock(payload.block_id, payload.status || "passed", payload.preview || "Completed");
+          const done = Array.from(state.values()).filter((item) => item.status !== "pending" && item.status !== "running").length;
+          document.getElementById("kvDone").textContent = String(done);
+          document.getElementById("kvProgress").textContent = `${Math.round((done / blocks.length) * 100)}%`;
+        });
+        source.addEventListener("run_complete", (event) => {
+          const payload = JSON.parse(event.data);
+          const totalTokens = (payload.llm_summary?.input_tokens || 0) + (payload.llm_summary?.output_tokens || 0);
+          document.getElementById("kvCost").textContent = `$${Number(payload.llm_summary?.cost || 0).toFixed(3)}`;
+          document.getElementById("kvTokens").textContent = String(totalTokens);
+          document.getElementById("outputPanel").textContent = `Проработка завершена.\nГотово блоков: ${payload.block_results?.length || 0}\nМожно открыть проверку и скачать результат.`;
+          source.close();
+        });
+        source.addEventListener("run_failed", (event) => {
+          document.getElementById("outputPanel").textContent = event.data;
+          source.close();
+        });
+      }
+
+      document.getElementById("startRunBtn").addEventListener("click", async () => {
+        startAt = Date.now();
+        tickTimer();
+        clearInterval(timer);
+        timer = setInterval(tickTimer, 1000);
+        renderPipeline();
+        setTimeout(openStream, 50);
+      });
+
+      document.getElementById("replayBtn").addEventListener("click", () => {
+        window.location.href = `/app/projects/${encodeURIComponent(projectId)}/run?mode=replay`;
+      });
+
+      renderPipeline();
+      document.getElementById("outputPanel").textContent = `Проект: ${projectId}\nНажмите “Запустить”, чтобы начать проработку.`;
+      document.getElementById("dashboardLink").href = `/projects/${encodeURIComponent(projectId)}/download/dashboard.html`;
+      document.getElementById("zipLink").href = `/projects/${encodeURIComponent(projectId)}/download/client-package.zip`;
+    </script>
+  </body>
+</html>

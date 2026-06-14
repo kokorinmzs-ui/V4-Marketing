@@ -4,9 +4,12 @@ from __future__ import annotations
 
 import json
 import os
+import queue
+import threading
+import time
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable, Iterator
 
 from ai_engine.blocks.definitions import register_blocks_01_10, register_blocks_11_20, register_blocks_21_27
 from ai_engine.prompts.registry import get_master_system_prompt, get_repair_prompt
@@ -30,12 +33,25 @@ class GenerationService:
         self._llm_mode = self._resolve_llm_mode()
         self._strict_assembly = self._resolve_strict_assembly()
 
-    def generate(self, project_id: str) -> dict[str, Any]:
+    def generate(
+        self,
+        project_id: str,
+        *,
+        event_emitter: Callable[[dict[str, Any]], None] | None = None,
+        run_mode: str = "live",
+    ) -> dict[str, Any]:
         project = self.project_service.get_project(project_id)
         self.project_service.set_status(project_id, "running", 10)
+        self._emit_event(
+            event_emitter,
+            "run_start",
+            project_id=project_id,
+            run_mode=run_mode,
+            project_name=project.name,
+        )
 
         try:
-            block_results = self._run_blocks(project)
+            block_results = self._run_blocks(project, event_emitter=event_emitter, run_mode=run_mode)
             llm_summary = self._summarize_llm_usage(block_results)
             assembler = FinalDataAssembler()
             for block_id, result in block_results.items():
@@ -61,6 +77,10 @@ class GenerationService:
             files = PackageBuilder().build(evm)
             zip_bytes = ZipExporter().export(files)
             review = self._build_review_metadata(llm_summary, block_results)
+            block_results_payload = [
+                self._serialize_block_result(block_id, result)
+                for block_id, result in block_results.items()
+            ]
 
             artifacts_dir = self.project_service.artifacts_path(project_id)
             self.project_service.write_bundle(project_id, "brief.json", json.dumps(project.brief.model_dump(mode="json"), ensure_ascii=False, indent=2))
@@ -78,6 +98,7 @@ class GenerationService:
                         "llm_summary": llm_summary,
                         "review": review,
                         "artifacts": list(files.keys()),
+                        "block_results": block_results_payload,
                     },
                     ensure_ascii=False,
                     indent=2,
@@ -85,19 +106,42 @@ class GenerationService:
             )
 
             self.project_service.set_status(project_id, "review_required", 90)
+            self._emit_event(
+                event_emitter,
+                "run_complete",
+                project_id=project_id,
+                run_mode=run_mode,
+                status="review_required",
+                llm_summary=llm_summary,
+                review=review,
+                files=list(files.keys()),
+            )
             return {
                 "project_id": project_id,
                 "status": "review_required",
                 "artifacts_dir": str(artifacts_dir),
                 "files": list(files.keys()),
                 "llm_summary": llm_summary,
-                "review": review,
-            }
+            "review": review,
+        }
         except Exception as exc:
             self.project_service.set_status(project_id, "failed", 100, last_error=str(exc))
+            self._emit_event(
+                event_emitter,
+                "run_failed",
+                project_id=project_id,
+                run_mode=run_mode,
+                error=str(exc),
+            )
             raise
 
-    def _run_blocks(self, project: ProjectRecord):
+    def _run_blocks(
+        self,
+        project: ProjectRecord,
+        *,
+        event_emitter: Callable[[dict[str, Any]], None] | None = None,
+        run_mode: str = "live",
+    ):
         reg = BlockRegistry()
         register_blocks_01_10(reg)
         register_blocks_11_20(reg)
@@ -105,7 +149,19 @@ class GenerationService:
 
         payloads = self._build_block_payloads(project)
         results = {}
-        for block_id in reg.get_all_ids():
+        block_ids = reg.get_all_ids()
+        for index, block_id in enumerate(block_ids, start=1):
+            block_def = reg.get(block_id)
+            self._emit_event(
+                event_emitter,
+                "block_start",
+                project_id=project.project_id,
+                run_mode=run_mode,
+                block_id=block_id,
+                block_name=getattr(block_def, "block_name", block_id),
+                index=index,
+                total=len(block_ids),
+            )
             results[block_id] = BlockExecutor(
                 reg,
                 self._make_generate_func(block_id, payloads),
@@ -113,6 +169,47 @@ class GenerationService:
                 max_repair_attempts=1,
                 system_prompt_prefix=get_master_system_prompt(),
             ).execute(block_id)
+            result = results[block_id]
+            block_event_type = "block_complete"
+            if result.status == "failed":
+                block_event_type = "block_failed"
+            elif getattr(result, "repaired", False):
+                block_event_type = "block_normalized"
+            self._emit_event(
+                event_emitter,
+                "block_update",
+                project_id=project.project_id,
+                run_mode=run_mode,
+                block_id=block_id,
+                block_name=getattr(block_def, "block_name", block_id),
+                status=getattr(result, "status", "pending"),
+                preview=self._build_block_preview(getattr(result, "data", {}) or {}),
+                provider_used=getattr(result, "provider_used", ""),
+                model_used=getattr(result, "model_used", ""),
+                elapsed_seconds=round(float(getattr(result, "elapsed_seconds", 0.0) or 0.0), 3),
+                repaired=bool(getattr(result, "repaired", False)),
+                event_kind=block_event_type,
+            )
+            if result.status == "failed":
+                self._emit_event(
+                    event_emitter,
+                    "block_failed",
+                    project_id=project.project_id,
+                    run_mode=run_mode,
+                    block_id=block_id,
+                    block_name=getattr(block_def, "block_name", block_id),
+                    error=getattr(result, "error", "") or "Block failed",
+                )
+            elif getattr(result, "repaired", False):
+                self._emit_event(
+                    event_emitter,
+                    "block_normalized",
+                    project_id=project.project_id,
+                    run_mode=run_mode,
+                    block_id=block_id,
+                    block_name=getattr(block_def, "block_name", block_id),
+                    preview=self._build_block_preview(getattr(result, "data", {}) or {}),
+                )
         return results
 
     def _summarize_llm_usage(self, block_results: dict[str, Any]) -> dict[str, Any]:
@@ -217,6 +314,63 @@ class GenerationService:
                 "used_cost_usd": round(used_cost, 6),
                 "over_budget": over_budget,
             },
+        }
+
+    @staticmethod
+    def _build_block_preview(data: dict[str, Any]) -> str:
+        if not isinstance(data, dict) or not data:
+            return "No structured output"
+        for key in (
+            "market_overview",
+            "positioning",
+            "avatar_name",
+            "headline",
+            "hook",
+            "title",
+            "summary",
+            "result",
+        ):
+            value = data.get(key)
+            if isinstance(value, str) and value.strip():
+                return value.strip()
+        keys = ", ".join(list(data.keys())[:4])
+        return f"Fields: {keys}" if keys else "Structured output received"
+
+    def _serialize_block_result(self, block_id: str, result: Any) -> dict[str, Any]:
+        usage = getattr(result, "usage", None)
+        total_usage = getattr(result, "total_usage", None)
+        data = getattr(result, "data", {}) or {}
+        validation_results = getattr(result, "validation_results", []) or []
+        normalized_validations: list[dict[str, Any]] = []
+        for item in validation_results[:3]:
+            normalized_validations.append(
+                {
+                    "validator": getattr(item, "validator_name", ""),
+                    "passed": getattr(item, "passed", False),
+                    "issue_count": len(getattr(item, "issues", []) or []),
+                }
+            )
+        preview = self._build_block_preview(data)
+        return {
+            "block_id": block_id,
+            "block_name": getattr(result, "block_name", block_id),
+            "status": getattr(result, "status", "pending"),
+            "passed": bool(getattr(result, "passed", False)),
+            "repaired": bool(getattr(result, "repaired", False)),
+            "provider_used": getattr(result, "provider_used", ""),
+            "model_used": getattr(result, "model_used", ""),
+            "elapsed_seconds": round(float(getattr(result, "elapsed_seconds", 0.0) or 0.0), 3),
+            "input_tokens": int(getattr(usage, "input_tokens", 0) or 0),
+            "output_tokens": int(getattr(usage, "output_tokens", 0) or 0),
+            "cost": round(float(getattr(usage, "cost", 0.0) or 0.0), 6),
+            "total_tokens": int(
+                (getattr(total_usage, "input_tokens", 0) or 0)
+                + (getattr(total_usage, "output_tokens", 0) or 0)
+            ),
+            "total_cost": round(float(getattr(total_usage, "cost", 0.0) or 0.0), 6),
+            "preview": preview,
+            "output_keys": list(data.keys())[:10] if isinstance(data, dict) else [],
+            "validations": normalized_validations,
         }
 
     def _build_block_payloads(self, project: ProjectRecord) -> dict[str, dict[str, Any]]:
@@ -598,3 +752,216 @@ class GenerationService:
                 "quality_score": 95.0,
             },
         }
+
+    def stream_run(self, project_id: str, mode: str = "auto") -> Iterator[dict[str, Any]]:
+        report = self._load_generation_report(project_id)
+        normalized_mode = (mode or "auto").strip().lower()
+        if normalized_mode not in {"auto", "live", "replay", "mock"}:
+            normalized_mode = "auto"
+
+        if normalized_mode == "replay" or (normalized_mode == "auto" and report):
+            yield from self._iter_replay_events(project_id, report)
+            return
+
+        if normalized_mode == "mock":
+            yield from self._iter_mock_events(project_id, report)
+            return
+
+        yield from self._iter_live_events(project_id)
+
+    def _iter_live_events(self, project_id: str) -> Iterator[dict[str, Any]]:
+        event_queue: "queue.Queue[dict[str, Any] | object]" = queue.Queue()
+        sentinel = object()
+        error_box: dict[str, str] = {}
+
+        def emit(event: dict[str, Any]) -> None:
+            event_queue.put(event)
+
+        def worker() -> None:
+            try:
+                self.generate(project_id, event_emitter=emit, run_mode="live")
+            except Exception as exc:  # pragma: no cover - streamed to client
+                error_box["error"] = str(exc)
+                emit(
+                    {
+                        "event": "run_failed",
+                        "project_id": project_id,
+                        "run_mode": "live",
+                        "error": str(exc),
+                    }
+                )
+            finally:
+                event_queue.put(sentinel)
+
+        thread = threading.Thread(target=worker, daemon=True)
+        thread.start()
+
+        while True:
+            item = event_queue.get()
+            if item is sentinel:
+                break
+            yield item  # type: ignore[misc]
+            time.sleep(0.015)
+
+        if error_box.get("error"):
+            return
+
+    def _iter_replay_events(self, project_id: str, report: dict[str, Any] | None) -> Iterator[dict[str, Any]]:
+        report = report or {}
+        block_results = report.get("block_results", []) or []
+        yield {
+            "event": "run_start",
+            "project_id": project_id,
+            "run_mode": "replay",
+            "project_name": report.get("project_name", project_id),
+        }
+        for index, item in enumerate(block_results, start=1):
+            block_id = item.get("block_id", f"block_{index}")
+            block_name = item.get("block_name", block_id)
+            status = item.get("status", "pending")
+            preview = item.get("preview", "")
+            repaired = bool(item.get("repaired", False))
+            yield {
+                "event": "block_start",
+                "project_id": project_id,
+                "run_mode": "replay",
+                "block_id": block_id,
+                "block_name": block_name,
+                "index": index,
+                "total": len(block_results),
+            }
+            yield {
+                "event": "block_update",
+                "project_id": project_id,
+                "run_mode": "replay",
+                "block_id": block_id,
+                "block_name": block_name,
+                "status": status,
+                "preview": preview,
+                "provider_used": item.get("provider_used", ""),
+                "model_used": item.get("model_used", ""),
+                "elapsed_seconds": item.get("elapsed_seconds", 0.0),
+                "repaired": repaired,
+                "event_kind": "block_normalized" if repaired else ("block_failed" if status == "failed" else "block_complete"),
+            }
+            if repaired:
+                yield {
+                    "event": "block_normalized",
+                    "project_id": project_id,
+                    "run_mode": "replay",
+                    "block_id": block_id,
+                    "block_name": block_name,
+                    "preview": preview,
+                }
+            elif status == "failed":
+                yield {
+                    "event": "block_failed",
+                    "project_id": project_id,
+                    "run_mode": "replay",
+                    "block_id": block_id,
+                    "block_name": block_name,
+                    "error": item.get("error", "Block failed"),
+                }
+            time.sleep(0.03)
+
+        yield {
+            "event": "run_complete",
+            "project_id": project_id,
+            "run_mode": "replay",
+            "status": report.get("status", "review_required"),
+            "llm_summary": report.get("llm_summary", {}),
+            "review": report.get("review", {}),
+        }
+
+    def _iter_mock_events(self, project_id: str, report: dict[str, Any] | None) -> Iterator[dict[str, Any]]:
+        report = report or {}
+        block_results = report.get("block_results", []) or []
+        if not block_results:
+            registry = BlockRegistry()
+            register_blocks_01_10(registry)
+            register_blocks_11_20(registry)
+            register_blocks_21_27(registry)
+            block_results = [
+                {
+                    "block_id": block_id,
+                    "block_name": block_id.replace("_", " "),
+                    "status": "passed",
+                    "preview": f"Mock output for {block_id}",
+                    "provider_used": "mock",
+                    "model_used": "mock",
+                    "elapsed_seconds": 0.05,
+                    "repaired": False,
+                }
+                for block_id in registry.get_all_ids()
+            ]
+        yield {
+            "event": "run_start",
+            "project_id": project_id,
+            "run_mode": "mock",
+            "project_name": report.get("project_name", project_id),
+        }
+        for index, item in enumerate(block_results, start=1):
+            block_id = item.get("block_id", f"block_{index}")
+            block_name = item.get("block_name", block_id)
+            yield {
+                "event": "block_start",
+                "project_id": project_id,
+                "run_mode": "mock",
+                "block_id": block_id,
+                "block_name": block_name,
+                "index": index,
+                "total": len(block_results),
+            }
+            yield {
+                "event": "block_update",
+                "project_id": project_id,
+                "run_mode": "mock",
+                "block_id": block_id,
+                "block_name": block_name,
+                "status": item.get("status", "passed"),
+                "preview": item.get("preview", f"Mock output for {block_id}"),
+                "provider_used": "mock",
+                "model_used": "mock",
+                "elapsed_seconds": item.get("elapsed_seconds", 0.05),
+                "repaired": bool(item.get("repaired", False)),
+                "event_kind": "block_complete",
+            }
+            yield {
+                "event": "block_complete",
+                "project_id": project_id,
+                "run_mode": "mock",
+                "block_id": block_id,
+                "block_name": block_name,
+                "status": item.get("status", "passed"),
+                "preview": item.get("preview", f"Mock output for {block_id}"),
+            }
+            time.sleep(0.015)
+
+        yield {
+            "event": "run_complete",
+            "project_id": project_id,
+            "run_mode": "mock",
+            "status": report.get("status", "review_required"),
+            "llm_summary": report.get("llm_summary", {"mode": "mock", "providers": ["mock"], "models": ["mock"]}),
+            "review": report.get("review", {}),
+        }
+
+    def _load_generation_report(self, project_id: str) -> dict[str, Any] | None:
+        try:
+            raw = self.project_service.read_bundle_file(project_id, "generation_report.json")
+        except Exception:
+            return None
+        try:
+            return json.loads(raw.decode("utf-8"))
+        except Exception:
+            return None
+
+    @staticmethod
+    def _emit_event(
+        event_emitter: Callable[[dict[str, Any]], None] | None,
+        event_name: str,
+        **payload: Any,
+    ) -> None:
+        if not event_emitter:
+            return
+        event_emitter({"event": event_name, **payload})

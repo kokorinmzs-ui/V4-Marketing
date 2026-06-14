@@ -1,56 +1,42 @@
 """
-BLOCK 15 — Офферы
-Минимум 10 офферов на аватара (всего 50).
+Block 15 — Offers.
+Use only the exact schema fields.
 """
 
-VERSION = "1.0.0"
+VERSION = "1.1.1"
 
 BLOCK_15_OFFERS_PROMPT = """
-# BLOCK 15 — Офферы
+# BLOCK 15 — Offers
 
-## ЦЕЛЬ БЛОКА
-Минимум 10 офферов на аватара (всего 50).
+## GOAL
+Create offers that directly close a specific pain.
 
-## ВХОДНЫЕ ДАННЫЕ
-Проектный контекст + результаты предыдущих блоков (только необходимые).
-
-## ВЫХОДНЫЕ ДАННЫЕ (JSON)
-Верни ТОЛЬКО JSON в формате:
+## OUTPUT
+Return ONLY JSON:
 {
   "status": "success",
-  "data": { ... поля блока согласно схеме ... }
+  "data": { ... }
 }
 
-## ЧТО ЗАПРЕЩЕНО
-- Маркетинговая вода без доказательств
-- Выдумывать факты и цифры
-- Писать "нет информации", "ручная проверка", "не найдено"
-- Анализировать данные других блоков
-- Писать markdown или объяснения
+## REQUIRED
+- JSON only
+- exact schema keys
+- clear value proposition
+- linked pain, avatar, CTA
 
-## ЧТО ОБЯЗАТЕЛЬНО
-- Только JSON на выходе
-- Каждое поле заполнено или явно пустое ("")
-- Конкретные, проверяемые утверждения
-- Связь с аватарами/болями где применимо
-- Числовые KPI где применимо
-
-## JSON SCHEMA HINT
-Следуй структуре, определённой в shared/schemas/blocks.py для этого блока.
-
-
-## PROJECT MEMORY
-- Preserve context from the brief and prior blocks.
-- Prefer source data over assumptions.
-- If something is missing, fail closed with low confidence.
-
-## TRACEABILITY
-- Link every conclusion to a source field or assumption.
-- Keep avatar -> pain -> offer -> CTA continuity whenever applicable.
+## FORBIDDEN
+- vague offers
+- markdown explanations
+- offers without a pain connection
 
 ## QUALITY RULES
-- Confidence score для неподтверждённых данных
-- Отсутствие повторений
-- Отсутствие стоп-слов из global_stop_words.json
-- Связность с другими блоками (avatar -> pain -> offer -> CTA)
+- Every offer must close a specific pain.
+- Keep the CTA actionable and traceable.
+- Use exact schema keys only.
+
+## JSON SCHEMA HINT
+Expected canonical fields:
+offers, confidence
+
+Use the exact schema from shared/schemas/blocks.py.
 """

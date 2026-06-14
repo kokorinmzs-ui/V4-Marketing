@@ -1,0 +1,37 @@
+{
+  "mode": "mock",
+  "projects": {
+    "dental": {
+      "project_id": "proj_26c739c29259",
+      "artifacts": 6,
+      "dashboard_chars": 156710,
+      "zip_bytes": 19961,
+      "zip_files": 6,
+      "fd_keys": 34,
+      "missions": 56
+    },
+    "photo": {
+      "project_id": "proj_d57f87fa3c35",
+      "artifacts": 6,
+      "dashboard_chars": 155991,
+      "zip_bytes": 19907,
+      "zip_files": 6,
+      "fd_keys": 34,
+      "missions": 56
+    },
+    "b2b": {
+      "project_id": "proj_337ba0d63cee",
+      "artifacts": 6,
+      "dashboard_chars": 156498,
+      "zip_bytes": 19942,
+      "zip_files": 6,
+      "fd_keys": 34,
+      "missions": 56
+    }
+  },
+  "artifact_existence": true,
+  "dashboard_opens": true,
+  "zip_valid": true,
+  "review_gate": true,
+  "verdict": "PARTIAL - mock only, needs live AI for full PASS"
+}

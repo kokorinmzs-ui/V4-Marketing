@@ -3,270 +3,146 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projects — Marketing OS v4</title>
+    <title>Marketing OS v4 — Projects</title>
+    <link rel="stylesheet" href="../../css/styles.css" />
+    <script src="../../js/api.js" defer></script>
     <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        font-family: sans-serif;
-        background: #f5f7fa;
-        color: #1a1a2e;
-        min-width: 390px;
-        line-height: 1.5;
-      }
-      header {
-        background: #1a1a2e;
-        color: #fff;
-        padding: 16px;
-      }
-      header a {
-        color: #90caf9;
-        text-decoration: none;
-        font-size: 14px;
-      }
-      h1 {
-        font-size: 22px;
-        margin: 8px 0;
-      }
-      main {
-        max-width: 800px;
-        margin: 24px auto;
-        padding: 0 16px;
-      }
-      .card {
-        background: #fff;
-        border-radius: 12px;
-        padding: 20px;
-        margin-bottom: 12px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-      }
-      .card .status {
-        display: inline-block;
-        padding: 4px 10px;
-        border-radius: 6px;
-        font-size: 12px;
-        font-weight: 600;
-        margin-bottom: 8px;
-      }
-      .status-pending {
-        background: #e0e0e0;
-        color: #666;
-      }
-      .status-running {
-        background: #fff3e0;
-        color: #e65100;
-      }
-      .status-completed {
-        background: #e8f5e9;
-        color: #2e7d32;
-      }
-      .status-failed {
-        background: #ffebee;
-        color: #c62828;
-      }
-      .btn {
-        padding: 10px 20px;
-        border: none;
-        border-radius: 8px;
-        font-size: 14px;
-        cursor: pointer;
-        transition: 0.2s;
-      }
-      .btn-primary {
-        background: #2196f3;
-        color: #fff;
-      }
-      .btn-primary:hover {
-        background: #1565c0;
-      }
-      .empty {
-        text-align: center;
-        color: #999;
-        padding: 40px;
-      }
-      .create-section {
-        margin-bottom: 20px;
-        display: flex;
-        gap: 8px;
-      }
-      .create-section input {
-        flex: 1;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        font-size: 14px;
-      }
-      .brief-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 8px;
-        margin-bottom: 12px;
-      }
-      .brief-grid textarea,
-      .brief-grid input {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        font-size: 14px;
-        font-family: inherit;
-      }
-      .brief-grid textarea {
-        grid-column: 1 / -1;
-        min-height: 88px;
-        resize: vertical;
-      }
-      .section-title {
-        font-size: 15px;
-        font-weight: 700;
-        margin: 0 0 10px 0;
-        color: #333;
-      }
-      .error-msg {
-        color: #c62828;
-        font-size: 13px;
-        margin-top: 8px;
-        display: none;
-      }
+      .project-grid { display: grid; gap: var(--s4); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .project-list { display: grid; gap: var(--s3); }
+      .project-row { display: grid; gap: var(--s2); padding: var(--s4); background: var(--bg-layer); border: 1px solid var(--border); border-radius: var(--r-md); }
+      .project-row header { display: flex; justify-content: space-between; gap: var(--s3); align-items: center; }
+      .project-actions { display: flex; gap: var(--s2); flex-wrap: wrap; }
+      .input-row { display: grid; gap: var(--s2); grid-template-columns: 1fr auto; }
+      .input-row input { width: 100%; }
+      @media (max-width: 960px) { .project-grid, .input-row { grid-template-columns: 1fr; } }
     </style>
   </head>
-  <body>
-    <header>
-      <a href="/">← Home</a>
-      <h1>Projects</h1>
-    </header>
-    <main>
-      <!-- legacy proof: localStorage mo_projects <a href="/projects/ p.id -->
-      <div class="card">
-        <h2 class="section-title">Create Project</h2>
-        <div class="brief-grid">
-          <input
-            id="projectNameInput"
-            type="text"
-            placeholder="Enter project name..."
-          />
-          <input
-            id="industryInput"
-            type="text"
-            placeholder="Industry (e.g. photography_studio)"
-          />
-          <input
-            id="productsInput"
-            type="text"
-            placeholder="Products (comma separated)"
-          />
-          <input
-            id="goalsInput"
-            type="text"
-            placeholder="Goals (comma separated)"
-          />
-          <textarea
-            id="descriptionInput"
-            placeholder="Business description"
-          ></textarea>
+  <body data-mode="workspace">
+    <div class="app-shell">
+      <aside class="app-sidebar">
+        <div class="sidebar-logo">Marketing OS v4</div>
+        <ul class="sidebar-nav">
+          <li><a href="/" onclick="return smartNav('/', '../page.html')">Главный экран</a></li>
+          <li><a class="active" href="/app/projects" onclick="return smartNav('/app/projects', 'page.html')">Мои проекты</a></li>
+          <li><a href="/app/brief/new" onclick="return smartNav('/app/brief/new', '../brief/new/page.html')">Заполнить бриф</a></li>
+          <li><a href="/app/brief/upload" onclick="return smartNav('/app/brief/upload', '../brief/upload/page.html')">Загрузить бриф</a></li>
+          <li><a href="/app/brief/template" onclick="return smartNav('/app/brief/template', '../brief/template/page.html')">Скачать бриф</a></li>
+          <li><a href="/app/projects/demo/run" onclick="return smartNav('/app/projects/demo/run', '[id]/run.html?projectId=demo')">Проработка</a></li>
+        </ul>
+        <div class="sidebar-status"><span class="dot"></span>Рабочие проекты</div>
+      </aside>
+      <main class="app-content">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">Workspace</div>
+            <h1 class="page-title">Проекты</h1>
+            <p class="page-subtitle">Создавай проекты, открывай карточку проекта и переходи к проработке.</p>
+          </div>
+          <div class="pill-row">
+            <span class="status-pill status-completed">подключено</span>
+            <span class="status-pill status-pending">без лишнего шума</span>
+          </div>
         </div>
-        <div class="create-section">
-          <button id="createBtn" class="btn btn-primary">Create Project</button>
-        </div>
-      </div>
-      <div class="error-msg" id="errorMsg"></div>
-      <div id="projectsList"></div>
-    </main>
-    <script src="/js/api.js"></script>
+
+        <section class="project-grid">
+          <article class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Create Project</div>
+                <div class="card-subtitle">Введите название и создайте проект</div>
+              </div>
+            </div>
+            <div class="input-row">
+              <input id="projectNameInput" class="input" placeholder="Enter project name..." />
+              <button id="createBtn" class="btn btn-primary" type="button">Create Project</button>
+            </div>
+            <p class="card-subtitle" id="createStatus" style="margin-top: var(--s2);"></p>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Quick actions</div>
+                <div class="card-subtitle">Быстрые входы в рабочие страницы</div>
+              </div>
+            </div>
+            <div class="project-actions">
+              <a class="btn btn-secondary" href="/app/brief/new" onclick="return smartNav('/app/brief/new', '../brief/new/page.html')">Brief builder</a>
+              <a class="btn btn-secondary" href="/app/brief/upload" onclick="return smartNav('/app/brief/upload', '../brief/upload/page.html')">Upload brief</a>
+              <a class="btn btn-secondary" href="/app/brief/template" onclick="return smartNav('/app/brief/template', '../brief/template/page.html')">Template</a>
+              <a class="btn btn-primary" href="/app/projects/demo/run" onclick="return smartNav('/app/projects/demo/run', '[id]/run.html?projectId=demo')">Demo run</a>
+            </div>
+          </article>
+        </section>
+
+        <section class="card" style="margin-top: var(--s5);">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Projects list</div>
+              <div class="card-subtitle">Список ваших проектов и быстрые действия</div>
+            </div>
+          </div>
+          <div id="projectsList" class="project-list"></div>
+        </section>
+      </main>
+    </div>
+
     <script>
-      var errorEl = document.getElementById("errorMsg");
-
-      function showError(msg) {
-        errorEl.textContent = msg;
-        errorEl.style.display = "block";
-        setTimeout(function () {
-          errorEl.style.display = "none";
-        }, 5000);
-      }
-
-      async function loadProjects() {
-        var list = document.getElementById("projectsList");
+      async function renderProjects() {
+        const container = document.getElementById("projectsList");
+        container.innerHTML = '<div class="card-subtitle">Загружаем проекты…</div>';
         try {
-          var projects = await listProjects();
-        } catch (e) {
-          showError("⚠️ Backend not available. Please start the server.");
-          list.innerHTML =
-            '<div class="empty">Backend connection failed.</div>';
-          return;
+          const projects = await window.listProjects();
+          const items = Array.isArray(projects) ? projects : projects.items || [];
+          container.innerHTML = items.length
+            ? items.map((project) => `
+              <div class="project-row">
+                <header>
+                  <div>
+                    <strong>${project.name || project.project_name || project.project_id}</strong>
+                    <div class="card-subtitle">${project.project_id || ""}</div>
+                  </div>
+                  <span class="status-pill status-${(project.status || "draft").replace(/\s+/g, "_")}">${project.status || "черновик"}</span>
+                </header>
+                <div class="project-actions">
+                  <a class="btn btn-secondary" href="/app/projects/${encodeURIComponent(project.project_id || project.id || "demo")}" onclick="return smartNav('/app/projects/${encodeURIComponent(project.project_id || project.id || "demo")}', '[id]/page.html?projectId=${encodeURIComponent(project.project_id || project.id || "demo")}')">Open</a>
+                  <a class="btn btn-primary" href="/app/projects/${encodeURIComponent(project.project_id || project.id || "demo")}/run" onclick="return smartNav('/app/projects/${encodeURIComponent(project.project_id || project.id || "demo")}/run', '[id]/run.html?projectId=${encodeURIComponent(project.project_id || project.id || "demo")}')">Проработка</a>
+                </div>
+              </div>`).join("")
+            : '<div class="card-subtitle">Пока нет проектов. Создайте первый выше.</div>';
+        } catch (error) {
+          container.innerHTML = `
+            <div class="project-row">
+              <strong>Demo project</strong>
+              <div class="card-subtitle">Пока показываем демонстрационный проект.</div>
+              <div class="project-actions">
+                <a class="btn btn-secondary" href="/app/projects/demo" onclick="return smartNav('/app/projects/demo', '[id]/page.html?projectId=demo')">Open</a>
+                <a class="btn btn-primary" href="/app/projects/demo/run" onclick="return smartNav('/app/projects/demo/run', '[id]/run.html?projectId=demo')">Проработка</a>
+              </div>
+            </div>`;
         }
-        if (!projects || !projects.length) {
-          list.innerHTML =
-            '<div class="empty">No projects yet. Create your first project above.</div>';
-          return;
-        }
-        list.innerHTML = projects
-          .map(function (p) {
-            return (
-              '<div class="card"><h3><a href="/projects/' +
-              p.project_id +
-              '">' +
-              p.name +
-              '</a></h3><span class="status status-' +
-              (p.status || "pending") +
-              '">' +
-              (p.status || "pending") +
-              '</span><p style="color:#888;font-size:13px">Created: ' +
-              new Date(p.created_at).toLocaleDateString() +
-              "</p></div>"
-            );
-          })
-          .join("");
       }
 
-      document
-        .getElementById("createBtn")
-        .addEventListener("click", async function () {
-          var name = document.getElementById("projectNameInput").value.trim();
-          var industry = document.getElementById("industryInput").value.trim();
-          var description = document
-            .getElementById("descriptionInput")
-            .value.trim();
-          var products = document
-            .getElementById("productsInput")
-            .value.split(",")
-            .map(function (item) {
-              return item.trim();
-            })
-            .filter(Boolean);
-          var goals = document
-            .getElementById("goalsInput")
-            .value.split(",")
-            .map(function (item) {
-              return item.trim();
-            })
-            .filter(Boolean);
-          if (!name) return alert("Please enter a project name");
-          if (!industry || !description || !products.length || !goals.length) {
-            return alert("Please fill in brief fields");
-          }
-          try {
-            await createProject(name, {
-              project_name: name,
-              industry: industry,
-              business_description: description,
-              products: products,
-              goals: goals,
-            });
-            document.getElementById("projectNameInput").value = "";
-            document.getElementById("industryInput").value = "";
-            document.getElementById("descriptionInput").value = "";
-            document.getElementById("productsInput").value = "";
-            document.getElementById("goalsInput").value = "";
-            await loadProjects();
-          } catch (e) {
-            showError("Failed to create project: " + e.message);
-          }
-        });
+      document.getElementById("createBtn").addEventListener("click", async () => {
+        const input = document.getElementById("projectNameInput");
+        const status = document.getElementById("createStatus");
+        const name = input.value.trim();
+        if (!name) {
+          status.textContent = "Сначала введите название проекта.";
+          return;
+        }
+        status.textContent = "Создаём проект…";
+        try {
+          const project = await window.createProject(name);
+          status.textContent = `Проект создан: ${project.project_id || project.id || name}`;
+          input.value = "";
+          await renderProjects();
+        } catch (error) {
+          status.textContent = `Не удалось создать проект: ${error.message}`;
+        }
+      });
 
-      loadProjects();
+      renderProjects();
     </script>
   </body>
 </html>

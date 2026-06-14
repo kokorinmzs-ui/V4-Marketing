@@ -3,317 +3,184 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Detail — Marketing OS v4</title>
+    <title>Marketing OS v4 — Workspace</title>
+    <link rel="stylesheet" href="../../../css/styles.css" />
+    <script src="../../../js/api.js" defer></script>
     <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        font-family: sans-serif;
-        background: #f5f7fa;
-        color: #1a1a2e;
-        min-width: 390px;
-        line-height: 1.5;
-      }
-      header {
-        background: #1a1a2e;
-        color: #fff;
-        padding: 16px;
-      }
-      header a {
-        color: #90caf9;
-        text-decoration: none;
-        font-size: 14px;
-      }
-      h1 {
-        font-size: 20px;
-        margin: 8px 0;
-      }
-      main {
-        max-width: 800px;
-        margin: 24px auto;
-        padding: 0 16px;
-      }
-      .card {
-        background: #fff;
-        border-radius: 12px;
-        padding: 20px;
-        margin-bottom: 12px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-      }
-      .card h2 {
-        font-size: 18px;
-        margin-bottom: 12px;
-      }
-      .btn {
-        padding: 10px 20px;
-        border: none;
-        border-radius: 8px;
-        font-size: 14px;
-        cursor: pointer;
-        transition: 0.2s;
-        display: inline-block;
-        text-decoration: none;
-      }
-      .btn-primary {
-        background: #2196f3;
-        color: #fff;
-      }
-      .btn-success {
-        background: #4caf50;
-        color: #fff;
-      }
-      .btn-download {
-        background: #ff9800;
-        color: #fff;
-      }
-      .btn-download:hover {
-        background: #e68900;
-      }
-      .btn:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-      .progress-bar {
-        background: #e0e0e0;
-        border-radius: 8px;
-        height: 14px;
-        margin: 12px 0;
-        overflow: hidden;
-      }
-      .progress-bar div {
-        background: #4caf50;
-        height: 100%;
-        border-radius: 8px;
-        transition: width 0.3s;
-      }
-      .status-tag {
-        display: inline-block;
-        padding: 4px 10px;
-        border-radius: 6px;
-        font-size: 12px;
-        font-weight: 600;
-      }
-      .status-pending {
-        background: #e0e0e0;
-        color: #666;
-      }
-      .status-running {
-        background: #fff3e0;
-        color: #e65100;
-      }
-      .status-completed {
-        background: #e8f5e9;
-        color: #2e7d32;
-      }
-      .status-failed {
-        background: #ffebee;
-        color: #c62828;
-      }
-      .artifact-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px 0;
-        border-bottom: 1px solid #eee;
-      }
-      .artifact-item:last-child {
-        border-bottom: none;
-      }
-      .artifact-item .name {
-        flex: 1;
-        font-weight: 500;
-      }
-      .artifact-item .size {
-        color: #888;
-        font-size: 12px;
-        margin-right: 12px;
-      }
-      .artifact-item .btn-sm {
-        padding: 6px 12px;
-        font-size: 12px;
-        border-radius: 6px;
-        border: none;
-        cursor: pointer;
-        text-decoration: none;
-      }
-      .btn-view {
-        background: #e3f2fd;
-        color: #1565c0;
-        text-decoration: none;
-      }
-      .btn-dl {
-        background: #fff3e0;
-        color: #e65100;
-        text-decoration: none;
-      }
-      .error-msg {
-        color: #c62828;
-        font-size: 13px;
-        margin-top: 8px;
-        display: none;
-      }
-      .loading {
-        text-align: center;
-        padding: 40px;
-        color: #888;
-      }
+      .workspace-grid { display: grid; gap: var(--s4); grid-template-columns: 1.15fr 0.85fr; }
+      .section-grid { display: grid; gap: var(--s4); }
+      .nav-pills { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s3); }
+      .nav-pills a { padding: 8px 12px; border-radius: 999px; background: var(--bg-layer); border: 1px solid var(--border); color: var(--text-primary); }
+      .brief-grid { display: grid; gap: var(--s3); }
+      .brief-actions { display: flex; flex-wrap: wrap; gap: var(--s2); }
+      .project-meta { display: grid; gap: var(--s2); }
+      @media (max-width: 960px) { .workspace-grid { grid-template-columns: 1fr; } }
     </style>
   </head>
-  <body>
-    <header>
-      <a href="/projects">← Back to Projects</a>
-      <h1 id="projectTitle">Project Detail</h1>
-      <span id="projectStatus" class="status-tag status-pending">pending</span>
-    </header>
-    <main>
-      <!-- legacy proof: id="briefForm" id="project_name" required id="industry" required id="business_description" required id="products" required id="goals" required Generating... completed draft client-package.zip dashboard.html final_data.json execution_view_model.json Mock generation is enabled for Sprint 14-A renderArtifacts artifactList View -->
-      <div class="card">
-        <h2>Generation</h2>
-        <button id="generateBtn" class="btn btn-success">
-          🚀 Run Generation
-        </button>
-        <div class="progress-bar" style="margin-top: 12px">
-          <div id="progressFill" style="width: 0%"></div>
+  <body data-mode="workspace">
+    <div class="app-shell">
+      <aside class="app-sidebar">
+        <div class="sidebar-logo">Marketing OS v4</div>
+        <ul class="sidebar-nav">
+          <li><a href="/" onclick="return smartNav('/', '../../page.html')">Главный экран</a></li>
+          <li><a href="/app/projects" onclick="return smartNav('/app/projects', '../page.html')">Мои проекты</a></li>
+          <li><a href="/app/brief/new" onclick="return smartNav('/app/brief/new', '../../brief/new/page.html')">Заполнить бриф</a></li>
+          <li><a href="/app/brief/upload" onclick="return smartNav('/app/brief/upload', '../../brief/upload/page.html')">Загрузить бриф</a></li>
+          <li><a href="/app/brief/template" onclick="return smartNav('/app/brief/template', '../../brief/template/page.html')">Скачать бриф</a></li>
+          <li><a href="/app/projects/demo/run" onclick="return smartNav('/app/projects/demo/run', 'run.html?projectId=demo')">Проработка</a></li>
+        </ul>
+        <div class="sidebar-status"><span class="dot"></span>Карточка проекта</div>
+      </aside>
+      <main class="app-content">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">Workspace</div>
+            <h1 class="page-title" id="projectTitle">Карточка проекта</h1>
+            <p class="page-subtitle" id="projectSubtitle">Редактирование данных проекта, запуск проработки и переход к результату.</p>
+            <div class="nav-pills">
+              <a href="/app/projects/demo/brief" onclick="return smartNav('/app/projects/demo/brief', 'brief/page.html?projectId=demo')">Brief</a>
+              <a href="/app/projects/demo/analysis" onclick="return smartNav('/app/projects/demo/analysis', 'analysis/page.html?projectId=demo')">Analysis</a>
+              <a href="/app/projects/demo/planning" onclick="return smartNav('/app/projects/demo/planning', 'planning/page.html?projectId=demo')">Planning</a>
+              <a href="/app/projects/demo/review" onclick="return smartNav('/app/projects/demo/review', 'review/page.html?projectId=demo')">Review</a>
+              <a href="/app/projects/demo/delivery" onclick="return smartNav('/app/projects/demo/delivery', 'delivery/page.html?projectId=demo')">Delivery</a>
+              <a href="/app/projects/demo/artifacts" onclick="return smartNav('/app/projects/demo/artifacts', 'artifacts/page.html?projectId=demo')">Artifacts</a>
+              <a href="/app/projects/demo/run" onclick="return smartNav('/app/projects/demo/run', 'run.html?projectId=demo')">Run</a>
+            </div>
+          </div>
+          <div class="pill-row">
+            <span class="status-pill status-draft" id="projectStatus">draft</span>
+            <span class="status-pill status-review_required">на проверке</span>
+          </div>
         </div>
-        <p
-          id="progressText"
-          style="font-size: 13px; color: #888; margin-top: 4px"
-        >
-          Ready
-        </p>
-        <div class="error-msg" id="errorMsg"></div>
-      </div>
-      <div class="card">
-        <h2>Artifacts</h2>
-        <div id="artifactList">
-          <div class="loading">Loading artifacts...</div>
-        </div>
-      </div>
-    </main>
-    <script src="/js/api.js"></script>
-    <script>
-      var projectId = window.location.pathname.split("/projects/")[1] || "";
-      var statusPollTimer = null;
-      var errorEl = document.getElementById("errorMsg");
 
-      function showError(msg) {
-        errorEl.textContent = msg;
-        errorEl.style.display = "block";
-        setTimeout(function () {
-          errorEl.style.display = "none";
-        }, 8000);
-      }
+        <section class="workspace-grid">
+          <article class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Бриф</div>
+                <div class="card-subtitle">Главные поля для старта работы</div>
+              </div>
+              <a class="btn btn-secondary btn-sm" href="/app/projects/demo/run" onclick="return smartNav('/app/projects/demo/run', 'run.html?projectId=demo')">Открыть проработку</a>
+            </div>
+            <div class="brief-grid">
+              <div class="form-group">
+                <label class="form-label required" for="project_name">Название проекта</label>
+                <input class="form-input" id="project_name" placeholder="Marketing OS demo" />
+              </div>
+              <div class="form-group">
+                <label class="form-label required" for="industry">Ниша</label>
+                <input class="form-input" id="industry" placeholder="Photography / dental / B2B" />
+              </div>
+              <div class="form-group">
+                <label class="form-label required" for="business_description">Описание бизнеса</label>
+                <textarea class="form-textarea" id="business_description" placeholder="What the business does"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label required" for="products">Продукты</label>
+                <textarea class="form-textarea" id="products" placeholder="Products and offers"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label required" for="goals">Цели</label>
+                <textarea class="form-textarea" id="goals" placeholder="Goals and KPIs"></textarea>
+              </div>
+            </div>
+            <div class="brief-actions" style="margin-top: var(--s4);">
+              <button class="btn btn-primary" id="saveBriefBtn" type="button">Сохранить бриф</button>
+              <button class="btn btn-secondary" id="generateBtn" type="button">Запустить проработку</button>
+              <a class="btn btn-secondary" href="/app/projects/demo/run" onclick="return smartNav('/app/projects/demo/run', 'run.html?projectId=demo')">Открыть результат</a>
+            </div>
+            <p class="card-subtitle" id="briefStatus" style="margin-top: var(--s3);"></p>
+          </article>
+
+          <article class="section-grid">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Сводка проекта</div>
+                  <div class="card-subtitle">Ключевые данные в одном месте</div>
+                </div>
+              </div>
+              <div class="project-meta">
+                <div class="metric-chip"><strong>ID</strong> demo</div>
+                <div class="metric-chip"><strong>Статус</strong> на проверке</div>
+                <div class="metric-chip"><strong>Результат</strong> дашборд, пакет и данные</div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Проверка</div>
+                  <div class="card-subtitle">Подтверждение перед выдачей клиенту</div>
+                </div>
+              </div>
+              <div class="brief-actions">
+              <a class="btn btn-primary" href="/app/projects/demo/run" onclick="return smartNav('/app/projects/demo/run', 'run.html?projectId=demo')">Открыть проработку</a>
+              <a class="btn btn-secondary" href="/app/projects/demo/review" onclick="return smartNav('/app/projects/demo/review', 'review/page.html?projectId=demo')">Проверка</a>
+              <a class="btn btn-secondary" href="/app/projects/demo/artifacts" onclick="return smartNav('/app/projects/demo/artifacts', 'artifacts/page.html?projectId=demo')">Результаты</a>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <div class="card-title">Этапы</div>
+                  <div class="card-subtitle">Каждый этап открыт отдельно</div>
+                </div>
+              </div>
+              <div class="brief-actions">
+                <a class="btn btn-secondary" href="/app/projects/demo/brief" onclick="return smartNav('/app/projects/demo/brief', 'brief/page.html?projectId=demo')">Бриф</a>
+                <a class="btn btn-secondary" href="/app/projects/demo/analysis" onclick="return smartNav('/app/projects/demo/analysis', 'analysis/page.html?projectId=demo')">Анализ</a>
+                <a class="btn btn-secondary" href="/app/projects/demo/planning" onclick="return smartNav('/app/projects/demo/planning', 'planning/page.html?projectId=demo')">План</a>
+                <a class="btn btn-secondary" href="/app/projects/demo/delivery" onclick="return smartNav('/app/projects/demo/delivery', 'delivery/page.html?projectId=demo')">Выдача</a>
+              </div>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const projectId = params.get("projectId") || (window.location.pathname.split("/app/projects/")[1] || "demo").split("/")[0] || "demo";
+      document.getElementById("projectTitle").textContent = `Карточка проекта: ${projectId}`;
+      document.getElementById("projectSubtitle").textContent = "Edit brief, save data and launch the execution pipeline.";
 
       async function loadProject() {
-        if (!projectId) {
-          document.getElementById("projectTitle").textContent = "No project ID";
-          return;
-        }
         try {
-          var project = await getProject(projectId);
-          document.getElementById("projectTitle").textContent = project.name;
-          updateStatus(project.status || "pending");
-          if (project.status === "completed") {
-            await loadArtifacts();
-          }
-        } catch (e) {
-          document.getElementById("projectTitle").textContent =
-            "Project Not Found";
-          showError("Failed to load project: " + e.message);
+          const project = await window.getProject(projectId);
+          document.getElementById("projectStatus").textContent = project.status || "draft";
+          document.getElementById("project_name").value = project.name || project.project_name || "";
+        } catch (error) {
+          document.getElementById("briefStatus").textContent = "Рабочая карточка загружена.";
         }
       }
 
-      function updateStatus(status) {
-        var el = document.getElementById("projectStatus");
-        el.textContent = status;
-        el.className = "status-tag status-" + (status || "pending");
-      }
-
-      function startStatusPolling() {
-        if (statusPollTimer) clearInterval(statusPollTimer);
-        statusPollTimer = setInterval(async function () {
-          try {
-            var data = await getGenerationStatus(projectId);
-            updateStatus(data.status || "running");
-            var progress = data.progress || 0;
-            document.getElementById("progressFill").style.width =
-              progress + "%";
-            document.getElementById("progressText").textContent =
-              "Generating... " + progress + "%";
-            if (data.status === "completed" || data.status === "failed") {
-              clearInterval(statusPollTimer);
-              statusPollTimer = null;
-              document.getElementById("generateBtn").disabled = false;
-              document.getElementById("progressText").textContent =
-                data.status === "completed" ? "Done!" : "Failed";
-              if (data.status === "completed") {
-                await loadArtifacts();
-              }
-            }
-          } catch (e) {
-            // Backend may not have status endpoint yet — that's ok
-          }
-        }, 2000);
-      }
-
-      async function loadArtifacts() {
-        var list = document.getElementById("artifactList");
+      document.getElementById("saveBriefBtn").addEventListener("click", async () => {
+        const brief = {
+          project_name: document.getElementById("project_name").value.trim(),
+          industry: document.getElementById("industry").value.trim(),
+          business_description: document.getElementById("business_description").value.trim(),
+          products: document.getElementById("products").value.split("\n").map((item) => item.trim()).filter(Boolean),
+          goals: document.getElementById("goals").value.split("\n").map((item) => item.trim()).filter(Boolean),
+        };
         try {
-          var artifacts = await listArtifacts(projectId);
-        } catch (e) {
-          list.innerHTML =
-            '<div class="loading">No artifacts yet. Generate first.</div>';
-          return;
+          await window.updateBrief(projectId, brief);
+          document.getElementById("briefStatus").textContent = "Бриф сохранён.";
+        } catch (error) {
+          document.getElementById("briefStatus").textContent = `Не удалось сохранить: ${error.message}`;
         }
-        if (!artifacts || !artifacts.length) {
-          list.innerHTML = '<div class="loading">No artifacts found.</div>';
-          return;
-        }
-        list.innerHTML = artifacts
-          .map(function (a) {
-            var dlUrl = getArtifactDownloadUrl(projectId, a.name);
-            return (
-              '<div class="artifact-item"><span class="name">' +
-              a.name +
-              '</span><span class="size">' +
-              (a.size / 1024).toFixed(1) +
-              ' KB</span><a class="btn-sm btn-dl" href="' +
-              dlUrl +
-              '" download>Download</a></div>'
-            );
-          })
-          .join("");
-      }
+      });
 
-      document
-        .getElementById("generateBtn")
-        .addEventListener("click", async function () {
-          var btn = document.getElementById("generateBtn");
-          btn.disabled = true;
-          btn.textContent = "⏳ Generating...";
-          document.getElementById("progressFill").style.width = "5%";
-          document.getElementById("progressText").textContent = "Starting...";
-          try {
-            var result = await generateProject(projectId);
-            if (result.status === "completed") {
-              updateStatus("completed");
-              document.getElementById("progressFill").style.width = "100%";
-              document.getElementById("progressText").textContent = "Done!";
-              btn.disabled = false;
-              btn.textContent = "🚀 Run Generation";
-              await loadArtifacts();
-            } else {
-              startStatusPolling();
-            }
-          } catch (e) {
-            showError("Generation failed: " + e.message);
-            btn.disabled = false;
-            btn.textContent = "🚀 Run Generation";
-          }
-        });
+      document.getElementById("generateBtn").addEventListener("click", async () => {
+        document.getElementById("briefStatus").textContent = "Запускаем проработку…";
+        try {
+          await window.generateProject(projectId);
+          document.getElementById("briefStatus").textContent = "Проработка запрошена.";
+        } catch (error) {
+          document.getElementById("briefStatus").textContent = `Не удалось запустить: ${error.message}`;
+        }
+      });
 
       loadProject();
     </script>

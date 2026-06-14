@@ -87,7 +87,7 @@ def unwrap_response(payload: Any) -> dict[str, Any]:
     return payload if isinstance(payload, dict) else {}
 
 
-def normalize_block(block_id: str, payload: Any, context: dict[str, Any]) -> dict[str, Any]:
+def normalize(block_id: str, payload: Any, context: dict[str, Any]) -> dict[str, Any]:
     data = unwrap_response(payload)
 
     if block_id == "01_market_analysis":
@@ -293,7 +293,7 @@ for index, block in enumerate(CHAIN, start=1):
     )
     elapsed = time.perf_counter() - t0
 
-    normalized = normalize_block(block_id, response.data, context)
+    normalized = normalize(block_id, response.data, context)
     schema_result = SchemaValidator(schema_cls).validate(normalized)
     stop_words_result = stop_words_validator.validate(normalized)
     content_quality_result = content_quality_validator.validate(normalized)

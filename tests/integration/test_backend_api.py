@@ -59,7 +59,8 @@ def test_root_endpoint(client):
     http, _service = client
     response = http.get("/")
     assert response.status_code == 200
-    assert response.json()["service"] == "Marketing OS v4 Backend API"
+    assert "Marketing OS" in response.text
+    assert "text/html" in response.headers.get("content-type", "").lower()
 
 
 def test_create_and_get_project(client):

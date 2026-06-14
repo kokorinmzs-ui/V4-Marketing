@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marketing OS v4 — Загрузка брифа</title>
+    <link rel="stylesheet" href="../../../css/styles.css" />
+    <script src="../../../js/api.js" defer></script>
+  </head>
+  <body data-mode="workspace">
+    <div class="app-shell">
+      <aside class="app-sidebar">
+        <div class="sidebar-logo">Marketing OS v4</div>
+        <ul class="sidebar-nav">
+          <li><a href="/" onclick="return smartNav('/', '../../page.html')">Главный экран</a></li>
+          <li><a href="/app/projects" onclick="return smartNav('/app/projects', '../../projects/page.html')">Мои проекты</a></li>
+          <li><a href="/app/brief/new" onclick="return smartNav('/app/brief/new', '../new/page.html')">Заполнить бриф</a></li>
+          <li><a class="active" href="/app/brief/upload" onclick="return smartNav('/app/brief/upload', 'page.html')">Загрузить бриф</a></li>
+          <li><a href="/app/brief/template" onclick="return smartNav('/app/brief/template', '../template/page.html')">Скачать бриф</a></li>
+        </ul>
+        <div class="sidebar-status"><span class="dot"></span>Загрузка брифа</div>
+      </aside>
+      <main class="app-content">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">Бриф</div>
+            <h1 class="page-title">Загрузить бриф</h1>
+            <p class="page-subtitle">Добавьте заполненный клиентом документ и продолжайте работу.</p>
+          </div>
+        </div>
+        <section class="card">
+          <div class="card-title">Зона загрузки</div>
+          <p class="card-subtitle">Поддерживается HTML, JSON и текстовый бриф.</p>
+          <input class="form-input" type="file" />
+          <div class="brief-actions" style="margin-top: var(--s4);">
+            <button class="btn btn-primary" type="button">Загрузить бриф</button>
+            <a class="btn btn-secondary" href="/app/projects" onclick="return smartNav('/app/projects', '../../projects/page.html')">Открыть проекты</a>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

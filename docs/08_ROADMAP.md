@@ -1,6 +1,6 @@
 ﻿# 08 — Roadmap (План реализации)
 
-Current status: Sprint 0–15 completed, Sprint 16 pending.
+Current status: Sprint 0–23 completed, Sprint 23.1 blocked on live DeepSeek credentials.
 
 ## План спринтов
 
@@ -11,7 +11,7 @@ Current status: Sprint 0–15 completed, Sprint 16 pending.
 | **Sprint 2**  | Shared Schemas & Contracts   | Pydantic-модели, нет `dict[str, Any]`, тесты                   |
 | **Sprint 3**  | Validator Engine             | Валидаторы: schema, stop words, repetition, KPI, actionability |
 | **Sprint 4**  | Prompt Library               | Master System + 27 block + repair + execution промптов         |
-| **Sprint 5**  | AI Provider Layer            | AIService, DeepSeek, OpenAI, retry, JSON parsing               |
+| **Sprint 5**  | AI Provider Layer            | AIService, DeepSeek, retry, JSON parsing                       |
 | **Sprint 6**  | Block Engine Base            | BlockExecutor, Registry, DependencyGraph, RepairLoop           |
 | **Sprint 7**  | Blocks 01–10                 | 10 блоков: рынок, диагностика, конкуренты, платформа, ЦА       |
 | **Sprint 8**  | Blocks 11–20                 | 10 блоков: аватары, психотипы, боли, триггеры, офферы          |
@@ -25,6 +25,12 @@ Current status: Sprint 0–15 completed, Sprint 16 pending.
 | **Sprint 16** | Golden Brief Testing         | 10 эталонных брифов (разные ниши)                              |
 | **Sprint 17** | QA Hardening                 | Quality score ≥ 90                                             |
 | **Sprint 18** | Deployment                   | Docker Compose, одна команда для запуска                       |
+| **Sprint 19** | Frontend ↔ Backend Integration | REST API client, fetch-based UI                                |
+| **Sprint 20** | Human Review & Cost Governance | review_required gate, budget metadata                          |
+| **Sprint 21** | Production RC Audit          | architecture, security, release gating                         |
+| **Sprint 22** | Live AI Reliability Hardening | drift tracker, normalization telemetry                         |
+| **Sprint 23** | Prompt Contract Hardening     | exact field rules, no alias drift                              |
+| **Sprint 23.1** | Live Reliability Validation | blocked on `DEEPSEEK_API_KEY`                                 |
 
 ## Sprint 2 — Shared Schemas & Contracts
 

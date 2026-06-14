@@ -26,7 +26,10 @@ def get_review(project_id: str, project_service: ProjectService = Depends(get_pr
 
     report = json.loads(review_path.read_text(encoding="utf-8"))
     review = report.get("review", {"status": project.status})
-    return {"project_id": project_id, "review": review}
+    response = {"project_id": project_id, "review": review}
+    if "llm_summary" in report:
+        response["llm_summary"] = report["llm_summary"]
+    return response
 
 
 @router.post("/review/approve")

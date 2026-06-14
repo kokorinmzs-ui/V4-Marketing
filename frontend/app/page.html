@@ -3,78 +3,141 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Marketing OS v4</title>
+    <title>Marketing OS v4 — Entry</title>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script src="../js/api.js" defer></script>
     <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      body {
-        font-family: sans-serif;
-        background: #f5f7fa;
-        color: #1a1a2e;
-        min-width: 390px;
-        line-height: 1.5;
-      }
-      header {
-        background: #1a1a2e;
-        color: #fff;
-        padding: 24px 16px;
-        text-align: center;
-      }
-      header h1 {
-        font-size: 24px;
-      }
-      header p {
-        opacity: 0.8;
-        margin-top: 8px;
-      }
-      main {
-        max-width: 600px;
-        margin: 40px auto;
-        padding: 0 16px;
-      }
-      .card {
-        background: #fff;
-        border-radius: 12px;
-        padding: 24px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-        text-align: center;
-      }
-      .btn {
-        display: inline-block;
-        padding: 12px 24px;
-        border: none;
-        border-radius: 8px;
-        font-size: 15px;
-        cursor: pointer;
-        text-decoration: none;
-        transition: all 0.2s;
-      }
-      .btn-primary {
-        background: #2196f3;
-        color: #fff;
-      }
-      .btn-primary:hover {
-        background: #1565c0;
-      }
+      body { background: var(--bg-root); }
+      .hero-grid { display: grid; gap: var(--s5); grid-template-columns: 1.3fr 0.7fr; }
+      .hero-copy { display: grid; gap: var(--s4); }
+      .hero-title { font-size: 42px; line-height: 1; letter-spacing: -1px; }
+      .hero-title span { color: var(--accent); }
+      .action-grid { display: grid; gap: var(--s3); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .action-grid .card { min-height: 140px; display: grid; gap: var(--s3); align-content: start; }
+      .workflow { display: grid; gap: var(--s2); }
+      .workflow-row { display: grid; grid-template-columns: 42px 1fr; gap: var(--s3); align-items: start; padding: var(--s3); background: var(--bg-layer); border: 1px solid var(--border); border-radius: var(--r-md); }
+      .workflow-num { width: 34px; height: 34px; border-radius: 999px; display: grid; place-items: center; background: var(--accent-glow); color: var(--accent); font-weight: 700; }
+      .pill-row { display: flex; flex-wrap: wrap; gap: var(--s2); }
+      @media (max-width: 960px) { .hero-grid, .action-grid { grid-template-columns: 1fr; } }
     </style>
   </head>
-  <body>
-    <header>
-      <h1>Marketing OS v4</h1>
-      <p>AI-powered marketing system — generate your 30-day execution plan</p>
-    </header>
-    <main>
-      <div class="card">
-        <h2 style="margin-bottom: 16px">Welcome</h2>
-        <p style="color: #666; margin-bottom: 24px">
-          Create projects, fill briefs, generate strategies, and download ZIP
-          packages with all assets.
-        </p>
-        <a href="/projects" class="btn btn-primary">Перейти к проектам</a>
-      </div>
-    </main>
+  <body data-mode="entry">
+    <div class="app-shell">
+      <aside class="app-sidebar">
+        <div class="sidebar-logo">Marketing OS v4</div>
+        <ul class="sidebar-nav">
+          <li><a class="active" href="/" onclick="return smartNav('/', '../page.html')">Главный экран</a></li>
+          <li><a href="/app/projects" onclick="return smartNav('/app/projects', 'projects/page.html')">Мои проекты</a></li>
+          <li><a href="/app/brief/new" onclick="return smartNav('/app/brief/new', 'brief/new/page.html')">Заполнить бриф</a></li>
+          <li><a href="/app/brief/upload" onclick="return smartNav('/app/brief/upload', 'brief/upload/page.html')">Загрузить бриф</a></li>
+          <li><a href="/app/brief/template" onclick="return smartNav('/app/brief/template', 'brief/template/page.html')">Скачать бриф</a></li>
+          <li><a href="/app/projects/demo/run" onclick="return smartNav('/app/projects/demo/run', 'projects/[id]/run.html?projectId=demo')">Проработка</a></li>
+        </ul>
+        <div class="sidebar-status"><span class="dot"></span>Готово к работе</div>
+      </aside>
+      <main class="app-content">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">Operator Panel</div>
+            <h1 class="page-title">Главный экран оператора</h1>
+            <p class="page-subtitle">Одна точка входа в продукт. Отсюда открываются проекты, брифы и live-проработка.</p>
+          </div>
+          <div class="pill-row">
+            <span class="status-pill status-completed">готово</span>
+            <span class="status-pill status-running">единый вход</span>
+            <span class="status-pill status-pending">без лишних экранов</span>
+          </div>
+        </div>
+
+        <section class="hero-grid">
+          <article class="card hero-copy">
+            <div class="card-header">
+              <div>
+                <div class="card-subtitle">Workflow</div>
+                <div class="card-title">Brief → Analysis → Planning → Review → Delivery</div>
+              </div>
+              <span class="status-pill status-completed">ready</span>
+            </div>
+            <p>Главный экран показывает весь продукт как рабочую систему, а не как набор разрозненных страниц.</p>
+            <div class="btn-row">
+              <a class="btn btn-primary" href="/app/projects" onclick="return smartNav('/app/projects', 'projects/page.html')">Мои проекты</a>
+              <a class="btn btn-secondary" href="/app/brief/new" onclick="return smartNav('/app/brief/new', 'brief/new/page.html')">Заполнить бриф</a>
+              <a class="btn btn-secondary" href="/app/brief/upload" onclick="return smartNav('/app/brief/upload', 'brief/upload/page.html')">Загрузить бриф</a>
+              <a class="btn btn-secondary" href="/app/brief/template" onclick="return smartNav('/app/brief/template', 'brief/template/page.html')">Скачать бриф</a>
+              <a class="btn btn-primary" href="/app/projects/demo/run" onclick="return smartNav('/app/projects/demo/run', 'projects/[id]/run.html?projectId=demo')">Проработка</a>
+            </div>
+            <div class="pill-row">
+              <span class="metric-chip"><strong>27</strong> AI blocks</span>
+              <span class="metric-chip"><strong>30</strong> day plan</span>
+              <span class="metric-chip"><strong>ZIP</strong> пакет клиента</span>
+              <span class="metric-chip"><strong>775+</strong> проверок</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Что можно сделать</div>
+                <div class="card-subtitle">Четыре действия для старта работы</div>
+              </div>
+            </div>
+            <div class="workflow">
+            <div class="workflow-row"><div class="workflow-num">1</div><div><strong>Мои проекты</strong><div class="card-subtitle">Открыть готовые и рабочие проекты.</div></div></div>
+            <div class="workflow-row"><div class="workflow-num">2</div><div><strong>Загрузить бриф</strong><div class="card-subtitle">Добавить заполненный клиентом бриф.</div></div></div>
+            <div class="workflow-row"><div class="workflow-num">3</div><div><strong>Заполнить бриф</strong><div class="card-subtitle">Создать бриф с подсказками по блокам.</div></div></div>
+            <div class="workflow-row"><div class="workflow-num">4</div><div><strong>Проработка</strong><div class="card-subtitle">Запустить живую обработку проекта.</div></div></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="grid-2" style="margin-top: var(--s5);">
+          <article class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Куда ведут кнопки</div>
+                <div class="card-subtitle">Все действия теперь открывают реальные экраны</div>
+              </div>
+            </div>
+            <div class="action-grid">
+              <div class="card">
+                <div class="card-title">Projects</div>
+                <p>Список проектов и кнопка создания.</p>
+                <a class="btn btn-primary" href="/app/projects" onclick="return smartNav('/app/projects', 'projects/page.html')">Открыть</a>
+              </div>
+              <div class="card">
+                <div class="card-title">Brief builder</div>
+                <p>Чекбоксы всех маркетинговых блоков.</p>
+                <a class="btn btn-primary" href="/app/brief/new" onclick="return smartNav('/app/brief/new', 'brief/new/page.html')">Открыть</a>
+              </div>
+              <div class="card">
+                <div class="card-title">Brief upload</div>
+                <p>Загрузка готового брифа клиента.</p>
+                <a class="btn btn-primary" href="/app/brief/upload" onclick="return smartNav('/app/brief/upload', 'brief/upload/page.html')">Открыть</a>
+              </div>
+              <div class="card">
+                <div class="card-title">Проработка</div>
+                <p>Живой экран проработки с таймером и статусами.</p>
+                <a class="btn btn-primary" href="/app/projects/demo/run" onclick="return smartNav('/app/projects/demo/run', 'projects/[id]/run.html?projectId=demo')">Открыть</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Статус системы</div>
+                <div class="card-subtitle">Что сейчас реально готово</div>
+              </div>
+            </div>
+            <div class="workflow">
+              <div class="workflow-row"><div class="workflow-num">✓</div><div><strong>Проекты</strong><div class="card-subtitle">Рабочие карточки и управление проектом.</div></div></div>
+              <div class="workflow-row"><div class="workflow-num">✓</div><div><strong>Оформление</strong><div class="card-subtitle">Единый визуальный язык для всех экранов.</div></div></div>
+              <div class="workflow-row"><div class="workflow-num">✓</div><div><strong>Живая проработка</strong><div class="card-subtitle">Пошаговая обработка блоков.</div></div></div>
+              <div class="workflow-row"><div class="workflow-num">✓</div><div><strong>Проверка</strong><div class="card-subtitle">Подтверждение результата перед выдачей.</div></div></div>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
   </body>
 </html>

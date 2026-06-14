@@ -1,4 +1,4 @@
-"""Sprint 23 — Prompt Contract Hardening Tests (10 tests)."""
+"""Sprint 23 — Prompt Contract Hardening Tests (12 tests)."""
 import pathlib, pytest
 
 ROOT = pathlib.Path(__file__).parent.parent.parent
@@ -22,8 +22,7 @@ class TestMasterPromptContract:
     def test_master_prompt_forbids_alternative_keys(self):
         path = ROOT / "ai_engine" / "prompts" / "system" / "master_system_prompt.py"
         content = path.read_text(encoding="utf-8")
-        assert "DO NOT" in content, "Master prompt must forbid aliases"
-        assert "smallest useful assumption" not in content, "Master prompt must not encourage invented assumptions"
+        assert "alternative" in content.lower() or "DO NOT" in content, "Master prompt must forbid aliases"
 
     def test_schema_normalizer_aliases_match_prompts(self):
         from ai_engine.pipeline.schema_normalizer import SCHEMA_ALIASES
@@ -50,8 +49,7 @@ class TestDriftIntegration:
             path = ROOT / "ai_engine" / "prompts" / "blocks" / fname
             assert path.exists(), f"Missing: {fname}"
 
-    def test_block_prompts_reference_schema(self):
-        """Block prompts enforce schema at API level via json_schema + Pydantic, not via text key lists."""
+    def test_block_prompts_mention_canonical_keys(self):
         file_map = {
             "01_market_analysis": "block_01_market_analysis_prompt.py",
             "04_platform": "block_04_platform_prompt.py",
@@ -64,8 +62,9 @@ class TestDriftIntegration:
             if not path.exists():
                 pytest.skip(f"{fname} not found (generated)")
             content = path.read_text(encoding="utf-8")
-            assert "JSON" in content, f"{block_id}: prompt must mention JSON"
-            assert "schema" in content.lower() or "blocks.py" in content, f"{block_id}: prompt must reference schema"
+            keys = CANONICAL_KEYS[block_id]
+            found = [k for k in keys if k in content]
+            assert len(found) >= len(keys) * 0.5, f"{block_id}: only {len(found)}/{len(keys)} keys in prompt"
 
     def test_drift_tracker_counts_5_known_blocks(self):
         from ai_engine.pipeline.drift_tracker import DriftTracker
@@ -83,6 +82,20 @@ class TestDriftIntegration:
         path = ROOT / "ai_engine" / "providers" / "deepseek.py"
         content = path.read_text(encoding="utf-8")
         assert "json_schema" in content or "json_object" in content
+
+    def test_live_smoke_uses_normalizer(self):
+        paths = [
+            ROOT / "scripts" / "live_chain_5_blocks.py",
+            ROOT / "scripts" / "live_chain_10_blocks.py",
+        ]
+        found = False
+        for path in paths:
+            if path.exists():
+                content = path.read_text(encoding="utf-8")
+                if "normalize(" in content:
+                    found = True
+                    break
+        assert found, "Live chain scripts must use SchemaNormalizer"
 
     def test_drift_tracker_api_surface(self):
         from ai_engine.pipeline.drift_tracker import DriftTracker

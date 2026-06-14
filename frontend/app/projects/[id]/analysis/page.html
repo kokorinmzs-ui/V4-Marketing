@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marketing OS v4 — Анализ</title>
+    <link rel="stylesheet" href="../../../css/styles.css" />
+    <script src="../../../js/api.js" defer></script>
+  </head>
+  <body data-mode="workspace">
+    <div class="app-shell">
+      <aside class="app-sidebar">
+        <div class="sidebar-logo">Marketing OS v4</div>
+        <ul class="sidebar-nav">
+          <li><a href="/" onclick="return smartNav('/', '../../../page.html')">Главный экран</a></li>
+          <li><a href="/app/projects" onclick="return smartNav('/app/projects', '../../projects/page.html')">Мои проекты</a></li>
+          <li><a href="/app/projects/demo/brief" onclick="return smartNav('/app/projects/demo/brief', '../brief/page.html')">Бриф</a></li>
+          <li><a class="active" href="/app/projects/demo/analysis" onclick="return smartNav('/app/projects/demo/analysis', 'page.html')">Анализ</a></li>
+          <li><a href="/app/projects/demo/planning" onclick="return smartNav('/app/projects/demo/planning', '../planning/page.html')">Планирование</a></li>
+          <li><a href="/app/projects/demo/review" onclick="return smartNav('/app/projects/demo/review', '../review/page.html')">Проверка</a></li>
+          <li><a href="/app/projects/demo/delivery" onclick="return smartNav('/app/projects/demo/delivery', '../delivery/page.html')">Выдача</a></li>
+          <li><a href="/app/projects/demo/artifacts" onclick="return smartNav('/app/projects/demo/artifacts', '../artifacts/page.html')">Артефакты</a></li>
+        </ul>
+        <div class="sidebar-status"><span class="dot"></span>Анализ проекта</div>
+      </aside>
+      <main class="app-content">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">Блок</div>
+            <h1 class="page-title">Анализ рынка и аудитории</h1>
+            <p class="page-subtitle">Здесь показывается результат первой маркетинговой проработки.</p>
+          </div>
+        </div>
+        <section class="card">
+          <div class="card-title">Что готово</div>
+          <p class="card-subtitle">Рынок, сегменты, боли, триггеры и ключевые выводы по проекту.</p>
+          <div class="workflow">
+            <div class="workflow-row"><div class="workflow-num">1</div><div><strong>Рынок</strong><div class="card-subtitle">Понимание ниши и спроса.</div></div></div>
+            <div class="workflow-row"><div class="workflow-num">2</div><div><strong>Аудитория</strong><div class="card-subtitle">Кто покупает и почему.</div></div></div>
+            <div class="workflow-row"><div class="workflow-num">3</div><div><strong>Риски</strong><div class="card-subtitle">Что мешает продаже и росту.</div></div></div>
+          </div>
+          <div class="btn-row" style="margin-top: var(--s4);">
+            <a class="btn btn-primary" href="/app/projects/demo/planning" onclick="return smartNav('/app/projects/demo/planning', '../planning/page.html')">Дальше</a>
+            <a class="btn btn-secondary" href="/app/projects/demo/run" onclick="return smartNav('/app/projects/demo/run', '../run.html')">Открыть проработку</a>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

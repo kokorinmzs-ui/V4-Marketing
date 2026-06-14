@@ -2,6 +2,29 @@
 
 **«Бери и делай»** — AI-система, превращающая бриф бизнеса в интерактивный offline HTML-файл с готовым маркетинговым планом действий.
 
+## Release Status
+
+Marketing OS v4 is a **Production Release Candidate (RC)**.
+
+Validated:
+
+- Backend/frontend integration
+- Review gate workflow
+- Artifact generation and ZIP packaging
+- Drift tracking
+- Prompt hardening
+- Security controls
+- Regression test suite
+
+Current status:
+
+- 775 tests passing
+- Clean git state
+- Review gate enabled
+- Drift tracking enabled
+
+Production status is pending Sprint 23.1 live DeepSeek reliability validation.
+
 ## Что делает система
 
 ```
@@ -62,7 +85,7 @@
 | Frontend       | Next.js 15, TypeScript, Tailwind + shadcn/ui, Zustand |
 | Backend        | FastAPI, Pydantic, Uvicorn                            |
 | AI Engine      | Python 3.12, Pydantic, Jinja2, httpx, tenacity        |
-| LLM            | DeepSeek Chat (основной), OpenAI GPT (резервный)      |
+| LLM            | DeepSeek API as the only production AI provider       |
 | Database       | PostgreSQL 16 + Prisma ORM                            |
 | Queue/Cache    | Redis + BullMQ                                        |
 | HTML Dashboard | Offline vanilla HTML/CSS/JS                           |
@@ -143,6 +166,15 @@ npm run dev
 | Sprint 3 — Sprint 13 | ✅ Completed |
 | Sprint 14 — Frontend Minimal UI | ✅ Completed |
 | Sprint 15 — Backend API Layer | ✅ Completed |
+| Sprint 16 — Golden Brief Testing | ✅ Completed |
+| Sprint 17 — QA Hardening | ✅ Completed |
+| Sprint 18 — Production Release Gate | ✅ Completed |
+| Sprint 19 — Frontend ↔ Backend Integration | ✅ Completed |
+| Sprint 20 — Human Review Gates & Cost Governance | ✅ Completed |
+| Sprint 21 — Production Release Candidate Audit | ✅ Completed |
+| Sprint 22 — Live AI Reliability Hardening | ✅ Completed |
+| Sprint 23 — Prompt Contract Hardening | ✅ Completed |
+| Sprint 23.1 — Live Reliability Validation | ⚠️ Blocked on `DEEPSEEK_API_KEY` |
 
 ## Ключевые принципы
 
@@ -152,8 +184,8 @@ npm run dev
 - **Client Simplicity** — результат обязан быть понятен владельцу бизнеса без маркетолога
 - **Offline First** — финальный HTML работает без сервера, без интернета, двойным кликом
 - **No Water** — запрещены «развивайте соцсети», «уникальный подход», «повышайте вовлечённость»
-- **Provider order** — `PRIMARY_LLM_PROVIDER=deepseek`, `FALLBACK_LLM_PROVIDER=openai`
-- **Runtime mode** — тесты и фикстуры могут работать в `mock_mode`, но production-путь идёт через реальные провайдеры
+- **No External LLM Fallbacks** — production path uses DeepSeek only
+- **Runtime mode** — тесты и фикстуры могут работать в `mock_mode`, но production-путь идёт через DeepSeek
 - **Backend API** — FastAPI layer writes artifacts to `storage/projects/`
 
 ## Документация
