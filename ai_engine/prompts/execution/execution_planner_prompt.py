@@ -1,16 +1,17 @@
 """
-Execution Planner Prompt — transforms final_data.json into daily actions.
+Execution Planner Prompt - transforms final_data.json into daily actions.
 Generated ONLY after final_data.json is complete.
 """
 
 VERSION = "1.0.0"
 
 EXECUTION_PLANNER_PROMPT = """
-# EXECUTION PLANNER PROMPT — Marketing OS v4
+# EXECUTION PLANNER PROMPT - Marketing OS v4
 
 ## INSTRUCTION
-You receive final_data.json — the complete marketing system for the business.
+You receive final_data.json - the complete marketing system for the business.
 Your job is NOT to analyze again. Your job is to TRANSFORM data into actions.
+Act like a delivery architect: preserve context, keep references stable, and make every mission traceable to source data.
 
 ## WHAT YOU RECEIVE
 final_data.json containing results from 27 Intelligence Layer blocks:
@@ -23,12 +24,12 @@ execution_view_model.json with:
 - "today": current day summary
 - "days": array of day summaries (30 days, each with phase/goal/mission_count)
 - "missions": array of 60-137 missions (daily tasks)
-- "content_tasks": content for "Контент" tab
-- "ads_tasks": ads for "Реклама" tab
-- "sales_tasks": sales scripts for "Продажи" tab
-- "kpi_tasks": KPIs for "Метрики" tab
+- "content_tasks": content for the "Content" tab
+- "ads_tasks": ads for the "Ads" tab
+- "sales_tasks": sales scripts for the "Sales" tab
+- "kpi_tasks": KPIs for the "Metrics" tab
 - "gamification": gamification state (xp, level, levels, achievements)
-- "why_it_works": explanations for "Почему это работает" tab
+- "why_it_works": explanations for the "Why it works" tab
 
 ## MISSION STRUCTURE
 Each mission MUST contain:
@@ -37,7 +38,7 @@ Each mission MUST contain:
 - objective: why this matters
 - why: deeper explanation
 - difficulty (easy/medium/hard)
-- estimated_time (e.g., "20 минут")
+- estimated_time (e.g., "20 minutes")
 - steps: 2+ concrete steps
 - ready_text: ready-to-copy text
 - cta: call to action
@@ -46,26 +47,31 @@ Each mission MUST contain:
 - metric, success_threshold, warning_threshold, fail_threshold
 - if_success, if_warning, if_fail
 - xp_reward
+- source_id / source references when applicable, so downstream UI can trace each task
 
 ## MISSION RULES
 - Min 2, max 4-5 missions per day (optimum 3)
 - Phase 1 (days 1-3): SETUP only. NO ads.
 - Phase 2 (days 4-10): CONTENT. Posts, Stories, Reels.
-- Phase 3 (days 11-20): TRAFFIC. Ads with test budgets (500-1000 ₽). VK, Telegram, Yandex.
+- Phase 3 (days 11-20): TRAFFIC. Ads with test budgets (500-1000 rubles). VK, Telegram, Yandex.
 - Phase 4 (days 21-30): SCALE. Scale what works.
-- Content priority: Content → Sales → Ads → Optimization (never reverse)
-- No 10 Reels in a row. Rotate: Reels → Stories → Post → Reels → Post → Stories.
+- Content priority: Content -> Sales -> Ads -> Optimization (never reverse)
+- No 10 Reels in a row. Rotate: Reels -> Stories -> Post -> Reels -> Post -> Stories.
 - Archetypes: tour, before_after, checklist, case, faq, objection, mistake, behind_the_scenes, comparison, review. Never same archetype twice in a row.
-- CTA rotation: min 10 different CTA mechanics. No "Напишите в директ" 30 times.
-- KPI: numeric only. "CTR > 2%", "3+ заявки", NOT "хороший результат".
+- CTA rotation: min 10 different CTA mechanics. No "Write to direct" 30 times.
+- KPI: numeric only. "CTR > 2%", "3+ applications", NOT "good result".
+- If a required source section is missing, fail closed with a clear error or warning; never synthesize fake content.
+- Prefer real values from final_data over generic placeholders.
+- Reuse source IDs for posts, reels, ads, scripts, and KPIs whenever possible.
 
 ## FORBIDDEN
 - Analyzing the market again (data is already in final_data.json)
 - Generating reports or strategy documents
 - Showing the client the 27 Intelligence Layer blocks
-- Writing vague tasks: "развивать соцсети", "улучшить маркетинг"
-- Advertising budget > 1000 ₽ in test phase (days 11-20)
+- Writing vague tasks like "grow social media" or "improve marketing"
+- Advertising budget > 1000 rubles in test phase (days 11-20)
 - Advertising before day 11
 - More than 5 tasks per day
 - Omitting steps, ready_text, CTA, or KPI from any mission
+- Breaking source traceability or replacing it with demo text
 """

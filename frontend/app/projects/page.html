@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projects — Marketing OS v4</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: sans-serif;
+        background: #f5f7fa;
+        color: #1a1a2e;
+        min-width: 390px;
+        line-height: 1.5;
+      }
+      header {
+        background: #1a1a2e;
+        color: #fff;
+        padding: 16px;
+      }
+      header a {
+        color: #90caf9;
+        text-decoration: none;
+        font-size: 14px;
+      }
+      h1 {
+        font-size: 22px;
+        margin: 8px 0;
+      }
+      main {
+        max-width: 800px;
+        margin: 24px auto;
+        padding: 0 16px;
+      }
+      .card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .card .status {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      .status-draft {
+        background: #e0e0e0;
+        color: #666;
+      }
+      .status-generating {
+        background: #fff3e0;
+        color: #e65100;
+      }
+      .status-completed {
+        background: #e8f5e9;
+        color: #2e7d32;
+      }
+      .status-failed {
+        background: #ffebee;
+        color: #c62828;
+      }
+      .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .btn-primary {
+        background: #2196f3;
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background: #1565c0;
+      }
+      .empty {
+        text-align: center;
+        color: #999;
+        padding: 40px;
+      }
+      .create-section {
+        margin-bottom: 20px;
+        display: flex;
+        gap: 8px;
+      }
+      .create-section input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="/">← Home</a>
+      <h1>Projects</h1>
+    </header>
+    <main>
+      <div class="create-section">
+        <input
+          id="projectNameInput"
+          type="text"
+          placeholder="Enter project name..."
+        />
+        <button id="createBtn" class="btn btn-primary">Create Project</button>
+      </div>
+      <div id="projectsList"></div>
+    </main>
+    <script>
+      function loadProjects() {
+        var list = document.getElementById("projectsList");
+        var projects = JSON.parse(localStorage.getItem("mo_projects") || "[]");
+        if (!projects.length) {
+          list.innerHTML =
+            '<div class="empty">No projects yet. Create your first project above.</div>';
+          return;
+        }
+        list.innerHTML = projects
+          .map(function (p) {
+            return (
+              '<div class="card"><h3><a href="/projects/' +
+              p.id +
+              '">' +
+              p.name +
+              '</a></h3><span class="status status-' +
+              p.status +
+              '">' +
+              p.status +
+              '</span><p style="color:#888;font-size:13px">Created: ' +
+              new Date(p.createdAt).toLocaleDateString() +
+              "</p></div>"
+            );
+          })
+          .join("");
+      }
+      document
+        .getElementById("createBtn")
+        .addEventListener("click", function () {
+          var name = document.getElementById("projectNameInput").value.trim();
+          if (!name) return alert("Please enter a project name");
+          var projects = JSON.parse(
+            localStorage.getItem("mo_projects") || "[]",
+          );
+          var project = {
+            id: Date.now().toString(36) + Math.random().toString(36).slice(2),
+            name: name,
+            status: "draft",
+            brief: {
+              project_name: name,
+              industry: "",
+              business_description: "",
+              target_audience: "",
+              products: "",
+              channels: "",
+              goals: "",
+              region: "",
+              budget: "",
+            },
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+          };
+          projects.unshift(project);
+          localStorage.setItem("mo_projects", JSON.stringify(projects));
+          document.getElementById("projectNameInput").value = "";
+          loadProjects();
+        });
+      loadProjects();
+    </script>
+  </body>
+</html>

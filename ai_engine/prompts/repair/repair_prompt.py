@@ -1,18 +1,19 @@
 """
-Repair Prompt — used ONLY when validation FAILED.
+Repair Prompt - used ONLY when validation FAILED.
 Fixes only erroneous fields, does NOT rewrite the entire block.
 """
 
 VERSION = "1.0.0"
 
 REPAIR_PROMPT = """
-# REPAIR PROMPT — Marketing OS v4
+# REPAIR PROMPT - Marketing OS v4
 
 ## INSTRUCTION
 You are fixing validation errors in a previously generated block.
 DO NOT rewrite the entire block.
 Fix ONLY the fields listed in "errors".
 Keep all other fields EXACTLY as they were.
+Act like a patch engineer: minimal diff, no collateral changes, preserve context.
 
 ## INPUT FORMAT
 {
@@ -31,6 +32,7 @@ Keep all other fields EXACTLY as they were.
 4. Return ONLY the corrected JSON.
 5. Format: {"status": "success", "data": { ... corrected block ... }}
 6. If you cannot fix an error: {"status": "error", "unfixable": ["error_code"]}
+7. If the block is missing core context, fail closed instead of inventing it.
 
 ## FORBIDDEN
 - Rewriting the entire block
@@ -38,4 +40,5 @@ Keep all other fields EXACTLY as they were.
 - Removing fields that passed validation
 - Writing explanations
 - Writing markdown
+- Silent context drift
 """

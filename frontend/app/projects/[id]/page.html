@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Detail — Marketing OS v4</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: sans-serif;
+        background: #f5f7fa;
+        color: #1a1a2e;
+        min-width: 390px;
+        line-height: 1.5;
+      }
+      header {
+        background: #1a1a2e;
+        color: #fff;
+        padding: 16px;
+      }
+      header a {
+        color: #90caf9;
+        text-decoration: none;
+        font-size: 14px;
+      }
+      h1 {
+        font-size: 20px;
+        margin: 8px 0;
+      }
+      main {
+        max-width: 800px;
+        margin: 24px auto;
+        padding: 0 16px;
+      }
+      .card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .card h2 {
+        font-size: 18px;
+        margin-bottom: 12px;
+      }
+      label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        margin: 10px 0 4px;
+        color: #444;
+      }
+      input,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+      textarea {
+        resize: vertical;
+        min-height: 60px;
+      }
+      .required::after {
+        content: " *";
+        color: #f44336;
+      }
+      .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.2s;
+        display: inline-block;
+        text-decoration: none;
+      }
+      .btn-primary {
+        background: #2196f3;
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background: #1565c0;
+      }
+      .btn-success {
+        background: #4caf50;
+        color: #fff;
+      }
+      .btn-download {
+        background: #ff9800;
+        color: #fff;
+      }
+      .btn-download:hover {
+        background: #e68900;
+      }
+      .progress-bar {
+        background: #e0e0e0;
+        border-radius: 8px;
+        height: 14px;
+        margin: 12px 0;
+        overflow: hidden;
+      }
+      .progress-bar div {
+        background: #4caf50;
+        height: 100%;
+        border-radius: 8px;
+        transition: width 0.3s;
+      }
+      .status-tag {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .status-draft {
+        background: #e0e0e0;
+        color: #666;
+      }
+      .status-generating {
+        background: #fff3e0;
+        color: #e65100;
+      }
+      .status-completed {
+        background: #e8f5e9;
+        color: #2e7d32;
+      }
+      .status-failed {
+        background: #ffebee;
+        color: #c62828;
+      }
+      .artifact-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+      }
+      .artifact-item:last-child {
+        border-bottom: none;
+      }
+      .artifact-item .name {
+        flex: 1;
+        font-weight: 500;
+      }
+      .artifact-item .size {
+        color: #888;
+        font-size: 12px;
+        margin-right: 12px;
+      }
+      .artifact-item .actions {
+        display: flex;
+        gap: 6px;
+      }
+      .artifact-item .btn-sm {
+        padding: 6px 12px;
+        font-size: 12px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+      }
+      .btn-view {
+        background: #e3f2fd;
+        color: #1565c0;
+        text-decoration: none;
+      }
+      .btn-dl {
+        background: #fff3e0;
+        color: #e65100;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="/projects">← Back to Projects</a>
+      <h1 id="projectTitle">Project Detail</h1>
+      <span id="projectStatus" class="status-tag status-draft">draft</span>
+    </header>
+    <main>
+      <div class="card">
+        <h2>Brief</h2>
+        <form id="briefForm">
+          <label class="required" for="project_name">Project Name</label>
+          <input id="project_name" name="project_name" required />
+          <label class="required" for="industry">Industry</label>
+          <input id="industry" name="industry" required />
+          <label class="required" for="business_description"
+            >Business Description</label
+          >
+          <textarea
+            id="business_description"
+            name="business_description"
+            required
+          ></textarea>
+          <label for="target_audience">Target Audience</label>
+          <input id="target_audience" name="target_audience" />
+          <label class="required" for="products">Products</label>
+          <input id="products" name="products" required />
+          <label for="channels">Channels</label>
+          <input id="channels" name="channels" />
+          <label class="required" for="goals">Goals</label>
+          <textarea id="goals" name="goals" required></textarea>
+          <label for="region">Region</label>
+          <input id="region" name="region" />
+          <label for="budget">Budget</label>
+          <input id="budget" name="budget" />
+          <div style="margin-top: 16px">
+            <button type="submit" class="btn btn-primary">Save Brief</button>
+          </div>
+        </form>
+      </div>
+      <div class="card">
+        <h2>Generation</h2>
+        <p id="mockGenerationNote" style="font-size: 13px; color: #888; margin-bottom: 8px">
+          Mock generation is enabled for Sprint 14-A.
+        </p>
+        <button id="generateBtn" class="btn btn-success">
+          🚀 Run Generation
+        </button>
+        <div class="progress-bar" style="margin-top: 12px">
+          <div id="progressFill" style="width: 0%"></div>
+        </div>
+        <p
+          id="progressText"
+          style="font-size: 13px; color: #888; margin-top: 4px"
+        >
+          Ready: 0%
+        </p>
+      </div>
+      <div class="card">
+        <h2>Artifacts</h2>
+        <div id="artifactList"></div>
+      </div>
+    </main>
+    <script>
+      var projectId = window.location.pathname.split("/projects/")[1] || "demo";
+      var projects = JSON.parse(localStorage.getItem("mo_projects") || "[]");
+      var project = projects.find(function (p) {
+        return p.id === projectId;
+      });
+      var generationTimer = null;
+      var generationStep = 0;
+
+      function loadProject() {
+        if (!project) {
+          document.getElementById("projectTitle").textContent =
+            "Project Not Found";
+          return;
+        }
+        document.getElementById("projectTitle").textContent = project.name;
+        var st = project.status;
+        document.getElementById("projectStatus").textContent = st;
+        document.getElementById("projectStatus").className =
+          "status-tag status-" + st;
+        var brief = project.brief;
+        document.getElementById("project_name").value =
+          brief.project_name || "";
+        document.getElementById("industry").value = brief.industry || "";
+        document.getElementById("business_description").value =
+          brief.business_description || "";
+        document.getElementById("target_audience").value =
+          brief.target_audience || "";
+        document.getElementById("products").value = brief.products || "";
+        document.getElementById("channels").value = brief.channels || "";
+        document.getElementById("goals").value = brief.goals || "";
+        document.getElementById("region").value = brief.region || "";
+        document.getElementById("budget").value = brief.budget || "";
+      }
+
+      document
+        .getElementById("briefForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          if (!project) return;
+          project.brief.project_name =
+            document.getElementById("project_name").value;
+          project.brief.industry = document.getElementById("industry").value;
+          project.brief.business_description = document.getElementById(
+            "business_description",
+          ).value;
+          project.brief.target_audience =
+            document.getElementById("target_audience").value;
+          project.brief.products = document.getElementById("products").value;
+          project.brief.channels = document.getElementById("channels").value;
+          project.brief.goals = document.getElementById("goals").value;
+          project.brief.region = document.getElementById("region").value;
+          project.brief.budget = document.getElementById("budget").value;
+          project.status = "ready_to_generate";
+          project.updatedAt = new Date().toISOString();
+          localStorage.setItem("mo_projects", JSON.stringify(projects));
+          alert("Brief saved! Project is ready for generation.");
+          loadProject();
+        });
+
+      document
+        .getElementById("generateBtn")
+        .addEventListener("click", function () {
+          if (!project) return;
+          project.status = "generating";
+          project.updatedAt = new Date().toISOString();
+          localStorage.setItem("mo_projects", JSON.stringify(projects));
+          loadProject();
+          generationStep = 0;
+          simulateGeneration();
+        });
+
+      function simulateGeneration() {
+        if (!project || project.status !== "generating") return;
+        generationStep++;
+        var pct = generationStep * 25;
+        document.getElementById("progressFill").style.width = pct + "%";
+        document.getElementById("progressText").textContent =
+          "Generating... " + pct + "%";
+        if (generationStep >= 4) {
+          project.status = "completed";
+          project.updatedAt = new Date().toISOString();
+          localStorage.setItem("mo_projects", JSON.stringify(projects));
+          loadProject();
+          renderArtifacts();
+          return;
+        }
+        generationTimer = setTimeout(
+          simulateGeneration,
+          600 + Math.random() * 800,
+        );
+      }
+
+      function renderArtifacts() {
+        var artifacts = [
+          {
+            name: "final_data.json",
+            size: 120604,
+            path: "artifacts/final_data.json",
+          },
+          {
+            name: "execution_view_model.json",
+            size: 104618,
+            path: "artifacts/execution_view_model.json",
+          },
+          {
+            name: "dashboard.html",
+            size: 150749,
+            path: "artifacts/dashboard.html",
+          },
+          {
+            name: "client-package.zip",
+            size: 16041,
+            path: "artifacts/client-package.zip",
+          },
+        ];
+        var list = document.getElementById("artifactList");
+        list.innerHTML = artifacts
+          .map(function (a) {
+            return (
+              '<div class="artifact-item"><span class="name">' +
+              a.name +
+              '</span><span class="size">' +
+              (a.size / 1024).toFixed(1) +
+              ' KB</span><div class="actions"><a class="btn-sm btn-view" href="/' +
+              a.path +
+              '" target="_blank">View</a><a class="btn-sm btn-dl" href="/' +
+              a.path +
+              '" download>Download</a></div></div>'
+            );
+          })
+          .join("");
+      }
+
+      loadProject();
+      if (project && project.status === "generating") {
+        simulateGeneration();
+      }
+      if (project && project.status === "completed") {
+        renderArtifacts();
+      }
+    </script>
+  </body>
+</html>

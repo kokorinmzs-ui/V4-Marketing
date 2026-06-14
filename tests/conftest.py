@@ -6,6 +6,8 @@ import os
 import tempfile
 from pathlib import Path
 
+import pytest
+
 
 def pytest_configure() -> None:
     root = Path(__file__).resolve().parents[1]
@@ -15,3 +17,10 @@ def pytest_configure() -> None:
     os.environ["TMP"] = str(tmp_root)
     os.environ["TEMP"] = str(tmp_root)
     os.environ["TMPDIR"] = str(tmp_root)
+
+
+@pytest.fixture
+def tmp_path() -> Path:
+    root = Path(__file__).resolve().parents[1] / ".pytest_tmp"
+    root.mkdir(exist_ok=True)
+    return Path(tempfile.mkdtemp(prefix="pytest-", dir=str(root)))
