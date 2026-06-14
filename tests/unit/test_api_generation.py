@@ -78,8 +78,8 @@ def test_generate_creates_artifacts_on_disk(generated_bundle):
 def test_generate_updates_project_status(generated_bundle):
     project_service, project, _result = generated_bundle
     updated = project_service.get_project(project.project_id)
-    assert updated.status == "completed"
-    assert updated.progress == 100
+    assert updated.status == "review_required"
+    assert updated.progress == 90
 
 
 def test_generate_writes_project_name_into_final_data(generated_bundle):
@@ -105,8 +105,9 @@ def test_generate_writes_valid_zip(generated_bundle):
 
 def test_generate_returns_files_list(generated_bundle):
     _service, _project, result = generated_bundle
-    assert result["status"] == "completed"
+    assert result["status"] == "review_required"
     assert "02-EXECUTION-DASHBOARD.html" in result["files"]
+    assert result["review"]["status"] == "review_required"
 
 
 def test_generate_missing_project_raises(project_service: ProjectService, generation_service: GenerationService):
@@ -119,7 +120,7 @@ def test_generate_http_roundtrip(client):
     created = http.post("/projects", json={"name": "HTTP Gen", "brief": make_brief("HTTP Gen").model_dump(mode="json")}).json()
     response = http.post(f"/projects/{created['project_id']}/generate")
     assert response.status_code == 200
-    assert response.json()["status"] == "completed"
+    assert response.json()["status"] == "review_required"
 
 
 def test_status_after_generate_is_completed(client):
@@ -128,7 +129,7 @@ def test_status_after_generate_is_completed(client):
     http.post(f"/projects/{created['project_id']}/generate")
     response = http.get(f"/projects/{created['project_id']}/status")
     assert response.status_code == 200
-    assert response.json() == {"status": "completed", "progress": 100}
+    assert response.json() == {"status": "review_required", "progress": 90}
 
 
 def test_generate_http_missing_project_returns_404(client):

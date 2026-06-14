@@ -87,11 +87,12 @@ def test_generate_status_artifacts_flow(client):
     project_id = created["project_id"]
     generate_response = http.post(f"/projects/{project_id}/generate")
     assert generate_response.status_code == 200
-    assert generate_response.json()["status"] == "completed"
+    assert generate_response.json()["status"] == "review_required"
+    assert generate_response.json()["review"]["status"] == "review_required"
 
     status_response = http.get(f"/projects/{project_id}/status")
     assert status_response.status_code == 200
-    assert status_response.json() == {"status": "completed", "progress": 100}
+    assert status_response.json() == {"status": "review_required", "progress": 90}
 
     artifacts_response = http.get(f"/projects/{project_id}/artifacts")
     assert artifacts_response.status_code == 200
@@ -114,6 +115,28 @@ def test_download_generated_files(client):
     assert zip_response.status_code == 200
     assert zipfile.is_zipfile(Path(client[1].artifacts_path(project_id) / "client-package.zip"))
     assert zip_response.content
+
+
+def test_review_approve_flow(client):
+    http, project_service = client
+    created = create_project(http, "Review Flow")
+    project_id = created["project_id"]
+    http.post(f"/projects/{project_id}/generate")
+    approve = http.post(f"/projects/{project_id}/review/approve")
+    assert approve.status_code == 200
+    assert approve.json()["status"] == "client_ready"
+    assert project_service.get_project(project_id).status == "client_ready"
+
+
+def test_review_reject_flow(client):
+    http, project_service = client
+    created = create_project(http, "Reject Flow")
+    project_id = created["project_id"]
+    http.post(f"/projects/{project_id}/generate")
+    reject = http.post(f"/projects/{project_id}/review/reject")
+    assert reject.status_code == 200
+    assert reject.json()["status"] == "rejected"
+    assert project_service.get_project(project_id).status == "rejected"
 
 
 def test_delete_project_endpoint(client):

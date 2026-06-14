@@ -24,9 +24,8 @@ class DeletePayload(MarketingOSBaseModel):
 
 class GeneratePayload(MarketingOSBaseModel):
     project_id: str = Field(...)
-    status: str = Field(default="completed")
+    status: str = Field(default="review_required")
 
 
 class ArtifactListPayload(MarketingOSBaseModel):
     artifacts: list[ArtifactInfo] = Field(default_factory=list)
-

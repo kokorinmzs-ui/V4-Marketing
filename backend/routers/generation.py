@@ -23,6 +23,8 @@ def generate_project(
             "project_id": result["project_id"],
             "status": result["status"],
             "llm_summary": result.get("llm_summary", {}),
+            "review": result.get("review", {}),
+            "files": result.get("files", []),
         }
     except ProjectNotFoundError as exc:
         raise HTTPException(status_code=404, detail="Project not found") from exc

@@ -60,6 +60,7 @@ class GenerationService:
             html = render_dashboard(evm)
             files = PackageBuilder().build(evm)
             zip_bytes = ZipExporter().export(files)
+            review = self._build_review_metadata(llm_summary, block_results)
 
             artifacts_dir = self.project_service.artifacts_path(project_id)
             self.project_service.write_bundle(project_id, "brief.json", json.dumps(project.brief.model_dump(mode="json"), ensure_ascii=False, indent=2))
@@ -67,14 +68,30 @@ class GenerationService:
             self.project_service.write_bundle(project_id, "execution_view_model.json", json.dumps(evm.model_dump(mode="json"), ensure_ascii=False, indent=2))
             self.project_service.write_bundle(project_id, "dashboard.html", html)
             self.project_service.write_bundle(project_id, "client-package.zip", zip_bytes)
+            self.project_service.write_bundle(
+                project_id,
+                "generation_report.json",
+                json.dumps(
+                    {
+                        "project_id": project.project_id,
+                        "status": "review_required",
+                        "llm_summary": llm_summary,
+                        "review": review,
+                        "artifacts": list(files.keys()),
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                ),
+            )
 
-            self.project_service.set_status(project_id, "completed", 100)
+            self.project_service.set_status(project_id, "review_required", 90)
             return {
                 "project_id": project_id,
-                "status": "completed",
+                "status": "review_required",
                 "artifacts_dir": str(artifacts_dir),
                 "files": list(files.keys()),
                 "llm_summary": llm_summary,
+                "review": review,
             }
         except Exception as exc:
             self.project_service.set_status(project_id, "failed", 100, last_error=str(exc))
@@ -168,6 +185,39 @@ class GenerationService:
     def _resolve_strict_assembly() -> bool:
         value = (os.getenv("PIPELINE_STRICT_ASSEMBLY") or "true").strip().lower()
         return value not in {"0", "false", "no", "off", "soft"}
+
+    @staticmethod
+    def _resolve_review_budget() -> dict[str, float]:
+        max_tokens = int(os.getenv("SPRINT20_MAX_TOKENS") or 100000)
+        max_cost = float(os.getenv("SPRINT20_MAX_COST_USD") or 1.0)
+        return {"max_tokens": max_tokens, "max_cost_usd": max_cost}
+
+    def _build_review_metadata(self, llm_summary: dict[str, Any], block_results: dict[str, Any]) -> dict[str, Any]:
+        budget = self._resolve_review_budget()
+        used_tokens = int(llm_summary.get("input_tokens", 0)) + int(llm_summary.get("output_tokens", 0))
+        used_cost = float(llm_summary.get("cost", 0.0))
+        over_budget = used_tokens > budget["max_tokens"] or used_cost > budget["max_cost_usd"]
+        warnings: list[str] = []
+        if over_budget:
+            warnings.append("Budget exceeded")
+        if not self._use_live_llm():
+            warnings.append("Deterministic or mock execution used")
+        failed_blocks = [block_id for block_id, result in block_results.items() if getattr(result, "status", "") != "passed"]
+        if failed_blocks:
+            warnings.append(f"Failed blocks: {', '.join(failed_blocks[:5])}")
+        return {
+            "status": "review_required",
+            "reviewer": None,
+            "approved_at": None,
+            "notes": warnings,
+            "budget": {
+                "max_tokens": budget["max_tokens"],
+                "max_cost_usd": budget["max_cost_usd"],
+                "used_tokens": used_tokens,
+                "used_cost_usd": round(used_cost, 6),
+                "over_budget": over_budget,
+            },
+        }
 
     def _build_block_payloads(self, project: ProjectRecord) -> dict[str, dict[str, Any]]:
         brief = project.brief

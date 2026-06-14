@@ -52,7 +52,7 @@ class ProjectCreateResponse(MarketingOSBaseModel):
 
 class ProjectGenerateResponse(MarketingOSBaseModel):
     project_id: str = Field(..., min_length=1)
-    status: str = Field(default="completed")
+    status: str = Field(default="review_required")
 
 
 class ArtifactInfo(MarketingOSBaseModel):
