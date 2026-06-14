@@ -1,6 +1,6 @@
 ﻿# 08 — Roadmap (План реализации)
 
-Current status: Sprint 0–13 completed, Sprint 14 pending.
+Current status: Sprint 0–15 completed, Sprint 16 pending.
 
 ## План спринтов
 
@@ -20,8 +20,8 @@ Current status: Sprint 0–13 completed, Sprint 14 pending.
 | **Sprint 11** | Execution Planner            | Миссии, content/ads/sales builders, gamification               |
 | **Sprint 12** | HTML Dashboard Renderer      | `artifacts/dashboard.html` — offline, tabs, localStorage       |
 | **Sprint 13** | Client Package Export        | ✅ Completed                                                   |
-| **Sprint 14** | Frontend Minimal UI          | ⏳ Pending                                                     |
-| **Sprint 15** | Backend API & Queue          | REST API, PostgreSQL, Redis/BullMQ                             |
+| **Sprint 14** | Frontend Minimal UI          | ✅ Completed                                                   |
+| **Sprint 15** | Backend API Layer            | REST API, file storage, FastAPI                                |
 | **Sprint 16** | Golden Brief Testing         | 10 эталонных брифов (разные ниши)                              |
 | **Sprint 17** | QA Hardening                 | Quality score ≥ 90                                             |
 | **Sprint 18** | Deployment                   | Docker Compose, одна команда для запуска                       |
@@ -204,9 +204,9 @@ ai_engine/exporters/
 
 ---
 
-## Sprint 15 — Backend API & Queue
+## Sprint 15 — Backend API Layer
 
-**Стек:** PostgreSQL, Prisma, Redis, BullMQ. Статусы переживают restart.
+**Стек:** FastAPI, Pydantic, file storage. Статусы переживают restart.
 
 ---
 

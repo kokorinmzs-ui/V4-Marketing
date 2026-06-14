@@ -27,9 +27,9 @@
 └──────────────────┬──────────────────────────┘
                    │ REST API
 ┌──────────────────▼──────────────────────────┐
-│         Backend / Orchestrator (Node.js)      │
-│  BriefService → PipelineEngine → ExportSvc   │
-│  Queue: generation / repair / export (BullMQ) │
+│         Backend / Orchestrator (FastAPI)      │
+│  Projects → Generation → Artifacts           │
+│  Storage: storage/projects/                  │
 └──────────────────┬──────────────────────────┘
                    │
 ┌──────────────────▼──────────────────────────┐
@@ -60,7 +60,7 @@
 | Компонент      | Технология                                            |
 | -------------- | ----------------------------------------------------- |
 | Frontend       | Next.js 15, TypeScript, Tailwind + shadcn/ui, Zustand |
-| Backend        | Node.js, Next.js API / FastAPI                        |
+| Backend        | FastAPI, Pydantic, Uvicorn                            |
 | AI Engine      | Python 3.12, Pydantic, Jinja2, httpx, tenacity        |
 | LLM            | DeepSeek Chat (основной), OpenAI GPT (резервный)      |
 | Database       | PostgreSQL 16 + Prisma ORM                            |
@@ -141,7 +141,8 @@ npm run dev
 | Sprint 1 — Repository Skeleton & Docs | ✅ Completed |
 | Sprint 2 — Shared Schemas & Contracts | ✅ Completed |
 | Sprint 3 — Sprint 13 | ✅ Completed |
-| Sprint 14 — Frontend Minimal UI | ⏳ Pending |
+| Sprint 14 — Frontend Minimal UI | ✅ Completed |
+| Sprint 15 — Backend API Layer | ✅ Completed |
 
 ## Ключевые принципы
 
@@ -153,6 +154,7 @@ npm run dev
 - **No Water** — запрещены «развивайте соцсети», «уникальный подход», «повышайте вовлечённость»
 - **Provider order** — `PRIMARY_LLM_PROVIDER=deepseek`, `FALLBACK_LLM_PROVIDER=openai`
 - **Runtime mode** — тесты и фикстуры могут работать в `mock_mode`, но production-путь идёт через реальные провайдеры
+- **Backend API** — FastAPI layer writes artifacts to `storage/projects/`
 
 ## Документация
 

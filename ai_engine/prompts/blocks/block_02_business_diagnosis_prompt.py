@@ -38,6 +38,16 @@ BLOCK_02_BUSINESS_DIAGNOSIS_PROMPT = """
 ## JSON SCHEMA HINT
 Следуй структуре, определённой в shared/schemas/blocks.py для этого блока.
 
+
+## PROJECT MEMORY
+- Preserve context from the brief and prior blocks.
+- Prefer source data over assumptions.
+- If something is missing, fail closed with low confidence.
+
+## TRACEABILITY
+- Link every conclusion to a source field or assumption.
+- Keep avatar -> pain -> offer -> CTA continuity whenever applicable.
+
 ## QUALITY RULES
 - Confidence score для неподтверждённых данных
 - Отсутствие повторений
